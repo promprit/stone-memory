@@ -2,7 +2,11 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    # Not "main" -- this repo has no main branch. The default branch is
+    # claude/dryasstudio-repo-setup-qas46n, so that was the actual trigger
+    # this workflow needed all along; watching "main" meant CI had never
+    # once run on a push here.
+    branches: [claude/dryasstudio-repo-setup-qas46n]
   pull_request:
 
 permissions:
