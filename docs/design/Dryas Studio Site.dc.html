@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><script src="./image-slot.js"></script><style>body{margin:0;background:#e7e6df;font-family:Archivo,system-ui,sans-serif}a{color:#4A5D53;text-decoration:none}a:hover{color:#1B342C}.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}.dv-tid{font:600 10px 'JetBrains Mono',monospace;padding:3px 7px;background:#1B342C;color:#EFEEE8;border-radius:4px;text-decoration:none}.dv-tname{font:600 13px/1.2 Archivo,sans-serif;color:#1B342C}.dv-opts{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}.dv-oid{font:600 10.5px 'JetBrains Mono',monospace;padding:3px 7px;background:rgba(27,52,44,.12);color:#1B342C;border-radius:5px;text-decoration:none}.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 Archivo,sans-serif;color:rgba(27,52,44,.6)}.dv-card{max-width:100%;background:#1B342C;border:1px solid rgba(0,0,0,.15);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:hidden}.dv-opt:target .dv-oid{background:#5C4A3F;color:#EFEEE8}.dv-next{margin:22px 0 0;font:12px/1.5 Archivo,sans-serif;color:rgba(27,52,44,.55)}</style></helmet>
+<section class="dv-turn" id="t2">
+<div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">Going further with <a class="dv-oid" href="#1c">1c</a> — inner pages, same vocabulary</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="2a"><div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>/gatekeep — game landing page</div>
+<div class="dv-card" style="width:1280px" data-screen-label="2a Gatekeep landing">
+<div style="display:flex;flex-direction:column;background:#10201B;color:#C9CFC4;min-height:1000px">
+  <nav style="display:flex;align-items:center;justify-content:space-between;padding:22px 48px;border-bottom:1px solid rgba(201,207,196,.12)">
+    <div style="display:flex;align-items:center;gap:14px">
+      <img src="assets/dryas-symbol-paper.svg" alt="Dryas Studio" style="height:26px">
+      <span style="font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#7C8A83">dryasstudio.com<span style="color:#EFEEE8">/gatekeep</span></span>
+    </div>
+    <div style="display:flex;gap:28px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em">
+      <a href="#2a" style="color:#EFEEE8">/overview</a><a href="#2a" style="color:#7C8A83">/devlog</a><a href="#2a" style="color:#7C8A83">/media</a><a href="#2a" style="color:#7C8A83">/press</a>
+    </div>
+  </nav>
+  <div style="position:relative;height:520px">
+    <image-slot id="slot-2a-hero" shape="rect" style="position:absolute;inset:0">Gatekeep key art — full bleed (1280×520)</image-slot>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,32,27,0) 40%,rgba(16,32,27,.9) 92%,rgba(16,32,27,.9) 100%);pointer-events:none"></div>
+    <div style="position:absolute;left:48px;bottom:96px;pointer-events:none">
+      <div style="font:400 12px 'JetBrains Mono',monospace;letter-spacing:.22em;color:#C9CFC4;margin-bottom:12px">A GAME BY DRYAS STUDIO — IN DEVELOPMENT</div>
+      <div style="font:500 96px/1 Archivo,sans-serif;letter-spacing:.08em;color:#EFEEE8">GATEKEEP</div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:16px;padding:0 48px;transform:translateY(-26px)">
+    <a href="#2a" style="font:500 13px 'JetBrains Mono',monospace;letter-spacing:.1em;background:#EFEEE8;color:#10201B;padding:16px 28px;border-radius:2px">GET PLAYTEST INVITES</a>
+    <a href="#2a" style="font:500 13px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#C9CFC4;border:1px solid rgba(201,207,196,.35);padding:15px 28px;border-radius:2px;background:#10201B">WATCH 40s OF GAMEPLAY</a>
+    <span style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83;margin-left:auto">TARGET: PC · RELEASE TBA</span>
+  </div>
+  <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:56px;padding:40px 48px 56px;border-bottom:1px solid rgba(201,207,196,.12)">
+    <div>
+      <div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.18em;color:#7C8A83;margin-bottom:16px">WHAT IS GATEKEEP</div>
+      <p style="margin:0;font:400 22px/1.55 Archivo,sans-serif;color:#EFEEE8;text-wrap:pretty">Decide what gets through — and live with what you let in. Every choice at the gate ripples into the world beyond it.</p>
+      <p style="margin:20px 0 0;font:400 15px/1.7 Archivo,sans-serif;color:#C9CFC4;max-width:520px">Placeholder pitch — swap in the real description. Two short paragraphs is the right length here: what you do, and why it stays with you.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0;font:400 13px 'JetBrains Mono',monospace">
+      <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(201,207,196,.12)"><span style="color:#7C8A83">STATUS</span><span style="color:#EFEEE8">IN DEVELOPMENT</span></div>
+      <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(201,207,196,.12)"><span style="color:#7C8A83">DEVELOPER</span><span style="color:#EFEEE8">DRYAS STUDIO (SOLO)</span></div>
+      <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(201,207,196,.12)"><span style="color:#7C8A83">PLATFORM</span><span style="color:#EFEEE8">PC</span></div>
+      <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(201,207,196,.12)"><span style="color:#7C8A83">DEVLOG</span><span style="color:#EFEEE8">#04 · 2026-08-14</span></div>
+      <div style="display:flex;justify-content:space-between;padding:14px 0"><span style="color:#7C8A83">PRESS KIT</span><a href="#2a" style="color:#C9CFC4;border-bottom:1px solid #4A5D53">DOWNLOAD →</a></div>
+    </div>
+  </div>
+  <div style="padding:48px;border-bottom:1px solid rgba(201,207,196,.12)">
+    <div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.18em;color:#7C8A83;margin-bottom:20px">MEDIA</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+      <div style="height:200px;position:relative;background:#1B342C;border:1px solid rgba(201,207,196,.12)"><image-slot id="slot-2a-m1" shape="rect" style="position:absolute;inset:0">Screenshot 01</image-slot></div>
+      <div style="height:200px;position:relative;background:#1B342C;border:1px solid rgba(201,207,196,.12)"><image-slot id="slot-2a-m2" shape="rect" style="position:absolute;inset:0">Screenshot 02</image-slot></div>
+      <div style="height:200px;position:relative;background:#1B342C;border:1px solid rgba(201,207,196,.12)"><image-slot id="slot-2a-m3" shape="rect" style="position:absolute;inset:0">Gameplay clip</image-slot></div>
+    </div>
+  </div>
+  <footer style="display:flex;align-items:center;justify-content:space-between;padding:32px 48px;margin-top:auto">
+    <span style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83">© 2026 DRYAS STUDIO · <a href="#2a" style="color:#7C8A83">← BACK TO THE STUDIO</a></span>
+    <div style="display:flex;gap:10px;align-items:center">
+      <span style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83">PLAYTEST LIST</span>
+      <span style="font:400 12px 'JetBrains Mono',monospace;color:#7C8A83;background:#1B342C;border:1px solid rgba(201,207,196,.2);padding:10px 14px;border-radius:2px;min-width:200px">you@email.com</span>
+      <span style="font:500 12px 'JetBrains Mono',monospace;background:#5C4A3F;color:#EFEEE8;padding:10px 16px;border-radius:2px">JOIN</span>
+    </div>
+  </footer>
+</div>
+</div></div>
+
+<div class="dv-opt" id="2b"><div class="dv-olabel"><a class="dv-oid" href="#2b">2b</a>/devlog — entry page, readable column</div>
+<div class="dv-card" style="width:1280px" data-screen-label="2b Devlog entry">
+<div style="display:grid;grid-template-columns:380px 1fr;background:#1B342C;color:#C9CFC4;min-height:900px">
+  <aside style="border-right:1px solid rgba(201,207,196,.12);padding:48px 40px;display:flex;flex-direction:column;gap:36px;background:#10201B">
+    <img src="assets/dryas-symbol-paper.svg" alt="Dryas Studio" style="height:44px;align-self:flex-start">
+    <nav style="display:flex;flex-direction:column;gap:14px;font:500 13px 'JetBrains Mono',monospace;letter-spacing:.12em">
+      <a href="#2b" style="color:#7C8A83">/gatekeep</a>
+      <a href="#2b" style="color:#EFEEE8">→ /devlog</a>
+      <a href="#2b" style="color:#7C8A83">/about</a>
+      <a href="#2b" style="color:#7C8A83">/press</a>
+      <a href="#2b" style="color:#7C8A83">/contact</a>
+    </nav>
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.18em;color:#7C8A83;margin-bottom:12px">ALL ENTRIES</div>
+      <a href="#2b" style="font:400 13px/1.5 'JetBrains Mono',monospace;color:#EFEEE8;padding:10px 12px;background:rgba(201,207,196,.08);border-radius:2px">#04 The rebrand</a>
+      <a href="#2b" style="font:400 13px/1.5 'JetBrains Mono',monospace;color:#7C8A83;padding:10px 12px">#03 Telemetry &amp; playtests</a>
+      <a href="#2b" style="font:400 13px/1.5 'JetBrains Mono',monospace;color:#7C8A83;padding:10px 12px">#02 A studio of one</a>
+      <a href="#2b" style="font:400 13px/1.5 'JetBrains Mono',monospace;color:#7C8A83;padding:10px 12px">#01 Hello, world</a>
+    </div>
+    <div style="margin-top:auto;font:400 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83">© 2026 DRYAS STUDIO</div>
+  </aside>
+  <main style="padding:72px 96px;max-width:860px">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px">
+      <span style="font:500 11px 'JetBrains Mono',monospace;letter-spacing:.14em;background:#5C4A3F;color:#EFEEE8;padding:4px 10px;border-radius:2px">MILESTONE</span>
+      <span style="font:400 12px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83">DEVLOG #04 · 2026-08-14 · 6 MIN</span>
+    </div>
+    <h1 style="margin:0 0 28px;font:500 44px/1.15 Archivo,sans-serif;letter-spacing:.02em;color:#EFEEE8;text-wrap:pretty">The rebrand, and why one lane matters</h1>
+    <p style="margin:0 0 20px;font:400 17px/1.75 Archivo,sans-serif;color:#C9CFC4">Placeholder body copy. This is the reading experience: one comfortable column, generous line height, Moss Pale on District Green. Real entries drop in here as plain text.</p>
+    <p style="margin:0 0 28px;font:400 17px/1.75 Archivo,sans-serif;color:#C9CFC4">Inline images sit full-column with a mono caption beneath. Code and numbers switch to JetBrains Mono.</p>
+    <div style="height:320px;position:relative;background:#10201B;border:1px solid rgba(201,207,196,.12)"><image-slot id="slot-2b-fig" shape="rect" style="position:absolute;inset:0">Entry figure — build screenshot</image-slot></div>
+    <div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#7C8A83;margin:10px 0 28px">FIG.01 — THE NEW MARK ON THE SPLASH SCREEN</div>
+    <div style="font:400 14px/1.8 'JetBrains Mono',monospace;color:#C9CFC4;background:#10201B;border:1px solid rgba(201,207,196,.12);border-radius:2px;padding:20px 24px;margin-bottom:36px">gatekeep · build 0.4.2<br>sessions this week: 118<br>median run: 14m 32s</div>
+    <div style="display:flex;justify-content:space-between;border-top:1px solid rgba(201,207,196,.12);padding-top:24px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em">
+      <a href="#2b" style="color:#7C8A83">← #03 TELEMETRY &amp; PLAYTESTS</a>
+      <a href="#2b" style="color:#C9CFC4">ALL ENTRIES →</a>
+    </div>
+  </main>
+</div>
+</div></div>
+
+<div class="dv-opt" id="2c"><div class="dv-olabel"><a class="dv-oid" href="#2c">2c</a>/about — solo-dev story + contact</div>
+<div class="dv-card" style="width:1280px" data-screen-label="2c About">
+<div style="display:grid;grid-template-columns:380px 1fr;background:#1B342C;color:#C9CFC4;min-height:820px">
+  <aside style="border-right:1px solid rgba(201,207,196,.12);padding:48px 40px;display:flex;flex-direction:column;gap:36px;background:#10201B">
+    <img src="assets/dryas-symbol-paper.svg" alt="Dryas Studio" style="height:44px;align-self:flex-start">
+    <nav style="display:flex;flex-direction:column;gap:14px;font:500 13px 'JetBrains Mono',monospace;letter-spacing:.12em">
+      <a href="#2c" style="color:#7C8A83">/gatekeep</a>
+      <a href="#2c" style="color:#7C8A83">/devlog</a>
+      <a href="#2c" style="color:#EFEEE8">→ /about</a>
+      <a href="#2c" style="color:#7C8A83">/press</a>
+      <a href="#2c" style="color:#7C8A83">/contact</a>
+    </nav>
+    <div style="width:180px;height:180px;position:relative"><image-slot id="slot-2c-portrait" shape="rounded" radius="2" style="position:absolute;inset:0">Your photo (or leave the mark)</image-slot></div>
+    <div style="margin-top:auto;font:400 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83">© 2026 DRYAS STUDIO</div>
+  </aside>
+  <main style="padding:72px 96px;max-width:900px;display:flex;flex-direction:column;gap:40px">
+    <div>
+      <div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.18em;color:#7C8A83;margin-bottom:16px">ABOUT</div>
+      <h1 style="margin:0;font:500 44px/1.15 Archivo,sans-serif;letter-spacing:.04em;color:#EFEEE8;text-transform:uppercase;text-wrap:pretty">A studio of one, on purpose.</h1>
+      <p style="margin:24px 0 0;font:400 17px/1.75 Archivo,sans-serif;color:#C9CFC4;max-width:620px">Dryas Studio is run by one person: design, engineering, art direction, and this website. Placeholder bio — two or three honest paragraphs about who you are and why you build alone. Named after Dryas octopetala, a flower that grows where almost nothing else does.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,207,196,.12);border:1px solid rgba(201,207,196,.12)">
+      <div style="background:#10201B;padding:28px"><div style="font:500 28px 'JetBrains Mono',monospace;color:#EFEEE8">01</div><div style="font:400 12px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83;margin-top:8px">GAME IN DEVELOPMENT</div></div>
+      <div style="background:#10201B;padding:28px"><div style="font:500 28px 'JetBrains Mono',monospace;color:#EFEEE8">2026</div><div style="font:400 12px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83;margin-top:8px">STUDIO FOUNDED</div></div>
+      <div style="background:#10201B;padding:28px"><div style="font:500 28px 'JetBrains Mono',monospace;color:#EFEEE8">04</div><div style="font:400 12px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83;margin-top:8px">DEVLOG ENTRIES</div></div>
+    </div>
+    <div style="border-top:1px solid rgba(201,207,196,.12);padding-top:32px">
+      <div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.18em;color:#7C8A83;margin-bottom:18px">CONTACT</div>
+      <div style="display:flex;flex-direction:column;gap:12px;font:400 14px 'JetBrains Mono',monospace">
+        <div style="display:flex;gap:20px"><span style="color:#7C8A83;width:90px">EMAIL</span><a href="#2c" style="color:#EFEEE8;border-bottom:1px solid #4A5D53">hello@dryasstudio.com</a></div>
+        <div style="display:flex;gap:20px"><span style="color:#7C8A83;width:90px">X</span><a href="#2c" style="color:#C9CFC4">@dryasstudio</a></div>
+        <div style="display:flex;gap:20px"><span style="color:#7C8A83;width:90px">DISCORD</span><a href="#2c" style="color:#C9CFC4">Gatekeep playtest server</a></div>
+        <div style="display:flex;gap:20px"><span style="color:#7C8A83;width:90px">PRESS</span><a href="#2c" style="color:#C9CFC4">press kit + fact sheet →</a></div>
+      </div>
+    </div>
+  </main>
+</div>
+</div></div>
+
+<div class="dv-opt" id="2d"><div class="dv-olabel"><a class="dv-oid" href="#2d">2d</a>/press — kit, facts, downloads</div>
+<div class="dv-card" style="width:1280px" data-screen-label="2d Press kit">
+<div style="display:grid;grid-template-columns:380px 1fr;background:#1B342C;color:#C9CFC4;min-height:820px">
+  <aside style="border-right:1px solid rgba(201,207,196,.12);padding:48px 40px;display:flex;flex-direction:column;gap:36px;background:#10201B">
+    <img src="assets/dryas-symbol-paper.svg" alt="Dryas Studio" style="height:44px;align-self:flex-start">
+    <nav style="display:flex;flex-direction:column;gap:14px;font:500 13px 'JetBrains Mono',monospace;letter-spacing:.12em">
+      <a href="#2d" style="color:#7C8A83">/gatekeep</a>
+      <a href="#2d" style="color:#7C8A83">/devlog</a>
+      <a href="#2d" style="color:#7C8A83">/about</a>
+      <a href="#2d" style="color:#EFEEE8">→ /press</a>
+      <a href="#2d" style="color:#7C8A83">/contact</a>
+    </nav>
+    <a href="#2d" style="font:500 13px 'JetBrains Mono',monospace;letter-spacing:.1em;background:#EFEEE8;color:#10201B;padding:14px 20px;border-radius:2px;text-align:center">DOWNLOAD FULL KIT (.ZIP)</a>
+    <div style="margin-top:auto;font:400 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83">© 2026 DRYAS STUDIO</div>
+  </aside>
+  <main style="padding:72px 96px;display:flex;flex-direction:column;gap:44px">
+    <div>
+      <div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.18em;color:#7C8A83;margin-bottom:16px">PRESS</div>
+      <h1 style="margin:0;font:500 44px/1.15 Archivo,sans-serif;letter-spacing:.04em;color:#EFEEE8;text-transform:uppercase">Press kit</h1>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px">
+      <div style="display:flex;flex-direction:column;gap:0;font:400 13px 'JetBrains Mono',monospace">
+        <div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.18em;color:#7C8A83;margin-bottom:14px">FACT SHEET</div>
+        <div style="display:flex;justify-content:space-between;padding:13px 0;border-top:1px solid rgba(201,207,196,.12)"><span style="color:#7C8A83">STUDIO</span><span style="color:#EFEEE8">DRYAS STUDIO</span></div>
+        <div style="display:flex;justify-content:space-between;padding:13px 0;border-top:1px solid rgba(201,207,196,.12)"><span style="color:#7C8A83">TEAM</span><span style="color:#EFEEE8">1 (SOLO DEVELOPER)</span></div>
+        <div style="display:flex;justify-content:space-between;padding:13px 0;border-top:1px solid rgba(201,207,196,.12)"><span style="color:#7C8A83">CURRENT TITLE</span><span style="color:#EFEEE8">GATEKEEP (IN DEV)</span></div>
+        <div style="display:flex;justify-content:space-between;padding:13px 0;border-top:1px solid rgba(201,207,196,.12)"><span style="color:#7C8A83">FOUNDED</span><span style="color:#EFEEE8">2026</span></div>
+        <div style="display:flex;justify-content:space-between;padding:13px 0;border-top:1px solid rgba(201,207,196,.12);border-bottom:1px solid rgba(201,207,196,.12)"><span style="color:#7C8A83">CONTACT</span><span style="color:#EFEEE8">PRESS@DRYASSTUDIO.COM</span></div>
+      </div>
+      <div>
+        <div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.18em;color:#7C8A83;margin-bottom:14px">LOGO &amp; MARK</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="background:#10201B;border:1px solid rgba(201,207,196,.12);display:flex;align-items:center;justify-content:center;height:110px"><img src="assets/dryas-symbol-paper.svg" alt="" style="height:48px"></div>
+          <div style="background:#EFEEE8;display:flex;align-items:center;justify-content:center;height:110px"><img src="assets/dryas-symbol.svg" alt="" style="height:48px"></div>
+          <div style="background:#10201B;border:1px solid rgba(201,207,196,.12);display:flex;align-items:center;justify-content:center;height:110px;grid-column:1/-1"><img src="assets/dryas-lockup-horizontal-reversed.svg" alt="" style="height:30px"></div>
+        </div>
+        <div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#7C8A83;margin-top:10px">SVG + PNG IN THE KIT · CLEARSPACE RULES INCLUDED</div>
+      </div>
+    </div>
+    <div>
+      <div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.18em;color:#7C8A83;margin-bottom:14px">GATEKEEP — SCREENSHOTS</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+        <div style="height:130px;position:relative;background:#10201B;border:1px solid rgba(201,207,196,.12)"><image-slot id="slot-2d-s1" shape="rect" style="position:absolute;inset:0">01</image-slot></div>
+        <div style="height:130px;position:relative;background:#10201B;border:1px solid rgba(201,207,196,.12)"><image-slot id="slot-2d-s2" shape="rect" style="position:absolute;inset:0">02</image-slot></div>
+        <div style="height:130px;position:relative;background:#10201B;border:1px solid rgba(201,207,196,.12)"><image-slot id="slot-2d-s3" shape="rect" style="position:absolute;inset:0">03</image-slot></div>
+        <div style="height:130px;position:relative;background:#10201B;border:1px solid rgba(201,207,196,.12)"><image-slot id="slot-2d-s4" shape="rect" style="position:absolute;inset:0">04</image-slot></div>
+      </div>
+    </div>
+  </main>
+</div>
+</div></div>
+
+</div>
+<p class="dv-next">Try next: "mobile versions of <a class="dv-oid" href="#2a">2a</a> and the home page" · "make the /gatekeep hero moodier" · "add a media/clips section to <a class="dv-oid" href="#2a">2a</a>"</p>
+</section>
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">dryasstudio.com — three home-page directions (dark, District Green)</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a"><div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Minimal &amp; typographic — quiet studio front, mono metadata</div>
+<div class="dv-card" style="width:1280px" data-screen-label="1a Minimal">
+<div style="display:flex;flex-direction:column;background:#1B342C;color:#C9CFC4;min-height:900px">
+  <nav style="display:flex;align-items:center;justify-content:space-between;padding:28px 56px;border-bottom:1px solid rgba(201,207,196,.12)">
+    <img src="assets/dryas-lockup-horizontal-reversed.svg" alt="Dryas Studio" style="height:26px;display:block">
+    <div style="display:flex;gap:36px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase">
+      <a href="#1a" style="color:#EFEEE8">Gatekeep</a><a href="#1a" style="color:#7C8A83">Devlog</a><a href="#1a" style="color:#7C8A83">About</a><a href="#1a" style="color:#7C8A83">Press</a><a href="#1a" style="color:#7C8A83">Contact</a>
+    </div>
+  </nav>
+  <div style="padding:120px 56px 96px;border-bottom:1px solid rgba(201,207,196,.12)">
+    <div style="font:400 12px 'JetBrains Mono',monospace;letter-spacing:.22em;color:#7C8A83;margin-bottom:28px">INDEPENDENT GAME STUDIO — EST. 2026</div>
+    <h1 style="margin:0;font:500 76px/1.08 Archivo,sans-serif;letter-spacing:.06em;color:#EFEEE8;text-transform:uppercase;max-width:900px;text-wrap:pretty">One person. One game at a time.</h1>
+    <p style="margin:32px 0 0;font:400 18px/1.6 Archivo,sans-serif;color:#C9CFC4;max-width:560px">Dryas Studio is a solo game development studio. Currently building <a href="#1a" style="color:#EFEEE8;border-bottom:1px solid #4A5D53">Gatekeep</a>.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(201,207,196,.12)">
+    <div style="padding:56px;display:flex;flex-direction:column;gap:24px;justify-content:center">
+      <div style="display:flex;align-items:center;gap:14px">
+        <span style="font:500 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#10201B;background:#C9CFC4;padding:4px 10px;border-radius:2px">IN DEVELOPMENT</span>
+        <span style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83">DEVLOG #04 — AUG 2026</span>
+      </div>
+      <div style="font:500 44px/1.1 Archivo,sans-serif;letter-spacing:.06em;color:#EFEEE8">GATEKEEP</div>
+      <p style="margin:0;font:400 15px/1.65 Archivo,sans-serif;color:#C9CFC4;max-width:420px">Our first title. A game about deciding what gets through — and living with what you let in.</p>
+      <div style="display:flex;gap:16px;align-items:center">
+        <a href="#1a" style="font:500 13px 'JetBrains Mono',monospace;letter-spacing:.1em;background:#EFEEE8;color:#10201B;padding:14px 26px;border-radius:2px">VISIT /GATEKEEP →</a>
+        <a href="#1a" style="font:500 13px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#C9CFC4;padding:14px 0;border-bottom:1px solid #4A5D53">READ THE DEVLOG</a>
+      </div>
+    </div>
+    <div style="background:#10201B;min-height:420px;position:relative">
+      <image-slot id="slot-1a-keyart" shape="rect" style="position:absolute;inset:0">Gatekeep key art / screenshot</image-slot>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid rgba(201,207,196,.12)">
+    <div style="padding:40px 56px;border-right:1px solid rgba(201,207,196,.12)">
+      <div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83;margin-bottom:12px">2026-08-14 · DEVLOG</div>
+      <div style="font:500 17px/1.4 Archivo,sans-serif;color:#EFEEE8">The rebrand, and why one lane matters</div>
+    </div>
+    <div style="padding:40px 56px;border-right:1px solid rgba(201,207,196,.12)">
+      <div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83;margin-bottom:12px">2026-07-30 · DEVLOG</div>
+      <div style="font:500 17px/1.4 Archivo,sans-serif;color:#EFEEE8">Telemetry, playtests, and honest numbers</div>
+    </div>
+    <div style="padding:40px 56px">
+      <div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83;margin-bottom:12px">2026-07-11 · NOTES</div>
+      <div style="font:500 17px/1.4 Archivo,sans-serif;color:#EFEEE8">Building a studio of one</div>
+    </div>
+  </div>
+  <footer style="display:flex;align-items:center;justify-content:space-between;padding:36px 56px;margin-top:auto">
+    <div style="display:flex;align-items:center;gap:16px">
+      <img src="assets/dryas-symbol-paper.svg" alt="" style="height:28px">
+      <span style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83">© 2026 DRYAS STUDIO</span>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <span style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83">GET UPDATES</span>
+      <span style="font:400 13px 'JetBrains Mono',monospace;color:#7C8A83;background:#10201B;border:1px solid rgba(201,207,196,.2);padding:10px 16px;border-radius:2px;min-width:220px">you@email.com</span>
+      <span style="font:500 12px 'JetBrains Mono',monospace;letter-spacing:.1em;background:#4A5D53;color:#EFEEE8;padding:11px 18px;border-radius:2px">SUBSCRIBE</span>
+    </div>
+  </footer>
+</div>
+</div></div>
+
+<div class="dv-opt" id="1b"><div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Game-forward — full-bleed Gatekeep art, studio as chrome</div>
+<div class="dv-card" style="width:1280px" data-screen-label="1b Game-forward">
+<div style="display:flex;flex-direction:column;background:#10201B;color:#C9CFC4;min-height:900px">
+  <div style="position:relative;height:640px;background:#10201B">
+    <image-slot id="slot-1b-hero" shape="rect" style="position:absolute;inset:0">Gatekeep full-bleed key art (1280×640)</image-slot>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,32,27,.75) 0%,rgba(16,32,27,0) 30%,rgba(16,32,27,0) 55%,rgba(16,32,27,.92) 100%);pointer-events:none"></div>
+    <nav style="position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:24px 48px">
+      <img src="assets/dryas-lockup-horizontal-reversed.svg" alt="Dryas Studio" style="height:24px;display:block">
+      <div style="display:flex;gap:32px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase">
+        <a href="#1b" style="color:#7C8A83">Devlog</a><a href="#1b" style="color:#7C8A83">About</a><a href="#1b" style="color:#7C8A83">Press</a>
+      </div>
+    </nav>
+    <div style="position:absolute;left:48px;right:48px;bottom:44px;display:flex;align-items:flex-end;justify-content:space-between;gap:32px">
+      <div>
+        <div style="font:400 12px 'JetBrains Mono',monospace;letter-spacing:.22em;color:#C9CFC4;margin-bottom:14px">NOW IN DEVELOPMENT</div>
+        <div style="font:500 88px/1 Archivo,sans-serif;letter-spacing:.08em;color:#EFEEE8">GATEKEEP</div>
+        <p style="margin:16px 0 0;font:400 17px/1.55 Archivo,sans-serif;color:#C9CFC4;max-width:520px">Decide what gets through. Live with what you let in.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;flex:none">
+        <a href="#1b" style="font:500 13px 'JetBrains Mono',monospace;letter-spacing:.1em;background:#EFEEE8;color:#10201B;padding:16px 30px;border-radius:2px;text-align:center">EXPLORE GATEKEEP →</a>
+        <a href="#1b" style="font:500 13px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#C9CFC4;border:1px solid rgba(201,207,196,.35);padding:15px 30px;border-radius:2px;text-align:center">GET UPDATES</a>
+      </div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,207,196,.12);border-top:1px solid rgba(201,207,196,.12);border-bottom:1px solid rgba(201,207,196,.12)">
+    <div style="background:#1B342C;padding:36px 40px"><div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.18em;color:#7C8A83;margin-bottom:10px">THE STUDIO</div><p style="margin:0;font:400 14px/1.6 Archivo,sans-serif;color:#C9CFC4">A one-person studio. Design, code, and everything between — one lane, done properly.</p></div>
+    <div style="background:#1B342C;padding:36px 40px"><div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.18em;color:#7C8A83;margin-bottom:10px">LATEST DEVLOG</div><p style="margin:0;font:400 14px/1.6 Archivo,sans-serif;color:#EFEEE8">#04 — The rebrand, and why one lane matters</p><div style="font:400 11px 'JetBrains Mono',monospace;color:#7C8A83;margin-top:8px">2026-08-14</div></div>
+    <div style="background:#1B342C;padding:36px 40px"><div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.18em;color:#7C8A83;margin-bottom:10px">FOLLOW ALONG</div><p style="margin:0;font:400 14px/1.6 Archivo,sans-serif;color:#C9CFC4">Devlog by email, gameplay clips on X, playtest invites first to subscribers.</p></div>
+  </div>
+  <footer style="display:flex;align-items:center;justify-content:space-between;padding:32px 48px;margin-top:auto">
+    <div style="display:flex;align-items:center;gap:14px"><img src="assets/dryas-symbol-paper.svg" alt="" style="height:24px"><span style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83">© 2026 DRYAS STUDIO — DRYASSTUDIO.COM</span></div>
+    <div style="display:flex;gap:24px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.14em"><a href="#1b" style="color:#7C8A83">X</a><a href="#1b" style="color:#7C8A83">DISCORD</a><a href="#1b" style="color:#7C8A83">PRESS KIT</a></div>
+  </footer>
+</div>
+</div></div>
+
+<div class="dv-opt" id="1c"><div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Devlog-first / technical — index page, mono-heavy, warm accents</div>
+<div class="dv-card" style="width:1280px" data-screen-label="1c Devlog-first">
+<div style="display:grid;grid-template-columns:380px 1fr;background:#1B342C;color:#C9CFC4;min-height:900px">
+  <aside style="border-right:1px solid rgba(201,207,196,.12);padding:48px 40px;display:flex;flex-direction:column;gap:40px;background:#10201B">
+    <img src="assets/dryas-symbol-paper.svg" alt="Dryas Studio" style="height:64px;align-self:flex-start">
+    <div>
+      <div style="font:500 30px/1.15 Archivo,sans-serif;letter-spacing:.06em;color:#EFEEE8;text-transform:uppercase">Dryas Studio</div>
+      <div style="font:400 12px 'JetBrains Mono',monospace;letter-spacing:.32em;color:#7C8A83;margin-top:8px">SOLO · GAMES · 2026</div>
+    </div>
+    <p style="margin:0;font:400 14px/1.7 Archivo,sans-serif;color:#C9CFC4">An independent studio of one, building Gatekeep in the open. Everything here is written by the person making the game.</p>
+    <nav style="display:flex;flex-direction:column;gap:14px;font:500 13px 'JetBrains Mono',monospace;letter-spacing:.12em">
+      <a href="#1c" style="color:#EFEEE8">→ /gatekeep</a>
+      <a href="#1c" style="color:#7C8A83">/devlog</a>
+      <a href="#1c" style="color:#7C8A83">/about</a>
+      <a href="#1c" style="color:#7C8A83">/press</a>
+      <a href="#1c" style="color:#7C8A83">/contact</a>
+    </nav>
+    <div style="margin-top:auto;display:flex;flex-direction:column;gap:10px">
+      <div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.18em;color:#7C8A83">DEVLOG BY EMAIL</div>
+      <div style="display:flex;gap:8px">
+        <span style="font:400 12px 'JetBrains Mono',monospace;color:#7C8A83;background:#1B342C;border:1px solid rgba(201,207,196,.2);padding:10px 14px;border-radius:2px;flex:1">you@email.com</span>
+        <span style="font:500 12px 'JetBrains Mono',monospace;background:#5C4A3F;color:#EFEEE8;padding:10px 16px;border-radius:2px">→</span>
+      </div>
+    </div>
+  </aside>
+  <main style="display:flex;flex-direction:column">
+    <div style="padding:48px 56px;border-bottom:1px solid rgba(201,207,196,.12)">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+        <span style="font:500 11px 'JetBrains Mono',monospace;letter-spacing:.14em;background:#5C4A3F;color:#EFEEE8;padding:4px 10px;border-radius:2px">CURRENT PROJECT</span>
+        <span style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83">STATUS: IN DEVELOPMENT</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 320px;gap:40px;align-items:center">
+        <div>
+          <div style="font:500 56px/1 Archivo,sans-serif;letter-spacing:.08em;color:#EFEEE8">GATEKEEP</div>
+          <p style="margin:18px 0 24px;font:400 15px/1.65 Archivo,sans-serif;color:#C9CFC4;max-width:480px">Decide what gets through — and live with what you let in. Follow the build, week by week.</p>
+          <a href="#1c" style="font:500 13px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#EFEEE8;border:1px solid #4A5D53;padding:13px 24px;border-radius:2px;display:inline-block">dryasstudio.com/gatekeep →</a>
+        </div>
+        <div style="height:200px;position:relative;background:#10201B;border:1px solid rgba(201,207,196,.12)">
+          <image-slot id="slot-1c-keyart" shape="rect" style="position:absolute;inset:0">Gatekeep screenshot</image-slot>
+        </div>
+      </div>
+    </div>
+    <div style="padding:40px 56px;display:flex;flex-direction:column;gap:0">
+      <div style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.18em;color:#7C8A83;margin-bottom:20px">DEVLOG — LATEST ENTRIES</div>
+      <div style="display:flex;align-items:baseline;gap:24px;padding:18px 0;border-top:1px solid rgba(201,207,196,.12)"><span style="font:400 12px 'JetBrains Mono',monospace;color:#7C8A83;flex:none;width:110px">2026-08-14</span><a href="#1c" style="font:500 17px Archivo,sans-serif;color:#EFEEE8;flex:1">#04 — The rebrand, and why one lane matters</a><span style="font:400 11px 'JetBrains Mono',monospace;color:#5C4A3F;background:rgba(92,74,63,.25);padding:3px 8px;border-radius:2px;color:#C9CFC4">MILESTONE</span></div>
+      <div style="display:flex;align-items:baseline;gap:24px;padding:18px 0;border-top:1px solid rgba(201,207,196,.12)"><span style="font:400 12px 'JetBrains Mono',monospace;color:#7C8A83;flex:none;width:110px">2026-07-30</span><a href="#1c" style="font:500 17px Archivo,sans-serif;color:#C9CFC4;flex:1">#03 — Telemetry, playtests, and honest numbers</a></div>
+      <div style="display:flex;align-items:baseline;gap:24px;padding:18px 0;border-top:1px solid rgba(201,207,196,.12)"><span style="font:400 12px 'JetBrains Mono',monospace;color:#7C8A83;flex:none;width:110px">2026-07-11</span><a href="#1c" style="font:500 17px Archivo,sans-serif;color:#C9CFC4;flex:1">#02 — Building a studio of one</a></div>
+      <div style="display:flex;align-items:baseline;gap:24px;padding:18px 0;border-top:1px solid rgba(201,207,196,.12);border-bottom:1px solid rgba(201,207,196,.12)"><span style="font:400 12px 'JetBrains Mono',monospace;color:#7C8A83;flex:none;width:110px">2026-06-27</span><a href="#1c" style="font:500 17px Archivo,sans-serif;color:#C9CFC4;flex:1">#01 — Hello, world. Meet Dryas Studio</a></div>
+      <a href="#1c" style="font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#7C8A83;margin-top:20px">ALL ENTRIES →</a>
+    </div>
+    <footer style="margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding:28px 56px;border-top:1px solid rgba(201,207,196,.12)">
+      <span style="font:400 11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7C8A83">© 2026 DRYAS STUDIO</span>
+      <div style="display:flex;gap:24px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.14em"><a href="#1c" style="color:#7C8A83">X</a><a href="#1c" style="color:#7C8A83">DISCORD</a><a href="#1c" style="color:#7C8A83">ITCH.IO</a></div>
+    </footer>
+  </main>
+</div>
+</div></div>
+
+</div>
+<p class="dv-next">Try next: "build the /gatekeep page in the style of <a class="dv-oid" href="#1b">1b</a>" · "mix <a class="dv-oid" href="#1a">1a</a>'s hero with <a class="dv-oid" href="#1c">1c</a>'s devlog list" · "show mobile versions"</p>
+</section>
+</x-dc>
+</body>
+</html>
