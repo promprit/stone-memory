@@ -1,18 +1,8 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": [
-    ".astro/types.d.ts",
-    "**/*.astro",
-    "**/*.ts",
-    "**/*.mjs"
-  ],
-  "exclude": [
-    "dist",
-    "node_modules"
-  ],
+  "include": [".astro/types.d.ts", "**/*.astro", "src/**/*.ts", "scripts/**/*.mjs"],
+  "exclude": ["dist", "node_modules", "functions"],
   "compilerOptions": {
-    "types": [
-      "@cloudflare/workers-types"
-    ]
+    "types": ["node"]
   }
 }

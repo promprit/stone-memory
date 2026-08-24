@@ -80,6 +80,8 @@ Recorded so the deviations are not re-litigated later.
 - **`_routes.json` includes `/api/*`.** The plan and spec §4.3 both said `/gatekeep*` only, which would have left the signup endpoint permanently unreachable. Spec corrected.
 - **No mobile nav toggle.** The handoff offers "hamburger or wrapped route nav"; wrapped needs no JavaScript, so the site's only script is the email form.
 - **No main-column footer on `2b`/`2c`/`2d`.** First pass rendered both a sidebar copyright and a main footer, which the canvas does not. Only `1c` has the main footer; the other three close the sidebar with the copyright line, and the shell now defaults to that.
+- **Image wells resolve from `public/images/` at build time.** Not in the original plan. The studio owner uploads through the GitHub web UI, so a well names an image by stem (`gatekeep/key-art`) and `src/lib/images.ts` finds whichever extension landed. Verified both ways: dropping a file in swaps the placeholder for the photo, removing it reverts.
+- **Two tsconfigs.** The Functions run on workerd and typecheck against `@cloudflare/workers-types`; the Astro app needs Node's. Merging both global lib sets into one root config makes `fetch`/`Request` ambiguous, so `functions/` has its own and `npm run check` runs `tsc --noEmit -p functions` after `astro check`. Proved it actually checks by planting a type error.
 - **`src/lib/tokens.ts` reads the palette via a Vite `?raw` import.** A few places need a colour as a value rather than a custom property (`theme-color`). Reading `tokens.css` from disk broke once the module was bundled into `dist/.prerender/`.
 
 ## Verification Strategy

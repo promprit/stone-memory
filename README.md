@@ -56,6 +56,11 @@ repo from shipping** — until they land, `/gatekeep` serves a holding page.
 
 Full detail in [the design doc](docs/superpowers/specs/2026-08-24-dryasstudio-site-design.md) §4.
 
+**Hand [`docs/superpowers/handovers/2026-08-24-gatekeep-under-dryasstudio.md`](docs/superpowers/handovers/2026-08-24-gatekeep-under-dryasstudio.md)
+to whoever picks this up in `one-lane`.** It is self-contained — the contract,
+the three changes with exact file paths, how to verify locally, and what not to
+do.
+
 ---
 
 ## How it is built
@@ -101,5 +106,7 @@ stroked District Green — made for light grounds. The site uses the kit file as
 delivered rather than inventing a variant. Design doc §8 has the two ways out.
 
 **Image wells are placeholders.** Key art, screenshots and the portrait are the
-studio owner's to supply; the handoff says so explicitly. Pass `src`/`alt` to
-`ImageWell` and the surrounding layout does not change.
+studio owner's to supply. Drop files into
+[`public/images/`](public/images/README.md) — through the GitHub web UI is fine
+— and the wells pick them up on the next build with **no code change**. That
+folder's README lists the exact filenames.

@@ -77,7 +77,16 @@ const shots = ['01', '02', '03', '04'];
     <section>
       <p class="kicker">Gatekeep — screenshots</p>
       <div class="shots">
-        {shots.map((n) => <ImageWell caption={n} height="130px" />)}
+        {
+          shots.map((n) => (
+            <ImageWell
+              caption={n}
+              image={`gatekeep/screenshot-${n}`}
+              alt={`Gatekeep screenshot ${n}`}
+              height="130px"
+            />
+          ))
+        }
       </div>
     </section>
   </div>

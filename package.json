@@ -7,13 +7,14 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check",
+    "check": "astro check && tsc --noEmit -p functions",
     "test": "node scripts/check-literals.mjs",
     "verify": "npm run test && npm run check && npm run build"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@cloudflare/workers-types": "^5.20260823.1",
+    "@types/node": "^26.2.0",
     "astro": "^7.2.4",
     "typescript": "^6.0.3",
     "wrangler": "^4.125.0"

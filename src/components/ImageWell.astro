@@ -6,12 +6,21 @@
  * assets — key art, screenshots, the portrait. The handoff says so
  * explicitly, and the design canvas draws them as dashed drop zones.
  *
- * When a real image arrives, pass `src`/`alt` and the well renders it
- * instead. Nothing else about the surrounding layout changes.
+ * When a real image arrives, the well renders it instead and nothing about the
+ * surrounding layout changes. Pass `image` — a stem like `gatekeep/key-art` —
+ * and the file is resolved from `public/images/` at build time, whatever
+ * extension it landed with. Absent, the placeholder caption shows. That is what
+ * lets the studio owner upload a photo through the GitHub web UI with no code
+ * change; see public/images/README.md.
  */
+import { findImage } from '../lib/images';
+
 interface Props {
   caption: string;
   height?: string;
+  /** Stem under public/images, e.g. `gatekeep/key-art`. Extension resolved. */
+  image?: string;
+  /** Explicit src, for an image that is not in public/images. */
   src?: string;
   alt?: string;
   /** Wells inside a Shade sidebar need the darker ground to invert. */
@@ -19,16 +28,26 @@ interface Props {
   class?: string;
 }
 
-const { caption, height, src, alt, onShade = false, class: className } = Astro.props;
+const {
+  caption,
+  height,
+  image,
+  src,
+  alt,
+  onShade = false,
+  class: className,
+} = Astro.props;
+
+const resolved = src ?? (image ? findImage(image) : null);
 ---
 
 <div
-  class:list={['well', { 'on-shade': onShade, filled: !!src }, className]}
+  class:list={['well', { 'on-shade': onShade, filled: !!resolved }, className]}
   style={height ? `height:${height}` : undefined}
 >
   {
-    src ? (
-      <img src={src} alt={alt ?? ''} loading="lazy" decoding="async" />
+    resolved ? (
+      <img src={resolved} alt={alt ?? caption} loading="lazy" decoding="async" />
     ) : (
       <span class="caption">{caption}</span>
     )
