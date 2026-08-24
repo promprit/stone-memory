@@ -1,0 +1,245 @@
+---
+/**
+ * /devlog/:slug — screen `2b Devlog entry`.
+ *
+ * The same sidebar shell as home, but the nav shows `→ /devlog` active and
+ * below it an ALL ENTRIES list with the current entry in a Moss-Pale-at-8%
+ * pill. The article is a single 860px column at 72px/96px padding.
+ *
+ * H1 is sentence case here, deliberately — it is the one place on the site
+ * that is not uppercase. The handoff calls this out.
+ */
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import Shell from '../../layouts/Shell.astro';
+import ImageWell from '../../components/ImageWell.astro';
+import { allEntries, dateOf, hrefOf, neighbours, numberOf, slugOf } from '../../lib/devlog';
+
+export const getStaticPaths = (async () => {
+  const entries = await allEntries();
+  return entries.map((entry) => ({
+    params: { slug: slugOf(entry) },
+    props: { entry, entries },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry, entries } = Astro.props;
+const { Content } = await render(entry);
+// Only `prev` is used: the design's article footer pairs a `← #03` link
+// with ALL ENTRIES →, not with a next-entry link.
+const { prev } = neighbours(entries, entry);
+
+const meta = [
+  `DEVLOG ${numberOf(entry)}`,
+  dateOf(entry),
+  entry.data.readingTime,
+].join(' · ');
+---
+
+<Shell
+  title={entry.data.title}
+  description={entry.data.summary}
+  active="devlog"
+>
+  <Fragment slot="sidebar">
+    <div class="entries">
+      <p class="kicker entries-head">All entries</p>
+      {
+        entries.map((item) => {
+          const current = item.id === entry.id;
+          return (
+            <a
+              href={hrefOf(item)}
+              class:list={['entry', { current }]}
+              aria-current={current ? 'page' : undefined}
+            >
+              {numberOf(item)} {item.data.title}
+            </a>
+          );
+        })
+      }
+    </div>
+  </Fragment>
+
+
+  <article class="article">
+    <div class="meta-row">
+      {entry.data.milestone && <span class="badge">MILESTONE</span>}
+      <span class="meta">{meta}</span>
+    </div>
+
+    <h1 class="heading">{entry.data.title}</h1>
+
+    <div class="body">
+      <Content />
+    </div>
+
+    <ImageWell caption="Entry figure — build screenshot" height="320px" />
+    <p class="figcaption">FIG.01 — THE NEW MARK ON THE SPLASH SCREEN</p>
+
+    <div class="stats">
+      gatekeep · build 0.4.2<br />
+      sessions this week: 118<br />
+      median run: 14m 32s
+    </div>
+
+    <nav class="prevnext" aria-label="More entries">
+      {
+        prev ? (
+          <a href={hrefOf(prev)} class="prev">
+            ← {numberOf(prev)} {prev.data.title}
+          </a>
+        ) : (
+          <span />
+        )
+      }
+      <a href="/devlog" class="next">ALL ENTRIES →</a>
+    </nav>
+  </article>
+</Shell>
+
+<style>
+  /* ── Sidebar entry list ───────────────────────────────────────────────── */
+
+  .entries {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .entries-head {
+    margin-bottom: 12px;
+  }
+
+  .entry {
+    font: 400 13px/1.5 var(--font-mono);
+    color: var(--slate-grey);
+    padding: 10px 12px;
+    border-radius: var(--radius);
+  }
+  .entry:hover {
+    color: var(--moss-pale);
+  }
+  .entry.current {
+    color: var(--paper);
+    background: var(--pill);
+  }
+
+
+  /* ── Article ──────────────────────────────────────────────────────────── */
+
+  .article {
+    padding: 72px 96px;
+    max-width: 860px;
+  }
+
+  .meta-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .meta {
+    font: 400 12px var(--font-mono);
+    letter-spacing: 0.14em;
+    color: var(--slate-grey);
+  }
+
+  /* Sentence case, not uppercase — the one exception on the site. */
+  .heading {
+    margin: 0 0 28px;
+    font: 500 44px/1.15 var(--font-display);
+    letter-spacing: 0.02em;
+    color: var(--paper);
+    text-wrap: pretty;
+  }
+
+  .body {
+    font: 400 17px/1.75 var(--font-body);
+    color: var(--moss-pale);
+  }
+  .body :global(p) {
+    margin: 0 0 20px;
+  }
+  .body :global(p:last-child) {
+    margin-bottom: 28px;
+  }
+  .body :global(a) {
+    color: var(--paper);
+    border-bottom: 1px solid var(--driving-mist);
+  }
+  .body :global(a:hover) {
+    border-bottom-color: var(--paper);
+  }
+  .body :global(code) {
+    font: 400 0.9em var(--font-mono);
+  }
+  .body :global(h2) {
+    margin: 36px 0 16px;
+    font: 500 24px/1.3 var(--font-display);
+    letter-spacing: 0.04em;
+    color: var(--paper);
+    text-transform: uppercase;
+  }
+
+  .figcaption {
+    font: 400 11px var(--font-mono);
+    letter-spacing: 0.12em;
+    color: var(--slate-grey);
+    margin: 10px 0 28px;
+  }
+
+  .stats {
+    font: 400 14px/1.8 var(--font-mono);
+    color: var(--moss-pale);
+    background: var(--shade);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 36px;
+  }
+
+  .prevnext {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    border-top: 1px solid var(--hairline);
+    padding-top: 24px;
+    font: 500 12px var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .prev {
+    color: var(--slate-grey);
+  }
+  .prev:hover {
+    color: var(--moss-pale);
+  }
+
+  .next {
+    color: var(--moss-pale);
+    text-align: right;
+  }
+  .next:hover {
+    color: var(--paper);
+  }
+
+  @media (max-width: 900px) {
+    .article {
+      padding: 40px 24px;
+    }
+    .heading {
+      font-size: 32px;
+    }
+    .prevnext {
+      flex-direction: column;
+      gap: 14px;
+    }
+    .next {
+      text-align: left;
+    }
+  }
+</style>

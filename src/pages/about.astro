@@ -1,0 +1,206 @@
+---
+/**
+ * /about — screen `2c About`.
+ *
+ * Sidebar carries a 180×180 portrait slot. Main is a 900px column: kicker,
+ * uppercase H1, bio, a three-cell stats strip built with the 1px grid-gap
+ * hairline trick, then the contact block.
+ *
+ * The contact block carries `id="contact"` because the sidebar's `/contact`
+ * nav item points here rather than at a page that would duplicate it.
+ * See design doc §6.2.
+ */
+import Shell from '../layouts/Shell.astro';
+import ImageWell from '../components/ImageWell.astro';
+import { allEntries } from '../lib/devlog';
+
+const entries = await allEntries();
+
+const stats = [
+  { value: '01', label: 'Game in development' },
+  { value: '2026', label: 'Studio founded' },
+  { value: String(entries.length).padStart(2, '0'), label: 'Devlog entries' },
+];
+
+const contact = [
+  { label: 'Email', value: 'hello@dryasstudio.com', href: 'mailto:hello@dryasstudio.com', primary: true },
+  { label: 'X', value: '@dryasstudio', href: 'https://x.com/dryasstudio' },
+  { label: 'Discord', value: 'Gatekeep playtest server', href: '#' },
+  { label: 'Press', value: 'press kit + fact sheet →', href: '/press' },
+];
+---
+
+<Shell
+  title="About"
+  description="Dryas Studio is run by one person: design, engineering, art direction, and this website."
+  active="about"
+>
+  <div slot="sidebar" class="portrait">
+    <ImageWell caption="Your photo (or leave the mark)" height="180px" onShade />
+  </div>
+
+
+  <div class="page">
+    <section>
+      <p class="kicker">About</p>
+      <h1 class="display heading">A studio of one, on purpose.</h1>
+      <p class="bio">
+        Dryas Studio is run by one person: design, engineering, art direction, and this website.
+        Placeholder bio — two or three honest paragraphs about who you are and why you build
+        alone. Named after <i>Dryas octopetala</i>, a flower that grows where almost nothing else
+        does.
+      </p>
+    </section>
+
+    {/* 1px grid gap over a hairline ground draws the dividers — the design's
+        own trick, kept rather than replaced with borders. */}
+    <section class="stats" aria-label="Studio at a glance">
+      {
+        stats.map(({ value, label }) => (
+          <div class="stat">
+            <div class="stat-value">{value}</div>
+            <div class="stat-label">{label}</div>
+          </div>
+        ))
+      }
+    </section>
+
+    <section id="contact" class="contact">
+      <p class="kicker">Contact</p>
+      <dl class="rows">
+        {
+          contact.map(({ label, value, href, primary }) => (
+            <div class="row">
+              <dt>{label}</dt>
+              <dd>
+                <a href={href} class:list={[primary ? 'link' : 'quiet']}>
+                  {value}
+                </a>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+  </div>
+
+</Shell>
+
+<style>
+  .portrait {
+    width: 180px;
+    height: 180px;
+  }
+
+
+  .page {
+    padding: 72px 96px;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .heading {
+    margin: 16px 0 0;
+    font-size: 44px;
+    line-height: 1.15;
+    letter-spacing: 0.04em;
+  }
+
+  .bio {
+    margin: 24px 0 0;
+    font: 400 17px/1.75 var(--font-body);
+    color: var(--moss-pale);
+    max-width: 620px;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--hairline);
+    border: 1px solid var(--hairline);
+  }
+
+  .stat {
+    background: var(--shade);
+    padding: 28px;
+  }
+
+  .stat-value {
+    font: 500 28px var(--font-mono);
+    color: var(--paper);
+  }
+
+  .stat-label {
+    font: 400 12px var(--font-mono);
+    letter-spacing: 0.14em;
+    color: var(--slate-grey);
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  .contact {
+    border-top: 1px solid var(--hairline);
+    padding-top: 32px;
+    /* The nav links here by anchor; keep the heading clear of the top edge
+       when it lands. */
+    scroll-margin-top: 24px;
+  }
+
+  .contact .kicker {
+    margin-bottom: 18px;
+  }
+
+  .rows {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0;
+    font: 400 14px var(--font-mono);
+  }
+
+  .row {
+    display: flex;
+    gap: 20px;
+  }
+
+  .row dt {
+    width: 90px;
+    flex: none;
+    color: var(--slate-grey);
+    text-transform: uppercase;
+  }
+
+  .row dd {
+    margin: 0;
+    min-width: 0;
+  }
+
+  .quiet {
+    color: var(--moss-pale);
+  }
+  .quiet:hover {
+    color: var(--paper);
+  }
+
+  @media (max-width: 900px) {
+    .page {
+      padding: 40px 24px;
+    }
+    .heading {
+      font-size: 32px;
+    }
+    .stats {
+      grid-template-columns: 1fr;
+    }
+    .row {
+      flex-direction: column;
+      gap: 4px;
+    }
+    .row dt {
+      width: auto;
+    }
+  }
+</style>

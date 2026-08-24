@@ -1,0 +1,50 @@
+/*
+ * Dryas Studio brand tokens — the official kit, v2.0.
+ *
+ * THIS IS THE ONLY FILE IN THE BUILD THAT MAY CONTAIN A COLOUR LITERAL.
+ * `npm test` (scripts/check-literals.mjs) fails on a hex, rgb() or hsl()
+ * anywhere in src/pages, src/layouts or src/components. The handoff is
+ * explicit that these eight colours are the palette and that new ones are
+ * never invented; a palette that is only a convention drifts within a month.
+ */
+
+:root {
+  /* ── Brand palette ──────────────────────────────────────────────────── */
+  --district-green: #1b342c; /* anchor, default page background            */
+  --shade: #10201b;          /* depth: sidebar, image wells, code blocks   */
+  --driving-mist: #4a5d53;   /* link underlines, active UI                 */
+  --earth-brown: #5c4a3f;    /* ACCENT ONLY — badges, subscribe. Never a ground. */
+  --moss-pale: #c9cfc4;      /* body copy on dark                          */
+  --slate-grey: #7c8a83;     /* metadata, inactive nav, dividers           */
+  --paper: #efeee8;          /* headings on dark, primary button fill      */
+
+  /* ── Derived surfaces ───────────────────────────────────────────────── */
+  /* Hairline dividers: 1px solid, Moss Pale at 12%. */
+  --hairline: rgba(201, 207, 196, 0.12);
+  /* Input and outlined-button borders sit slightly brighter than a hairline. */
+  --edge: rgba(201, 207, 196, 0.2);
+  --edge-strong: rgba(201, 207, 196, 0.35);
+  --edge-hover: rgba(201, 207, 196, 0.6);
+  /* The active-entry pill in the devlog sidebar. */
+  --pill: rgba(201, 207, 196, 0.08);
+  /* The list-row MILESTONE badge — Earth Brown at 25%, Moss Pale text.
+     Distinct from the article badge, which is solid Earth Brown on Paper. */
+  --badge-soft: rgba(92, 74, 63, 0.25);
+
+  /* ── Type ───────────────────────────────────────────────────────────── */
+  --font-display: 'Archivo Variable', Archivo, system-ui, -apple-system, sans-serif;
+  --font-body: var(--font-display);
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ── Geometry ───────────────────────────────────────────────────────── */
+  /* 2px everywhere — buttons, badges, inputs, wells. Nothing rounder. */
+  --radius: 2px;
+  --sidebar-w: 380px;
+  /* Below this the sidebar collapses to a top bar. Not mocked; the handoff
+     specifies the rule and this is the single place it is expressed. */
+  --bp-sidebar: 900px;
+
+  /* ── Motion ─────────────────────────────────────────────────────────── */
+  /* "~120ms ease transitions; no motion beyond colour." */
+  --t: 120ms ease;
+}

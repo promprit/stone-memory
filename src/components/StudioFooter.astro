@@ -1,0 +1,75 @@
+---
+/**
+ * The main-column footer from screen 1c: hairline top, © left, socials right.
+ * Mono 11px, .14em, Slate.
+ */
+interface Props {
+  /** Home carries the socials; inner pages just carry the line. */
+  socials?: boolean;
+}
+
+const { socials = true } = Astro.props;
+const year = new Date().getFullYear();
+
+const links = [
+  { label: 'X', href: 'https://x.com/dryasstudio' },
+  { label: 'DISCORD', href: '#' },
+  { label: 'ITCH.IO', href: '#' },
+];
+---
+
+<footer class="footer">
+  <span class="copy">© {year} DRYAS STUDIO</span>
+  {
+    socials && (
+      <div class="socials">
+        {links.map(({ label, href }) => (
+          <a href={href} class="social">
+            {label}
+          </a>
+        ))}
+      </div>
+    )
+  }
+</footer>
+
+<style>
+  .footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 28px 56px;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .copy {
+    font: 400 11px var(--font-mono);
+    letter-spacing: 0.14em;
+    color: var(--slate-grey);
+  }
+
+  .socials {
+    display: flex;
+    gap: 24px;
+    font: 500 11px var(--font-mono);
+    letter-spacing: 0.14em;
+  }
+
+  .social {
+    color: var(--slate-grey);
+  }
+  .social:hover {
+    color: var(--moss-pale);
+  }
+
+  @media (max-width: 900px) {
+    .footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 28px 24px;
+    }
+  }
+</style>

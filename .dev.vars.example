@@ -1,0 +1,9 @@
+# Copy to .dev.vars for `wrangler pages dev dist`. Never commit .dev.vars.
+#
+# Origin of the GATEKEEP Pages deployment. Unset is a defined state: the
+# /gatekeep proxy serves its holding page instead of erroring.
+GATEKEEP_ORIGIN=https://gatekeep.pages.dev
+
+# Buttondown API key for /api/subscribe. Unset is a defined state: the
+# endpoint returns 501 and the form says "not wired up yet".
+# BUTTONDOWN_API_KEY=

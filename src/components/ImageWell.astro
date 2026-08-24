@@ -1,0 +1,72 @@
+---
+/**
+ * A placeholder image well: Shade ground, hairline border, mono caption.
+ *
+ * Every image on the site is one of these until the studio supplies real
+ * assets — key art, screenshots, the portrait. The handoff says so
+ * explicitly, and the design canvas draws them as dashed drop zones.
+ *
+ * When a real image arrives, pass `src`/`alt` and the well renders it
+ * instead. Nothing else about the surrounding layout changes.
+ */
+interface Props {
+  caption: string;
+  height?: string;
+  src?: string;
+  alt?: string;
+  /** Wells inside a Shade sidebar need the darker ground to invert. */
+  onShade?: boolean;
+  class?: string;
+}
+
+const { caption, height, src, alt, onShade = false, class: className } = Astro.props;
+---
+
+<div
+  class:list={['well', { 'on-shade': onShade, filled: !!src }, className]}
+  style={height ? `height:${height}` : undefined}
+>
+  {
+    src ? (
+      <img src={src} alt={alt ?? ''} loading="lazy" decoding="async" />
+    ) : (
+      <span class="caption">{caption}</span>
+    )
+  }
+</div>
+
+<style>
+  .well {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    text-align: center;
+    background: var(--shade);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  /* Inside the Shade sidebar, invert the ground so the well still reads. */
+  .on-shade {
+    background: var(--district-green);
+  }
+
+  .caption {
+    font: 400 11px/1.5 var(--font-mono);
+    letter-spacing: 0.12em;
+    color: var(--slate-grey);
+    text-transform: uppercase;
+  }
+
+  .filled {
+    padding: 0;
+  }
+  .well img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>

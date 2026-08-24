@@ -1,0 +1,132 @@
+---
+/**
+ * The sidebar shell shared by every screen: `380px` Shade sidebar with a
+ * right hairline, `1fr` District Green main column, full-viewport min-height.
+ *
+ * The sidebar's *contents* differ per route — home gets the intro paragraph
+ * and the signup, 2b gets the entry list, 2c gets the portrait, 2d gets the
+ * download button — so it takes a slot rather than branching on route.
+ *
+ * The mark size differs too: 64px on home, 44px on inner pages. That is the
+ * one dimension the shell parameterises.
+ *
+ * Below 900px the grid collapses to a single column and the sidebar becomes
+ * a top bar with a bottom hairline instead of a right one.
+ */
+import Base from './Base.astro';
+import SidebarNav from '../components/SidebarNav.astro';
+import type { Route } from '../components/SidebarNav.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  bareTitle?: boolean;
+  active?: Route;
+  markSize?: number;
+}
+
+const { title, description, bareTitle, active, markSize = 44 } = Astro.props;
+---
+
+<Base title={title} description={description} bareTitle={bareTitle}>
+  <div class="shell">
+    <aside class="sidebar">
+      <a href="/" class="mark" aria-label="Dryas Studio — home">
+        <img
+          src="/assets/dryas-symbol-paper.svg"
+          alt="Dryas Studio"
+          style={`height:${markSize}px`}
+          width="24"
+          height="32"
+        />
+      </a>
+
+      <slot name="sidebar-top" />
+
+      <SidebarNav active={active} />
+
+      <slot name="sidebar" />
+
+      <div class="sidebar-foot">
+        {/* Screens 2b/2c/2d close the sidebar with the copyright line; 1c
+            swaps it for the email signup. A slot wins when a page supplies one. */}
+        {
+          Astro.slots.has('sidebar-bottom') ? (
+            <slot name="sidebar-bottom" />
+          ) : (
+            <span class="sidebar-copy">© {new Date().getFullYear()} DRYAS STUDIO</span>
+          )
+        }
+      </div>
+    </aside>
+
+    <main class="main" id="main">
+      <slot />
+    </main>
+  </div>
+</Base>
+
+<style>
+  .shell {
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: var(--district-green);
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    padding: 48px 40px;
+    background: var(--shade);
+    border-right: 1px solid var(--hairline);
+  }
+
+  .mark {
+    align-self: flex-start;
+  }
+  .mark img {
+    width: auto;
+  }
+
+  /* Pins the signup / download button to the bottom of the sidebar. */
+  .sidebar-foot {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sidebar-copy {
+    font: 400 11px var(--font-mono);
+    letter-spacing: 0.14em;
+    color: var(--slate-grey);
+  }
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  @media (max-width: 900px) {
+    .shell {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      gap: 24px;
+      padding: 24px;
+      border-right: 0;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    /* On a top bar the sidebar's bottom slot is just the next block, not a
+       pinned foot — otherwise it would push the whole bar tall. */
+    .sidebar-foot {
+      margin-top: 0;
+    }
+  }
+</style>

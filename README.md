@@ -2,8 +2,25 @@
 
 The Dryas Studio website. Static site, Cloudflare Pages.
 
-**Status:** design approved, not yet implemented. This repo currently holds the
-design doc, the implementation plan, and the design bundle it was written from.
+**Status:** built. Four of the five design screens are implemented (`/`,
+`/devlog`, `/devlog/:slug`, `/about`, `/press`); the fifth, the Gatekeep
+landing, belongs to the other repo. Not yet deployed — the Cloudflare projects
+still need creating.
+
+```bash
+npm install
+npm run dev        # astro dev
+npm run verify     # literal guard + astro check + build
+npm run build      # -> dist/
+```
+
+To exercise the Pages Functions (`/gatekeep/*` and `/api/subscribe`) you need
+Wrangler, not `astro dev`:
+
+```bash
+cp .dev.vars.example .dev.vars
+npm run build && npx wrangler pages dev dist
+```
 
 ---
 
@@ -40,6 +57,23 @@ repo from shipping** — until they land, `/gatekeep` serves a holding page.
 Full detail in [the design doc](docs/superpowers/specs/2026-08-24-dryasstudio-site-design.md) §4.
 
 ---
+
+## How it is built
+
+Astro 7, static output, no adapter. The devlog is a markdown content collection.
+Fonts are self-hosted (Fontsource, latin subsets) rather than linked from Google
+Fonts — a design prototype linking a CDN is right; a production page adding a
+third-party connection to its critical path is not.
+
+**The whole site ships one `<script>`**, on the home page, for the email form.
+Every other page ships zero. The collapsed mobile nav wraps rather than using a
+hamburger, precisely so it needs none.
+
+**Brand colours are defined once**, in `src/styles/tokens.css`. `npm test` fails
+the build on a hex, `rgb()` or `hsl()` anywhere in `src/pages`, `src/layouts` or
+`src/components` — the same guard, and the same reasoning, as `one-lane`'s
+`test/no-literals.test.ts`. A palette that is only a convention drifts within a
+month.
 
 ## Docs
 

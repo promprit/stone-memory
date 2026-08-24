@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 32" role="img" aria-label="Dryas Studio">
+  <!-- PLACEHOLDER — not the real Dryas mark 6A. The brand kit SVG was not
+       delivered with the design bundle and is not in promprit/one-lane.
+       Replace this file in place; nothing in the build references anything
+       but the filename. See docs/superpowers/specs/2026-08-24-dryasstudio-site-design.md §8. -->
+  <path d="M12 2 22 20H2Z" fill="#1B342C"/>
+  <path d="M12 20v10" stroke="#1B342C" stroke-width="2"/>
+</svg>

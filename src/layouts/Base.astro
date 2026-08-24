@@ -1,0 +1,82 @@
+---
+/**
+ * The document shell. Everything on the site renders inside this.
+ *
+ * Fonts are self-hosted via Fontsource rather than linked from Google Fonts
+ * as the design canvas does — a prototype linking a CDN is right; a
+ * production page adding a third-party connection to its critical path is
+ * not. See the design doc §3.
+ */
+// Latin subsets only — the site is English. Fontsource's full entrypoints
+// also ship Cyrillic, Greek and Vietnamese faces; unicode-range means a
+// browser never downloads them, but they still bloat the deploy.
+import '@fontsource-variable/archivo';
+import '@fontsource/jetbrains-mono/latin-400.css';
+import '@fontsource/jetbrains-mono/latin-ext-400.css';
+import '@fontsource/jetbrains-mono/latin-500.css';
+import '@fontsource/jetbrains-mono/latin-ext-500.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import { shade } from '../lib/tokens';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Sentence-case page titles (devlog entries) skip the studio suffix rule. */
+  bareTitle?: boolean;
+}
+
+const {
+  title,
+  description = 'Dryas Studio is a solo game development studio, currently building Gatekeep.',
+  bareTitle = false,
+} = Astro.props;
+
+const fullTitle = bareTitle ? title : `${title} — Dryas Studio`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    {/* The brand rules require the small-cut variant at <=28px, which a
+        favicon always is. */}
+    <link rel="icon" href="/assets/dryas-symbol-small-cut.svg" type="image/svg+xml" />
+    <meta name="theme-color" content={shade} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Dryas Studio" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <a href="#main" class="skip">Skip to content</a>
+    <slot />
+    <style>
+      .skip {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        z-index: 100;
+        background: var(--paper);
+        color: var(--shade);
+        font: 500 12px var(--font-mono);
+        letter-spacing: 0.1em;
+        padding: 12px 18px;
+        border-radius: var(--radius);
+      }
+      .skip:focus {
+        left: 12px;
+        top: 12px;
+      }
+    </style>
+  </body>
+</html>

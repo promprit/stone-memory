@@ -1,7 +1,9 @@
 # dryasstudio.com — studio site, and the two-repo domain split
 
 **Date:** 2026-08-24
-**Status:** design approved (Peem), not implemented
+**Status:** design approved (Peem); **implemented** 2026-08-24 for the four
+screens this repo owns. Outstanding: the Cloudflare projects themselves (§4.1),
+the `one-lane` changes (§4.6), and the brand assets (§8).
 **Repo:** `promprit/stone-memory` — this repo, which becomes the Dryas Studio website
 **Also touches:** `promprit/one-lane` (the GATEKEEP monorepo) at three named points — see §4.6
 
@@ -77,9 +79,10 @@ Same-origin is not a side effect here, it is load-bearing:
   content collections, near-verbatim — schema-validated frontmatter, typed
   queries, zero runtime.
 - The site ships **no JavaScript by default**. The handoff's interaction budget
-  is "~120ms ease transitions; no motion beyond colour". The only scripted
-  behaviour on the whole site is the email form (§5) and the mobile nav toggle
-  (§6.3), both of which are islands.
+  is "~120ms ease transitions; no motion beyond colour". The email form (§5) is
+  the *only* script on the whole site — the collapsed mobile nav takes the
+  handoff's "wrapped route nav" option rather than a hamburger, so it needs
+  none. As built: one `<script>` on the home page, zero on every other.
 - Pages Functions coexist with an Astro static build without an adapter: the
   build emits `dist/`, and `functions/` is picked up by Pages alongside it.
 
@@ -133,13 +136,18 @@ would be a second, invisible source of truth for the prefix.
 ### 4.3 `_routes.json`
 
 ```json
-{ "version": 1, "include": ["/gatekeep", "/gatekeep/*"], "exclude": [] }
+{ "version": 1, "include": ["/gatekeep", "/gatekeep/*", "/api/*"], "exclude": [] }
 ```
 
 **This file is not optional.** Pages defaults to `include: ["/*"]`, which invokes
 the Functions runtime for every request to the site — turning a static marketing
 page into a Worker invocation. With the file, the studio pages are served by the
 asset CDN and never enter the Functions runtime at all.
+
+`/api/*` belongs in the list too, and it is easy to miss: the signup endpoint
+in §5 is also a Pages Function, and confining the runtime to `/gatekeep*` alone
+would leave it permanently unreachable — a POST would silently fall through to
+the asset handler.
 
 ### 4.4 Path shape
 
@@ -238,7 +246,14 @@ LIST" in the GATEKEEP footer. They are different lists and the same mechanism.
   `BUTTONDOWN_API_KEY` bound, the Function returns `501` and the form shows its
   error state. Local dev and preview deploys work without a credential.
 - Spam floor: a honeypot field and server-side format validation. No CAPTCHA —
-  Turnstile is available later if it is ever actually needed.
+  Turnstile is available later if it is ever actually needed. The honeypot's
+  response is byte-identical to a real success, so a bot learns nothing from
+  being caught.
+- **The Function dispatches on method itself rather than exporting only
+  `onRequestPost`.** Those look equivalent and are not: with a POST-only export,
+  Pages lets a GET fall through to the *asset* handler, which answers
+  `/api/subscribe` with the home page and a `200`. Confirmed against
+  `wrangler pages dev`, and fixed by an explicit `onRequest` that returns `405`.
 
 Success swaps the form for a mono confirmation line, per the handoff.
 
@@ -283,9 +298,16 @@ list; `2c` gets the portrait; `2d` gets the download button), so the shell takes
 a slot rather than branching.
 
 **Responsive is specified but not mocked.** Applying the handoff's rules: below
-~900px the sidebar collapses to a top bar (mark + toggle), grids stack to one
-column, minimum 24px side padding, touch targets ≥44px. The nav toggle is the
-site's second and last piece of JavaScript.
+~900px the sidebar collapses to a top bar, grids stack to one column, minimum
+24px side padding, touch targets ≥44px. The handoff offers "hamburger or
+wrapped route nav" — **wrapped**, which keeps the site free of any JavaScript
+except the email form.
+
+The sidebar's closing element differs by screen and the shell handles it
+without branching on route: `1c` ends with the email signup, `2b`/`2c`/`2d`
+with the copyright line. So the shell renders the copyright by default and a
+page's `sidebar-bottom` slot overrides it. Those three screens carry **no**
+main-column footer at all — only `1c` does.
 
 ---
 

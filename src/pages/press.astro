@@ -1,0 +1,215 @@
+---
+/**
+ * /press — screen `2d Press kit`.
+ *
+ * Sidebar carries the primary DOWNLOAD FULL KIT (.ZIP) button. Main is a
+ * two-column grid: the fact sheet on the left, logo & mark swatches on the
+ * right, then a 4-up screenshot grid below.
+ *
+ * The light swatch is the one place on the site with a Paper ground — the
+ * green mark needs it, and the brand rules require a solid plate.
+ */
+import Shell from '../layouts/Shell.astro';
+import ImageWell from '../components/ImageWell.astro';
+
+const facts = [
+  { label: 'Studio', value: 'DRYAS STUDIO' },
+  { label: 'Team', value: '1 (SOLO DEVELOPER)' },
+  { label: 'Current title', value: 'GATEKEEP (IN DEV)' },
+  { label: 'Founded', value: '2026' },
+  { label: 'Contact', value: 'PRESS@DRYASSTUDIO.COM' },
+];
+
+const shots = ['01', '02', '03', '04'];
+---
+
+<Shell
+  title="Press"
+  description="Press kit, fact sheet, logos and screenshots for Dryas Studio and Gatekeep."
+  active="press"
+>
+  {/* Not yet a real file — the kit is assembled once the brand assets and
+      game screenshots land. See design doc §8. */}
+  <a slot="sidebar" href="#" class="btn btn-primary kit">DOWNLOAD FULL KIT (.ZIP)</a>
+
+
+  <div class="page">
+    <section>
+      <p class="kicker">Press</p>
+      <h1 class="display heading">Press kit</h1>
+    </section>
+
+    <div class="cols">
+      <section class="facts">
+        <p class="kicker facts-head">Fact sheet</p>
+        <dl class="fact-rows">
+          {
+            facts.map(({ label, value }) => (
+              <div class="fact">
+                <dt>{label}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </section>
+
+      <section>
+        <p class="kicker">Logo &amp; mark</p>
+        <div class="swatches">
+          <div class="swatch dark">
+            <img src="/assets/dryas-symbol-paper.svg" alt="Dryas Studio mark, paper variant" />
+          </div>
+          <div class="swatch light">
+            <img src="/assets/dryas-symbol.svg" alt="Dryas Studio mark, District Green variant" />
+          </div>
+          <div class="swatch dark wide">
+            <img
+              src="/assets/dryas-lockup-horizontal-reversed.svg"
+              alt="Dryas Studio horizontal lockup, reversed"
+            />
+          </div>
+        </div>
+        <p class="footnote">SVG + PNG IN THE KIT · CLEARSPACE RULES INCLUDED</p>
+      </section>
+    </div>
+
+    <section>
+      <p class="kicker">Gatekeep — screenshots</p>
+      <div class="shots">
+        {shots.map((n) => <ImageWell caption={n} height="130px" />)}
+      </div>
+    </section>
+  </div>
+
+</Shell>
+
+<style>
+  .kit {
+    display: block;
+    padding: 14px 20px;
+  }
+
+
+  .page {
+    padding: 72px 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+  }
+
+  .heading {
+    margin: 16px 0 0;
+    font-size: 44px;
+    line-height: 1.15;
+    letter-spacing: 0.04em;
+  }
+
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+  }
+
+  /* ── Fact sheet ───────────────────────────────────────────────────────── */
+
+  .facts-head {
+    margin-bottom: 14px;
+  }
+
+  .fact-rows {
+    margin: 0;
+    font: 400 13px var(--font-mono);
+  }
+
+  .fact {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 13px 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .fact:last-child {
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .fact dt {
+    color: var(--slate-grey);
+    text-transform: uppercase;
+  }
+
+  .fact dd {
+    margin: 0;
+    color: var(--paper);
+    text-align: right;
+  }
+
+  /* ── Swatches ─────────────────────────────────────────────────────────── */
+
+  .swatches {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .swatch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 110px;
+  }
+
+  .swatch.dark {
+    background: var(--shade);
+    border: 1px solid var(--hairline);
+  }
+
+  /* The only Paper ground on the site — the green mark requires it, and the
+     brand rules require a solid plate under a mark. */
+  .swatch.light {
+    background: var(--paper);
+  }
+
+  .swatch.wide {
+    grid-column: 1 / -1;
+  }
+
+  .swatch img {
+    height: 48px;
+    width: auto;
+  }
+  .swatch.wide img {
+    height: 30px;
+  }
+
+  .footnote {
+    font: 400 11px var(--font-mono);
+    letter-spacing: 0.12em;
+    color: var(--slate-grey);
+    margin-top: 10px;
+  }
+
+  /* ── Screenshots ──────────────────────────────────────────────────────── */
+
+  .shots {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .page {
+      padding: 40px 24px;
+    }
+    .heading {
+      font-size: 32px;
+    }
+    .cols {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .shots {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

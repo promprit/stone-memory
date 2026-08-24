@@ -1,0 +1,173 @@
+---
+/**
+ * Home — screen `1c Devlog-first`, the chosen direction.
+ *
+ * Sidebar: 64px mark, studio name, mono tagline, intro paragraph, route nav,
+ * email signup pinned to the bottom.
+ * Main: the Gatekeep feature band, then the devlog list, then the footer.
+ */
+import Shell from '../layouts/Shell.astro';
+import DevlogRow from '../components/DevlogRow.astro';
+import EmailSignup from '../components/EmailSignup.astro';
+import ImageWell from '../components/ImageWell.astro';
+import StudioFooter from '../components/StudioFooter.astro';
+import { allEntries } from '../lib/devlog';
+
+const entries = await allEntries();
+---
+
+<Shell
+  title="Dryas Studio"
+  bareTitle
+  description="An independent studio of one, building Gatekeep in the open."
+  active="gatekeep"
+  markSize={64}
+>
+  <Fragment slot="sidebar-top">
+    <div>
+      <div class="studio-name">Dryas Studio</div>
+      <div class="tagline">SOLO · GAMES · 2026</div>
+    </div>
+    <p class="intro">
+      An independent studio of one, building Gatekeep in the open. Everything here is written by
+      the person making the game.
+    </p>
+  </Fragment>
+
+  <EmailSignup slot="sidebar-bottom" list="devlog" label="Devlog by email" cta="→" />
+
+  {/* ── Gatekeep feature band ──────────────────────────────────────────── */}
+  <section class="feature">
+    <div class="feature-meta">
+      <span class="badge">CURRENT PROJECT</span>
+      <span class="status">STATUS: IN DEVELOPMENT</span>
+    </div>
+
+    <div class="feature-grid">
+      <div>
+        <h1 class="game-title">GATEKEEP</h1>
+        <p class="pitch">
+          Decide what gets through — and live with what you let in. Follow the build, week by
+          week.
+        </p>
+        <a href="/gatekeep/" class="btn btn-outline">dryasstudio.com/gatekeep →</a>
+      </div>
+
+      <ImageWell caption="Gatekeep screenshot" height="200px" />
+    </div>
+  </section>
+
+  {/* ── Devlog list ────────────────────────────────────────────────────── */}
+  <section class="devlog">
+    <h2 class="kicker">Devlog — latest entries</h2>
+    {
+      entries.map((entry, i) => (
+        <DevlogRow entry={entry} latest={i === 0} last={i === entries.length - 1} />
+      ))
+    }
+    <a href="/devlog" class="all-entries">ALL ENTRIES →</a>
+  </section>
+
+  <StudioFooter />
+</Shell>
+
+<style>
+  /* ── Sidebar ──────────────────────────────────────────────────────────── */
+
+  .studio-name {
+    font: 500 30px/1.15 var(--font-display);
+    letter-spacing: 0.06em;
+    color: var(--paper);
+    text-transform: uppercase;
+  }
+
+  .tagline {
+    font: 400 12px var(--font-mono);
+    letter-spacing: 0.32em;
+    color: var(--slate-grey);
+    margin-top: 8px;
+  }
+
+  .intro {
+    font: 400 14px/1.7 var(--font-body);
+    color: var(--moss-pale);
+  }
+
+  /* ── Feature band ─────────────────────────────────────────────────────── */
+
+  .feature {
+    padding: 48px 56px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .feature-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .status {
+    font: 400 11px var(--font-mono);
+    letter-spacing: 0.14em;
+    color: var(--slate-grey);
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .game-title {
+    font: 500 56px/1 var(--font-display);
+    letter-spacing: 0.08em;
+    color: var(--paper);
+  }
+
+  .pitch {
+    margin: 18px 0 24px;
+    font: 400 15px/1.65 var(--font-body);
+    color: var(--moss-pale);
+    max-width: 480px;
+  }
+
+  /* ── Devlog list ──────────────────────────────────────────────────────── */
+
+  .devlog {
+    padding: 40px 56px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .devlog .kicker {
+    margin-bottom: 20px;
+  }
+
+  .all-entries {
+    align-self: flex-start;
+    margin-top: 20px;
+    font: 500 12px var(--font-mono);
+    letter-spacing: 0.12em;
+    color: var(--slate-grey);
+  }
+  .all-entries:hover {
+    color: var(--moss-pale);
+  }
+
+  @media (max-width: 900px) {
+    .feature,
+    .devlog {
+      padding: 32px 24px;
+    }
+    .feature-grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .game-title {
+      font-size: 44px;
+    }
+  }
+</style>

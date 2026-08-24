@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # The literal guard: no brand colour may be defined outside
+      # src/styles/tokens.css. See scripts/check-literals.mjs.
+      - run: npm test
+
+      - run: npx astro check
+
+      - run: npx astro build
+
+# Deploys are handled by Cloudflare Pages' own Git integration. This workflow
+# exists to keep a broken build off main, not to ship.
