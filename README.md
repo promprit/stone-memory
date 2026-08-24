@@ -88,13 +88,18 @@ month.
 
 ## Known gaps
 
-**The brand SVGs are missing.** The handoff references four files in `assets/` —
-`dryas-symbol-paper.svg`, `dryas-symbol.svg`, `dryas-symbol-small-cut.svg`,
-`dryas-lockup-horizontal-reversed.svg`. None were in the delivered bundle and
-none are in `one-lane`. The build scaffolds against those exact filenames with
-placeholder marks so the real files drop in with no code change, but the site is
-not finished until they arrive.
+**Not deployed yet.** The Cloudflare Pages projects still need creating — see
+[the plan](docs/superpowers/plans/2026-08-24-dryasstudio-site.md) Task 15.
 
 **Screen `2a Gatekeep landing` is not built here.** It is the game's own landing
 page and belongs to `one-lane` — see design doc §4.7, which also notes that it
 is drawn in hex while that repo's tests forbid colour literals.
+
+**The favicon is weak on dark browser chrome.** The brand rules require the
+small-cut mark below 28px, and the delivered `dryas-symbol-small-cut.svg` is
+stroked District Green — made for light grounds. The site uses the kit file as
+delivered rather than inventing a variant. Design doc §8 has the two ways out.
+
+**Image wells are placeholders.** Key art, screenshots and the portrait are the
+studio owner's to supply; the handoff says so explicitly. Pass `src`/`alt` to
+`ImageWell` and the surrounding layout does not change.

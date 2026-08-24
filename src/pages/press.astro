@@ -178,8 +178,13 @@ const shots = ['01', '02', '03', '04'];
     height: 48px;
     width: auto;
   }
+  /* The lockup ships with its own District Green plate baked in, unlike the
+     two symbols. Let it span the card so it reads as a plated lockup rather
+     than a green block floating on Shade. */
   .swatch.wide img {
-    height: 30px;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
   }
 
   .footnote {

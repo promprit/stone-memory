@@ -2,8 +2,8 @@
 
 **Date:** 2026-08-24
 **Status:** design approved (Peem); **implemented** 2026-08-24 for the four
-screens this repo owns. Outstanding: the Cloudflare projects themselves (§4.1),
-the `one-lane` changes (§4.6), and the brand assets (§8).
+screens this repo owns, with the real brand kit installed. Outstanding: the
+Cloudflare projects themselves (§4.1) and the `one-lane` changes (§4.6).
 **Repo:** `promprit/stone-memory` — this repo, which becomes the Dryas Studio website
 **Also touches:** `promprit/one-lane` (the GATEKEEP monorepo) at three named points — see §4.6
 
@@ -343,28 +343,38 @@ only a convention drifts within a month.
 
 ---
 
-## 8. Blocked: the brand assets are missing
+## 8. Brand assets — delivered 2026-08-24
 
-The handoff README lists four SVGs in `assets/`:
+All four kit SVGs arrived and are in `public/assets/` under the filenames the
+handoff names. §8 is no longer a blocker.
 
-- `dryas-symbol-paper.svg` — the mark on dark grounds, used on every screen
-- `dryas-symbol.svg` — District Green mark, for the light swatch on `2d`
-- `dryas-symbol-small-cut.svg` — required at ≤28px, so: the favicon
-- `dryas-lockup-horizontal-reversed.svg` — full lockup on dark, `2d`
+| File | Ground | Notes |
+|---|---|---|
+| `dryas-symbol-paper.svg` | dark | 120×120, stroke Paper. Sidebar mark on every screen. |
+| `dryas-symbol.svg` | light | 120×120, stroke District Green. The Paper swatch on `2d`. |
+| `dryas-symbol-small-cut.svg` | light | Simplified — no inner triangle, stroke-width 10. Stroked **District Green**. |
+| `dryas-lockup-horizontal-reversed.svg` | — | 520×120, and it **carries its own District Green plate** as a full-bleed rect. |
 
-**None of them were in the delivered bundle, and none are in `one-lane`** — its
-`apps/web/public/` holds only the game's own `icon.svg` and
-`icon-maskable.svg`, which are a different mark.
+Two consequences the files themselves impose, neither of them a design choice
+made here:
 
-The build proceeds against those exact four filenames with a placeholder mark, so
-that supplying the real files is a drop-in with no code change. But **the site
-cannot be called done until they land**, and the brand rules that depend on them
-(clearspace = axis length below the triangle; 20px minimum; the small-cut variant
-below 28px; never on photography without a solid plate) cannot be verified
-against a placeholder.
+**The lockup is self-plating.** Unlike the two symbols, it ships with a
+District Green background rect. Dropped into `2d`'s Shade swatch at a fixed
+30px height it renders as a small green block floating on a darker card, so the
+wide swatch lets it span the full width instead and reads as a plated lockup.
+That is also the brand-correct outcome — the mark is never unplated.
 
-This is the one open dependency on the studio owner. Everything else in this
-design is buildable today.
+**The small-cut variant is stroked for LIGHT grounds, and the favicon is the one
+place that matters.** The brand rules require the small-cut below 28px, which
+makes it the favicon, and the delivered file is District Green. Against a dark
+browser tab bar it will be close to invisible.
+
+The site uses the kit file as delivered rather than inventing a Paper-stroked
+variant — that is a brand decision, not an implementation one. **Open for the
+studio owner:** either a paper small-cut is added to the kit for dark chrome, or
+the favicon gets an explicit Paper plate behind the green mark (which satisfies
+the never-unplated rule too). Until then the favicon is legible on light chrome
+and weak on dark.
 
 ---
 
@@ -375,6 +385,7 @@ Nothing here is rejected.
 | Thing | Trigger |
 |---|---|
 | Real key art, screenshots, portrait | Studio supplies them. Every image well is a placeholder until then, by design — the handoff says so. |
+| A Paper-stroked small-cut mark, or a plated favicon | §8. A brand-kit decision, not an implementation one. |
 | The `2a` screen | `one-lane` takes it, with the OKLCH translation of §4.7. |
 | Making `/gatekeep` indexable | `one-lane`'s beta decision, §4.6.3. Not this repo's call. |
 | Video modal on `2a` ("WATCH 40s OF GAMEPLAY") | A video asset exists. Also `one-lane`'s screen. |
