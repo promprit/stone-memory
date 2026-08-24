@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" width="520" height="120" role="img" aria-label="Dryas Studio">
+  <rect width="520" height="120" fill="#1B342C"></rect>
+  <g fill="none" stroke="#EFEEE8" stroke-width="3.4" stroke-linejoin="round">
+    <path d="M60 26 92 84H28Z"></path>
+    <path d="M60 48 76 82H44Z"></path>
+    <path d="M60 84V108"></path>
+  </g>
+  <line x1="152" y1="30" x2="152" y2="106" stroke="#2E4A3F"></line>
+  <text x="188" y="72" fill="#EFEEE8" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="46" font-weight="500" letter-spacing="10.1">DRYAS</text>
+  <text x="190" y="102" fill="#9DAAA1" font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" letter-spacing="7.4">STUDIO</text>
+</svg>
