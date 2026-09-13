@@ -7,7 +7,7 @@
  * explicitly, and the design canvas draws them as dashed drop zones.
  *
  * When a real image arrives, the well renders it instead and nothing about the
- * surrounding layout changes. Pass `image` — a stem like `gatekeep/key-art` —
+ * surrounding layout changes. Pass `image` — a stem like `studio/portrait` —
  * and the file is resolved from `public/images/` at build time, whatever
  * extension it landed with. Absent, the placeholder caption shows. That is what
  * lets the studio owner upload a photo through the GitHub web UI with no code
@@ -18,7 +18,7 @@ import { findImage } from '../lib/images';
 interface Props {
   caption: string;
   height?: string;
-  /** Stem under public/images, e.g. `gatekeep/key-art`. Extension resolved. */
+  /** Stem under public/images, e.g. `studio/portrait`. Extension resolved. */
   image?: string;
   /** Explicit src, for an image that is not in public/images. */
   src?: string;

@@ -6,7 +6,7 @@ import { join } from 'node:path';
  *
  * The point is that the studio owner can upload a photo through the GitHub web
  * UI and have it appear, with no code change and no rebuild of anything but the
- * site. So the wells name an image by stem — `gatekeep/key-art` — and this
+ * site. So the wells name an image by stem — `studio/portrait` — and this
  * resolves whichever extension actually landed.
  *
  * `process.cwd()` rather than a path relative to this module: Vite bundles this
@@ -25,7 +25,7 @@ const ROOT = join(process.cwd(), 'public', 'images');
 const EXTENSIONS = ['avif', 'webp', 'jpg', 'jpeg', 'png', 'svg'];
 
 /**
- * `gatekeep/key-art` → `/images/gatekeep/key-art.jpg`, or null.
+ * `studio/portrait` → `/images/studio/portrait.jpg`, or null.
  *
  * Extension precedence follows EXTENSIONS, so dropping in an AVIF alongside a
  * legacy JPEG picks the AVIF without deleting anything.

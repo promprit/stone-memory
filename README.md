@@ -2,10 +2,15 @@
 
 The Dryas Studio website. Static site, Cloudflare Pages.
 
-**Status:** built. Four of the five design screens are implemented (`/`,
-`/devlog`, `/devlog/:slug`, `/about`, `/press`); the fifth, the Gatekeep
-landing, belongs to the other repo. Not yet deployed — the Cloudflare projects
-still need creating.
+**Status:** live at `https://dryasstudio.com` (apex + `www`, `www` 301s to the
+apex). Pages project `dryas-studio`, deployed by direct upload.
+
+**2026-09-13 — GATEKEEP dropped.** Dryas Studio is now the parent studio of
+Sidecraft and BrewMind. The proxy to the game, its images, handovers and the
+game devlog were removed; the pages carry placeholder copy until the new
+studio site is planned. `/gatekeep*` 301s and `/devlog*` 302s to the home page
+(`public/_redirects`). The pre-drop design docs and devlog posts are kept in
+[`docs/archive/2026-08-gatekeep-era/`](docs/archive/2026-08-gatekeep-era/).
 
 ```bash
 npm install
@@ -14,8 +19,8 @@ npm run verify     # literal guard + astro check + build
 npm run build      # -> dist/
 ```
 
-To exercise the Pages Functions (`/gatekeep/*` and `/api/subscribe`) you need
-Wrangler, not `astro dev`:
+To exercise the Pages Function (`/api/subscribe`) you need Wrangler, not
+`astro dev`:
 
 ```bash
 cp .dev.vars.example .dev.vars
@@ -24,89 +29,36 @@ npm run build && npx wrangler pages dev dist
 
 ---
 
-## The two-repo contract
-
-One hostname, two repos.
-
-| Path | Repo | How |
-|---|---|---|
-| `dryasstudio.com/*` | **this repo** | Cloudflare Pages project `dryas-studio`, static `dist/` |
-| `dryasstudio.com/gatekeep/*` | [`promprit/one-lane`](https://github.com/promprit/one-lane) | Pages project `gatekeep`, reached through a proxy Function in this repo |
-
-Cloudflare Pages binds a *hostname* to a project — it has no native way to hand
-one path prefix to a different project. So this repo owns the hostname and
-carries a single catch-all Pages Function at `functions/gatekeep/[[path]].ts`
-that proxies to the GATEKEEP Pages project. `public/_routes.json` confines the
-Functions runtime to `/gatekeep*`, so every studio page is served straight from
-the asset CDN with no Worker invocation.
-
-Both repos deploy independently. This one never builds the other.
-
-### What `one-lane` needs to change
-
-Three things, each a separate PR against that repo. **None of them block this
-repo from shipping** — until they land, `/gatekeep` serves a holding page.
-
-1. `basePath: "/gatekeep"` in `apps/web/next.config.ts`
-2. Service worker registered at `/gatekeep/sw.js`, with the cached shell URLs prefixed
-3. A decision on the global `robots: { index: false, follow: false }` in
-   `apps/web/app/layout.tsx` — the proxy serves it faithfully, so `/gatekeep`
-   launches invisible to search engines until GATEKEEP's own beta decision
-   changes it
-
-Full detail in [the design doc](docs/superpowers/specs/2026-08-24-dryasstudio-site-design.md) §4.
-
-**Hand [`docs/superpowers/handovers/2026-08-24-gatekeep-under-dryasstudio.md`](docs/superpowers/handovers/2026-08-24-gatekeep-under-dryasstudio.md)
-to whoever picks this up in `one-lane`.** It is self-contained — the contract,
-the three changes with exact file paths, how to verify locally, and what not to
-do.
-
----
-
 ## How it is built
 
-Astro 7, static output, no adapter. The devlog is a markdown content collection.
-Fonts are self-hosted (Fontsource, latin subsets) rather than linked from Google
-Fonts — a design prototype linking a CDN is right; a production page adding a
-third-party connection to its critical path is not.
+Astro 7, static output, no adapter. Fonts are self-hosted (Fontsource, latin
+subsets) rather than linked from Google Fonts — a production page should not
+add a third-party connection to its critical path.
 
 **The whole site ships one `<script>`**, on the home page, for the email form.
 Every other page ships zero. The collapsed mobile nav wraps rather than using a
 hamburger, precisely so it needs none.
 
+`public/_routes.json` confines the Functions runtime to `/api/*`, so every page
+is served straight from the asset CDN with no Worker invocation.
+
 **Brand colours are defined once**, in `src/styles/tokens.css`. `npm test` fails
 the build on a hex, `rgb()` or `hsl()` anywhere in `src/pages`, `src/layouts` or
-`src/components` — the same guard, and the same reasoning, as `one-lane`'s
-`test/no-literals.test.ts`. A palette that is only a convention drifts within a
-month.
-
-## Docs
-
-- [**Design**](docs/superpowers/specs/2026-08-24-dryasstudio-site-design.md) — routing, stack, screens, tokens
-- [**Plan**](docs/superpowers/plans/2026-08-24-dryasstudio-site.md) — 19 tasks in five phases
-- [`docs/design/`](docs/design/) — the delivered design bundle. Open
-  `Dryas Studio Site.dc.html` in a browser to see all five screens; every style
-  is inline on the element, so inspecting any element gives exact values.
-  `HANDOFF.md` is the accompanying spec.
+`src/components`. A palette that is only a convention drifts within a month.
 
 ---
 
 ## Known gaps
 
-**Not deployed yet.** The Cloudflare Pages projects still need creating — see
-[the plan](docs/superpowers/plans/2026-08-24-dryasstudio-site.md) Task 15.
+**Placeholder copy.** Home, about and press describe the studio in one line
+each until the parent-studio site is planned.
 
-**Screen `2a Gatekeep landing` is not built here.** It is the game's own landing
-page and belongs to `one-lane` — see design doc §4.7, which also notes that it
-is drawn in hex while that repo's tests forbid colour literals.
+**Signup is not wired up.** `BUTTONDOWN_API_KEY` is unset, so `/api/subscribe`
+answers `501` and the form says so. That is a defined state, not a crash.
 
-**The favicon is weak on dark browser chrome.** The brand rules require the
-small-cut mark below 28px, and the delivered `dryas-symbol-small-cut.svg` is
-stroked District Green — made for light grounds. The site uses the kit file as
-delivered rather than inventing a variant. Design doc §8 has the two ways out.
+**The favicon is weak on dark browser chrome.** The delivered
+`dryas-symbol-small-cut.svg` is stroked District Green — made for light grounds.
 
-**Image wells are placeholders.** Key art, screenshots and the portrait are the
-studio owner's to supply. Drop files into
-[`public/images/`](public/images/README.md) — through the GitHub web UI is fine
-— and the wells pick them up on the next build with **no code change**. That
-folder's README lists the exact filenames.
+**Image wells are placeholders.** Drop files into
+[`public/images/`](public/images/README.md) and the wells pick them up on the
+next build with no code change.

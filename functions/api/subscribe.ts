@@ -1,10 +1,9 @@
 /**
- * POST /api/subscribe — email signup for both lists.
+ * POST /api/subscribe — email signup for the studio list.
  *
- * Same-origin, so the studio sidebar form AND the playtest form in the
- * GATEKEEP footer (served under /gatekeep by the proxy) can both reach it
- * with no CORS and no third-party script on any page. The provider
- * credential never leaves this Function.
+ * Same-origin, so any form on the site can reach it with no CORS and no
+ * third-party script on any page. The provider credential never leaves
+ * this Function.
  *
  * See docs/superpowers/specs/2026-08-24-dryasstudio-site-design.md §5.
  */
@@ -15,8 +14,7 @@ interface Env {
 }
 
 const LISTS = {
-  devlog: 'devlog',
-  playtest: 'playtest',
+  updates: 'updates',
 } as const;
 
 type List = keyof typeof LISTS;
@@ -171,7 +169,7 @@ function page(status: number, message: string) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Devlog by email — Dryas Studio</title>
+<title>Studio news by email — Dryas Studio</title>
 <meta name="robots" content="noindex">
 <style>
   body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;

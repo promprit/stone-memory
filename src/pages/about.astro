@@ -12,27 +12,22 @@
  */
 import Shell from '../layouts/Shell.astro';
 import ImageWell from '../components/ImageWell.astro';
-import { allEntries } from '../lib/devlog';
-
-const entries = await allEntries();
 
 const stats = [
-  { value: '01', label: 'Game in development' },
+  { value: '02', label: 'Sidecraft · BrewMind' },
   { value: '2026', label: 'Studio founded' },
-  { value: String(entries.length).padStart(2, '0'), label: 'Devlog entries' },
 ];
 
 const contact = [
   { label: 'Email', value: 'hello@dryasstudio.com', href: 'mailto:hello@dryasstudio.com', primary: true },
   { label: 'X', value: '@dryasstudio', href: 'https://x.com/dryasstudio' },
-  { label: 'Discord', value: 'Gatekeep playtest server', href: '#' },
   { label: 'Press', value: 'press kit + fact sheet →', href: '/press' },
 ];
 ---
 
 <Shell
   title="About"
-  description="Dryas Studio is run by one person: design, engineering, art direction, and this website."
+  description="Dryas Studio is a digital studio, home of Sidecraft and BrewMind."
   active="about"
 >
   <div slot="sidebar" class="portrait">
@@ -49,12 +44,11 @@ const contact = [
   <div class="page">
     <section>
       <p class="kicker">About</p>
-      <h1 class="display heading">A studio of one, on purpose.</h1>
+      <h1 class="display heading">A digital studio.</h1>
       <p class="bio">
-        Dryas Studio is run by one person: design, engineering, art direction, and this website.
-        Placeholder bio — two or three honest paragraphs about who you are and why you build
-        alone. Named after <i>Dryas octopetala</i>, a flower that grows where almost nothing else
-        does.
+        Dryas Studio builds products and productized services: Sidecraft for websites, BrewMind as
+        its own product. Placeholder bio — the full studio story lands with the new site. Named
+        after <i>Dryas octopetala</i>, a flower that grows where almost nothing else does.
       </p>
     </section>
 
@@ -123,7 +117,7 @@ const contact = [
 
   .stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1px;
     background: var(--hairline);
     border: 1px solid var(--hairline);

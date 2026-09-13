@@ -1,0 +1,11 @@
+# Cloudflare Pages redirects.
+#
+# GATEKEEP was dropped on 2026-09-13. /gatekeep was public and indexable, so
+# old links and crawlers get a permanent redirect home rather than a 404.
+/gatekeep    /  301
+/gatekeep/*  /  301
+
+# The devlog is unpublished while the studio site is rewritten. Temporary,
+# because /devlog is expected to come back with studio content.
+/devlog      /  302
+/devlog/*    /  302

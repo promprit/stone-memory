@@ -9,11 +9,8 @@
  * the handoff puts contact inside /about, and screen 2c carries the full
  * contact block. So the item points at the anchor rather than a page that
  * would duplicate it. See design doc §6.2.
- *
- * `/gatekeep` is served by the other repo (promprit/one-lane) through the
- * proxy Function. Same-origin, so it is a plain href like any other.
  */
-export type Route = 'gatekeep' | 'devlog' | 'about' | 'press' | 'contact';
+export type Route = 'about' | 'press' | 'contact';
 
 interface Props {
   active?: Route;
@@ -22,8 +19,6 @@ interface Props {
 const { active } = Astro.props;
 
 const items: { key: Route; label: string; href: string }[] = [
-  { key: 'gatekeep', label: '/gatekeep', href: '/gatekeep/' },
-  { key: 'devlog', label: '/devlog', href: '/devlog' },
   { key: 'about', label: '/about', href: '/about' },
   { key: 'press', label: '/press', href: '/press' },
   { key: 'contact', label: '/contact', href: '/about#contact' },

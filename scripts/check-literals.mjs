@@ -5,16 +5,13 @@
  * Fails if a colour literal appears anywhere in src/pages, src/layouts or
  * src/components. The eight brand colours are defined once, in
  * src/styles/tokens.css, and the handoff is explicit that new ones are never
- * invented. A palette that is only a convention drifts within a month — this
- * is the same guard, and the same reasoning, as one-lane's
- * apps/web/test/no-literals.test.ts.
+ * invented. A palette that is only a convention drifts within a month.
  *
  * Exempt:
  *   - src/styles/tokens.css   the definition itself
  *   - rgba(0,0,0,…)           neutral scrims, which carry no brand colour
- *   - public/, functions/     not part of the styled build; the /gatekeep
- *                             holding page and the no-JS form response are
- *                             standalone documents that cannot reach the
+ *   - public/, functions/     not part of the styled build; the no-JS form
+ *                             response is a standalone document that cannot reach the
  *                             stylesheet, and the placeholder SVGs are
  *                             replaced wholesale when the real kit lands
  *

@@ -12,14 +12,7 @@ right subfolder. Filenames must match the table below; the extension can be
 
 | File | Where it appears | Rendered size |
 |---|---|---|
-| `gatekeep/key-art.*` | Home page feature band | 320 × 200 |
-| `gatekeep/screenshot-01.*` … `-04.*` | `/press` screenshot grid | ~160 × 130 each |
 | `studio/portrait.*` | `/about` sidebar | 180 × 180 |
-| `devlog/<slug>-fig-01.*` | The figure in that devlog entry | full column × 320 |
-
-`<slug>` is the entry's URL segment — the filename in `src/content/devlog/`
-without its number prefix. So `04-the-rebrand.md` wants
-`devlog/the-rebrand-fig-01.jpg`.
 
 ## Before you upload
 

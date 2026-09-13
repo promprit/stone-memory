@@ -2,16 +2,15 @@
 /**
  * The site's only piece of client JavaScript.
  *
- * Two variants, both posting same-origin to /api/subscribe (a Pages Function
- * in this repo, see design doc §5):
- *   - `devlog`   — the stacked sidebar form on the home page
- *   - `playtest` — the wider inline form in the GATEKEEP footer
+ * Posts same-origin to /api/subscribe (a Pages Function in this repo, see
+ * design doc §5). `stacked` is the sidebar form on the home page; `inline`
+ * is a one-line variant for wider slots.
  *
  * No third-party script. The provider credential lives in the Function, so
  * nothing about the list provider is visible to a browser.
  */
 interface Props {
-  list: 'devlog' | 'playtest';
+  list: 'updates';
   label: string;
   /** Submit button content — an arrow in the sidebar, a word in the footer. */
   cta: string;
@@ -118,7 +117,7 @@ const id = `signup-${list}`;
     cursor: default;
   }
 
-  /* The playtest footer variant sits on one line with a wider field. */
+  /* The inline variant sits on one line with a wider field. */
   .inline {
     flex-direction: row;
     align-items: center;

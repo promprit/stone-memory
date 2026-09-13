@@ -1,76 +1,66 @@
 ---
 /**
- * Home — screen `1c Devlog-first`, the chosen direction.
+ * Home — screen `1c`, layout kept.
  *
  * Sidebar: 64px mark, studio name, mono tagline, intro paragraph, route nav,
  * email signup pinned to the bottom.
- * Main: the Gatekeep feature band, then the devlog list, then the footer.
+ * Main: the studio band naming the service lines, then the footer.
+ *
+ * Placeholder copy (2026-09-13): GATEKEEP was dropped and the devlog
+ * unpublished. The real parent-studio content — DRYAS as owner of Sidecraft
+ * and BrewMind — lands in the planning phase.
  */
 import Shell from '../layouts/Shell.astro';
-import DevlogRow from '../components/DevlogRow.astro';
 import EmailSignup from '../components/EmailSignup.astro';
-import ImageWell from '../components/ImageWell.astro';
 import StudioFooter from '../components/StudioFooter.astro';
-import { allEntries } from '../lib/devlog';
 
-const entries = await allEntries();
+const lines = [
+  { name: 'Sidecraft', pitch: 'Websites that ship in weeks.' },
+  { name: 'BrewMind', pitch: 'Proprietary product.' },
+];
 ---
 
 <Shell
   title="Dryas Studio"
   bareTitle
-  description="An independent studio of one, building Gatekeep in the open."
-  active="gatekeep"
+  description="Dryas Studio is a digital studio, home of Sidecraft and BrewMind."
   markSize={64}
 >
   <Fragment slot="sidebar-top">
     <div>
       <div class="studio-name">Dryas Studio</div>
-      <div class="tagline">SOLO · GAMES · 2026</div>
+      <div class="tagline">STUDIO · DIGITAL · 2026</div>
     </div>
     <p class="intro">
-      An independent studio of one, building Gatekeep in the open. Everything here is written by
-      the person making the game.
+      A digital studio building products and productized services.
     </p>
   </Fragment>
 
-  <EmailSignup slot="sidebar-bottom" list="devlog" label="Devlog by email" cta="→" />
+  <EmailSignup slot="sidebar-bottom" list="updates" label="Studio news by email" cta="→" />
 
-  {/* ── Gatekeep feature band ──────────────────────────────────────────── */}
+  {/* ── Studio band ────────────────────────────────────────────────────── */}
   <section class="feature">
     <div class="feature-meta">
-      <span class="badge">CURRENT PROJECT</span>
-      <span class="status">STATUS: IN DEVELOPMENT</span>
+      <span class="badge">DRYAS STUDIO</span>
+      <span class="status">STATUS: NEW SITE COMING</span>
     </div>
 
-    <div class="feature-grid">
-      <div>
-        <h1 class="game-title">GATEKEEP</h1>
-        <p class="pitch">
-          Decide what gets through — and live with what you let in. Follow the build, week by
-          week.
-        </p>
-        <a href="/gatekeep/" class="btn btn-outline">dryasstudio.com/gatekeep →</a>
-      </div>
-
-      <ImageWell
-          caption="Gatekeep screenshot"
-          image="gatekeep/key-art"
-          alt="Gatekeep key art"
-          height="200px"
-        />
-    </div>
+    <h1 class="game-title">DRYAS STUDIO</h1>
+    <p class="pitch">The studio behind Sidecraft and BrewMind.</p>
   </section>
 
-  {/* ── Devlog list ────────────────────────────────────────────────────── */}
-  <section class="devlog">
-    <h2 class="kicker">Devlog — latest entries</h2>
-    {
-      entries.map((entry, i) => (
-        <DevlogRow entry={entry} latest={i === 0} last={i === entries.length - 1} />
-      ))
-    }
-    <a href="/devlog" class="all-entries">ALL ENTRIES →</a>
+  <section class="lines" aria-label="Service lines and products">
+    <h2 class="kicker">What we run</h2>
+    <ul class="line-list">
+      {
+        lines.map(({ name, pitch }) => (
+          <li class="line">
+            <span class="line-name">{name}</span>
+            <span class="line-pitch">{pitch}</span>
+          </li>
+        ))
+      }
+    </ul>
   </section>
 
   <StudioFooter />
@@ -98,7 +88,7 @@ const entries = await allEntries();
     color: var(--moss-pale);
   }
 
-  /* ── Feature band ─────────────────────────────────────────────────────── */
+  /* ── Studio band ──────────────────────────────────────────────────────── */
 
   .feature {
     padding: 48px 56px;
@@ -119,13 +109,6 @@ const entries = await allEntries();
     color: var(--slate-grey);
   }
 
-  .feature-grid {
-    display: grid;
-    grid-template-columns: 1fr 320px;
-    gap: 40px;
-    align-items: center;
-  }
-
   .game-title {
     font: 500 56px/1 var(--font-display);
     letter-spacing: 0.08em;
@@ -133,46 +116,63 @@ const entries = await allEntries();
   }
 
   .pitch {
-    margin: 18px 0 24px;
+    margin: 18px 0 0;
     font: 400 15px/1.65 var(--font-body);
     color: var(--moss-pale);
     max-width: 480px;
   }
 
-  /* ── Devlog list ──────────────────────────────────────────────────────── */
+  /* ── Service lines ────────────────────────────────────────────────────── */
 
-  .devlog {
+  .lines {
     padding: 40px 56px;
-    display: flex;
-    flex-direction: column;
   }
 
-  .devlog .kicker {
+  .lines .kicker {
     margin-bottom: 20px;
   }
 
-  .all-entries {
-    align-self: flex-start;
-    margin-top: 20px;
-    font: 500 12px var(--font-mono);
-    letter-spacing: 0.12em;
-    color: var(--slate-grey);
+  .line-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
-  .all-entries:hover {
+
+  .line {
+    display: flex;
+    gap: 24px;
+    padding: 16px 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .line:last-child {
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .line-name {
+    width: 140px;
+    flex: none;
+    font: 500 13px var(--font-mono);
+    letter-spacing: 0.12em;
+    color: var(--paper);
+    text-transform: uppercase;
+  }
+
+  .line-pitch {
+    font: 400 14px/1.6 var(--font-body);
     color: var(--moss-pale);
   }
 
   @media (max-width: 900px) {
     .feature,
-    .devlog {
+    .lines {
       padding: 32px 24px;
-    }
-    .feature-grid {
-      grid-template-columns: 1fr;
-      gap: 28px;
     }
     .game-title {
       font-size: 44px;
+    }
+    .line {
+      flex-direction: column;
+      gap: 4px;
     }
   }
 </style>

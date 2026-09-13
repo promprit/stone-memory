@@ -4,32 +4,28 @@
  *
  * Sidebar carries the primary DOWNLOAD FULL KIT (.ZIP) button. Main is a
  * two-column grid: the fact sheet on the left, logo & mark swatches on the
- * right, then a 4-up screenshot grid below.
+ * right.
  *
  * The light swatch is the one place on the site with a Paper ground — the
  * green mark needs it, and the brand rules require a solid plate.
  */
 import Shell from '../layouts/Shell.astro';
-import ImageWell from '../components/ImageWell.astro';
 
 const facts = [
   { label: 'Studio', value: 'DRYAS STUDIO' },
-  { label: 'Team', value: '1 (SOLO DEVELOPER)' },
-  { label: 'Current title', value: 'GATEKEEP (IN DEV)' },
+  { label: 'Lines', value: 'SIDECRAFT · BREWMIND' },
   { label: 'Founded', value: '2026' },
   { label: 'Contact', value: 'PRESS@DRYASSTUDIO.COM' },
 ];
-
-const shots = ['01', '02', '03', '04'];
 ---
 
 <Shell
   title="Press"
-  description="Press kit, fact sheet, logos and screenshots for Dryas Studio and Gatekeep."
+  description="Press kit, fact sheet and logos for Dryas Studio."
   active="press"
 >
-  {/* Not yet a real file — the kit is assembled once the brand assets and
-      game screenshots land. See design doc §8. */}
+  {/* Not yet a real file — the kit is assembled once the brand assets
+      land. See design doc §8. */}
   <a slot="sidebar" href="#" class="btn btn-primary kit">DOWNLOAD FULL KIT (.ZIP)</a>
 
 
@@ -73,22 +69,6 @@ const shots = ['01', '02', '03', '04'];
         <p class="footnote">SVG + PNG IN THE KIT · CLEARSPACE RULES INCLUDED</p>
       </section>
     </div>
-
-    <section>
-      <p class="kicker">Gatekeep — screenshots</p>
-      <div class="shots">
-        {
-          shots.map((n) => (
-            <ImageWell
-              caption={n}
-              image={`gatekeep/screenshot-${n}`}
-              alt={`Gatekeep screenshot ${n}`}
-              height="130px"
-            />
-          ))
-        }
-      </div>
-    </section>
   </div>
 
 </Shell>
@@ -203,14 +183,6 @@ const shots = ['01', '02', '03', '04'];
     margin-top: 10px;
   }
 
-  /* ── Screenshots ──────────────────────────────────────────────────────── */
-
-  .shots {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-  }
-
   @media (max-width: 900px) {
     .page {
       padding: 40px 24px;
@@ -221,9 +193,6 @@ const shots = ['01', '02', '03', '04'];
     .cols {
       grid-template-columns: 1fr;
       gap: 40px;
-    }
-    .shots {
-      grid-template-columns: repeat(2, 1fr);
     }
   }
 </style>

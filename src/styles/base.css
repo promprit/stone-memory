@@ -62,7 +62,7 @@ p {
   color: var(--slate-grey);
 }
 
-/* Section kicker — "WHAT IS GATEKEEP", "DEVLOG — LATEST ENTRIES", "ABOUT". */
+/* Section kicker — "WHAT WE RUN", "PRESS", "ABOUT". */
 .kicker {
   font: 400 11px var(--font-mono);
   letter-spacing: 0.18em;

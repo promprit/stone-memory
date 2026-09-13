@@ -1,7 +1,7 @@
 # Cloudflare Pages headers.
 #
 # Note the division of labour with public/_routes.json: that file decides
-# which paths reach the Functions runtime at all (only /gatekeep* and /api/*),
+# which paths reach the Functions runtime at all (only /api/*),
 # this one decides what every response carries.
 
 /*
@@ -23,6 +23,4 @@
 /assets/*
   Cache-Control: public, max-age=3600, must-revalidate
 
-# No CSP yet. The proxied game's requirements are not known until it is
-# actually serving through the /gatekeep Function, and a CSP written against
-# a guess would break it silently. Add one once Task 17 has run.
+# No CSP yet. Add one with the new studio site, once its scripts are known.
