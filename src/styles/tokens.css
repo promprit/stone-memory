@@ -25,11 +25,6 @@
   --edge: rgba(201, 207, 196, 0.2);
   --edge-strong: rgba(201, 207, 196, 0.35);
   --edge-hover: rgba(201, 207, 196, 0.6);
-  /* The active-entry pill in the devlog sidebar. */
-  --pill: rgba(201, 207, 196, 0.08);
-  /* The list-row MILESTONE badge — Earth Brown at 25%, Moss Pale text.
-     Distinct from the article badge, which is solid Earth Brown on Paper. */
-  --badge-soft: rgba(92, 74, 63, 0.25);
 
   /* ── Type ───────────────────────────────────────────────────────────── */
   --font-display: 'Archivo Variable', Archivo, system-ui, -apple-system, sans-serif;

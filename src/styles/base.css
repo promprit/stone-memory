@@ -70,8 +70,7 @@ p {
   text-transform: uppercase;
 }
 
-/* Display headings: Archivo 500, uppercase, .06em. Sentence case is the
-   exception and belongs to devlog entry titles only (screen 2b). */
+/* Display headings: Archivo 500, uppercase, .06em. */
 .display {
   font-family: var(--font-display);
   font-weight: 500;
@@ -165,7 +164,7 @@ p {
 
 /* ── Badges ───────────────────────────────────────────────────────────── */
 
-/* Solid Earth Brown — "CURRENT PROJECT", the article's "MILESTONE". */
+/* Solid Earth Brown — "DIGITAL AGENCY" on the home band. */
 .badge {
   display: inline-block;
   font: 500 11px var(--font-mono);
@@ -173,17 +172,6 @@ p {
   background: var(--earth-brown);
   color: var(--paper);
   padding: 4px 10px;
-  border-radius: var(--radius);
-}
-
-/* The list-row variant: 25% Earth Brown behind Moss Pale, so it reads as a
-   marker beside a title rather than competing with it. */
-.badge-soft {
-  display: inline-block;
-  font: 400 11px var(--font-mono);
-  background: var(--badge-soft);
-  color: var(--moss-pale);
-  padding: 3px 8px;
   border-radius: var(--radius);
 }
 

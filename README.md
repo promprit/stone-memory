@@ -1,16 +1,18 @@
 # dryasstudio.com
 
-The Dryas Studio website. Static site, Cloudflare Pages.
+The website of Dryas Studio, a digital agency and the parent of Sidecraft and
+BrewMind. Static site, Cloudflare Pages.
 
 **Status:** live at `https://dryasstudio.com` (apex + `www`, `www` 301s to the
 apex). Pages project `dryas-studio`, deployed by direct upload.
 
-**2026-09-13 — GATEKEEP dropped.** Dryas Studio is now the parent studio of
-Sidecraft and BrewMind. The proxy to the game, its images, handovers and the
-game devlog were removed; the pages carry placeholder copy until the new
-studio site is planned. `/gatekeep*` 301s and `/devlog*` 302s to the home page
-(`public/_redirects`). The pre-drop design docs and devlog posts are kept in
+**2026-09-13 — game studio → digital agency.** GATEKEEP and the game devlog
+were removed; the pages carry placeholder agency copy until the new site is
+planned. `/gatekeep*` and `/devlog*` 301 to the home page
+(`public/_redirects`). The pre-change design docs and devlog posts are kept in
 [`docs/archive/2026-08-gatekeep-era/`](docs/archive/2026-08-gatekeep-era/).
+Brand guidelines live in [`docs/brand/`](docs/brand/); marks and social images
+in `public/assets/`.
 
 ```bash
 npm install
@@ -50,8 +52,8 @@ the build on a hex, `rgb()` or `hsl()` anywhere in `src/pages`, `src/layouts` or
 
 ## Known gaps
 
-**Placeholder copy.** Home, about and press describe the studio in one line
-each until the parent-studio site is planned.
+**Placeholder copy.** Home, about and press describe the agency in one line
+each until the agency site is planned.
 
 **Signup is not wired up.** `BUTTONDOWN_API_KEY` is unset, so `/api/subscribe`
 answers `501` and the form says so. That is a defined state, not a crash.

@@ -6,9 +6,9 @@
  * email signup pinned to the bottom.
  * Main: the studio band naming the service lines, then the footer.
  *
- * Placeholder copy (2026-09-13): GATEKEEP was dropped and the devlog
- * unpublished. The real parent-studio content — DRYAS as owner of Sidecraft
- * and BrewMind — lands in the planning phase.
+ * Placeholder copy (2026-09-13): Dryas Studio is a digital agency, the
+ * parent of Sidecraft and BrewMind. The full agency site lands in the
+ * planning phase.
  */
 import Shell from '../layouts/Shell.astro';
 import EmailSignup from '../components/EmailSignup.astro';
@@ -23,30 +23,30 @@ const lines = [
 <Shell
   title="Dryas Studio"
   bareTitle
-  description="Dryas Studio is a digital studio, home of Sidecraft and BrewMind."
+  description="Dryas Studio is a digital agency, home of Sidecraft and BrewMind."
   markSize={64}
 >
   <Fragment slot="sidebar-top">
     <div>
       <div class="studio-name">Dryas Studio</div>
-      <div class="tagline">STUDIO · DIGITAL · 2026</div>
+      <div class="tagline">DIGITAL AGENCY · 2026</div>
     </div>
     <p class="intro">
-      A digital studio building products and productized services.
+      A digital agency. We build websites, products and productized services.
     </p>
   </Fragment>
 
-  <EmailSignup slot="sidebar-bottom" list="updates" label="Studio news by email" cta="→" />
+  <EmailSignup slot="sidebar-bottom" list="updates" label="Agency news by email" cta="→" />
 
-  {/* ── Studio band ────────────────────────────────────────────────────── */}
+  {/* ── Agency band ────────────────────────────────────────────────────── */}
   <section class="feature">
     <div class="feature-meta">
-      <span class="badge">DRYAS STUDIO</span>
+      <span class="badge">DIGITAL AGENCY</span>
       <span class="status">STATUS: NEW SITE COMING</span>
     </div>
 
-    <h1 class="game-title">DRYAS STUDIO</h1>
-    <p class="pitch">The studio behind Sidecraft and BrewMind.</p>
+    <h1 class="agency-title">DRYAS STUDIO</h1>
+    <p class="pitch">The digital agency behind Sidecraft and BrewMind.</p>
   </section>
 
   <section class="lines" aria-label="Service lines and products">
@@ -88,7 +88,7 @@ const lines = [
     color: var(--moss-pale);
   }
 
-  /* ── Studio band ──────────────────────────────────────────────────────── */
+  /* ── Agency band ──────────────────────────────────────────────────────── */
 
   .feature {
     padding: 48px 56px;
@@ -109,7 +109,7 @@ const lines = [
     color: var(--slate-grey);
   }
 
-  .game-title {
+  .agency-title {
     font: 500 56px/1 var(--font-display);
     letter-spacing: 0.08em;
     color: var(--paper);
@@ -167,7 +167,7 @@ const lines = [
     .lines {
       padding: 32px 24px;
     }
-    .game-title {
+    .agency-title {
       font-size: 44px;
     }
     .line {

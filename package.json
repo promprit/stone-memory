@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.2.5",
-    "@fontsource/jetbrains-mono": "^5.2.5",
-    "zod": "^4.4.3"
+    "@fontsource/jetbrains-mono": "^5.2.5"
   }
 }

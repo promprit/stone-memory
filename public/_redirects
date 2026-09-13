@@ -5,7 +5,6 @@
 /gatekeep    /  301
 /gatekeep/*  /  301
 
-# The devlog is unpublished while the studio site is rewritten. Temporary,
-# because /devlog is expected to come back with studio content.
-/devlog      /  302
-/devlog/*    /  302
+# The game devlog was removed when Dryas Studio became a digital agency.
+/devlog      /  301
+/devlog/*    /  301
