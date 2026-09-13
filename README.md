@@ -1,7 +1,7 @@
 # dryasstudio.com
 
-The website of Dryas Studio, a digital agency and the parent of Sidecraft and
-BrewMind. Static site, Cloudflare Pages.
+The website of Dryas Studio, a digital agency. Sidecraft is its service;
+BrewMind is a client. Static site, Cloudflare Pages.
 
 **Status:** live at `https://dryasstudio.com` (apex + `www`, `www` 301s to the
 apex). Pages project `dryas-studio`, deployed by direct upload.

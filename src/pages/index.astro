@@ -6,24 +6,30 @@
  * email signup pinned to the bottom.
  * Main: the studio band naming the service lines, then the footer.
  *
- * Placeholder copy (2026-09-13): Dryas Studio is a digital agency, the
- * parent of Sidecraft and BrewMind. The full agency site lands in the
+ * Placeholder copy (2026-09-13): Dryas Studio is a digital agency; Sidecraft
+ * is its service and BrewMind a client. The full agency site lands in the
  * planning phase.
  */
 import Shell from '../layouts/Shell.astro';
 import EmailSignup from '../components/EmailSignup.astro';
 import StudioFooter from '../components/StudioFooter.astro';
 
-const lines = [
-  { name: 'Sidecraft', pitch: 'Websites that ship in weeks.' },
-  { name: 'BrewMind', pitch: 'Proprietary product.' },
+const groups = [
+  {
+    kicker: 'Our service',
+    items: [{ name: 'Sidecraft', pitch: 'Websites that ship in weeks — design to deploy.' }],
+  },
+  {
+    kicker: 'Clients',
+    items: [{ name: 'BrewMind', pitch: 'AI coffee recipe platform.' }],
+  },
 ];
 ---
 
 <Shell
   title="Dryas Studio"
   bareTitle
-  description="Dryas Studio is a digital agency, home of Sidecraft and BrewMind."
+  description="Dryas Studio is a digital agency. Our service, Sidecraft, ships websites in weeks."
   markSize={64}
 >
   <Fragment slot="sidebar-top">
@@ -46,22 +52,24 @@ const lines = [
     </div>
 
     <h1 class="agency-title">DRYAS STUDIO</h1>
-    <p class="pitch">The digital agency behind Sidecraft and BrewMind.</p>
+    <p class="pitch">The digital agency behind Sidecraft — websites that ship in weeks.</p>
   </section>
 
-  <section class="lines" aria-label="Service lines and products">
-    <h2 class="kicker">What we run</h2>
-    <ul class="line-list">
-      {
-        lines.map(({ name, pitch }) => (
-          <li class="line">
-            <span class="line-name">{name}</span>
-            <span class="line-pitch">{pitch}</span>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
+  {
+    groups.map(({ kicker, items }) => (
+      <section class="lines">
+        <h2 class="kicker">{kicker}</h2>
+        <ul class="line-list">
+          {items.map(({ name, pitch }) => (
+            <li class="line">
+              <span class="line-name">{name}</span>
+              <span class="line-pitch">{pitch}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
 
   <StudioFooter />
 </Shell>
@@ -126,6 +134,9 @@ const lines = [
 
   .lines {
     padding: 40px 56px;
+  }
+  .lines + .lines {
+    padding-top: 0;
   }
 
   .lines .kicker {
