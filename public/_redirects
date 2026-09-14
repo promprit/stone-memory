@@ -8,3 +8,8 @@
 # The game devlog was removed when Dryas Studio became a digital agency.
 /devlog      /  301
 /devlog/*    /  301
+
+# Sidecraft OS lives on its own origin behind Cloudflare Access (added after go-live 2026-09-14).
+# 302, not 301: browsers must not cache it forever if the OS origin ever moves.
+/sidecraft/os    https://os.dryasstudio.com/        302
+/sidecraft/os/*  https://os.dryasstudio.com/:splat  302
