@@ -1,0 +1,33 @@
+---
+/**
+ * The Dryas mark — canopy, crown and root in one triangle — stroked in the
+ * accent. `small` is the two-path cut for 16–28px sizes. Pass `label` when
+ * the mark carries meaning; without it the SVG is decorative.
+ */
+interface Props {
+  size: number;
+  variant?: 'full' | 'small';
+  strokeWidth?: number;
+  label?: string;
+  class?: string;
+}
+
+const { size, variant = 'full', strokeWidth, label, class: className } = Astro.props;
+const stroke = strokeWidth ?? (variant === 'small' ? 10 : 3.4);
+---
+
+<svg
+  class={className}
+  width={size}
+  height={size}
+  viewBox="0 0 120 120"
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+>
+  <g fill="none" stroke-width={stroke} stroke-linejoin="round" style="stroke: var(--accent)">
+    <path d="M60 26 92 84H28Z"></path>
+    {variant === 'full' && <path d="M60 48 76 82H44Z"></path>}
+    <path d="M60 84V108"></path>
+  </g>
+</svg>

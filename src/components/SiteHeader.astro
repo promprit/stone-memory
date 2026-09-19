@@ -1,0 +1,110 @@
+---
+/**
+ * Top bar: mark + DRYAS / STUDIO lockup on the left, route nav on the right.
+ * Active route is accent; the rest are muted and brighten to fg on hover.
+ */
+import Mark from './Mark.astro';
+
+export type Route = 'services' | 'process' | 'about' | 'contact';
+
+interface Props {
+  active?: Route;
+}
+
+const { active } = Astro.props;
+
+const items: { key: Route; label: string; href: string }[] = [
+  { key: 'services', label: '/SERVICES', href: '/services' },
+  { key: 'process', label: '/PROCESS', href: '/process' },
+  { key: 'about', label: '/ABOUT', href: '/about' },
+  { key: 'contact', label: '/CONTACT', href: '/contact' },
+];
+---
+
+<header class="header">
+  <a href="/" class="brand" aria-label="Dryas Studio — home">
+    <Mark size={38} />
+    <span class="lockup" aria-hidden="true">
+      <span class="name">DRYAS</span>
+      <span class="sub">STUDIO</span>
+    </span>
+  </a>
+  <nav class="nav" aria-label="Site">
+    {
+      items.map(({ key, label, href }) => (
+        <a
+          href={href}
+          class:list={['item', { active: key === active }]}
+          aria-current={key === active ? 'page' : undefined}
+        >
+          {label}
+        </a>
+      ))
+    }
+  </nav>
+</header>
+
+<style>
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 18px var(--gutter);
+    border-bottom: 1px solid var(--hairline);
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .lockup {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .name {
+    font: 500 17px var(--font-wordmark);
+    letter-spacing: 0.22em;
+    color: var(--fg);
+  }
+
+  .sub {
+    font: 400 8px var(--font-mono);
+    letter-spacing: 0.62em;
+    color: var(--accent);
+    margin-top: 4px;
+  }
+
+  .nav {
+    display: flex;
+    gap: 28px;
+    font: 500 12px var(--font-mono);
+    letter-spacing: 0.14em;
+    flex-wrap: wrap;
+  }
+
+  .item {
+    color: var(--muted);
+  }
+  .item:hover {
+    color: var(--fg);
+  }
+  .item.active {
+    color: var(--accent);
+  }
+
+  @media (max-width: 600px) {
+    .nav {
+      gap: 0 20px;
+    }
+    /* >=44px touch target without changing the type. */
+    .item {
+      padding: 14px 0;
+    }
+  }
+</style>

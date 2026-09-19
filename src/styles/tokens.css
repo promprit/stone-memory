@@ -1,45 +1,41 @@
 /*
- * Dryas Studio brand tokens — the official kit, v2.0.
+ * Dryas Studio brand tokens — site v3 (Claude Design "Dryas Site v3").
  *
  * THIS IS THE ONLY FILE IN THE BUILD THAT MAY CONTAIN A COLOUR LITERAL.
  * `npm test` (scripts/check-literals.mjs) fails on a hex, rgb() or hsl()
- * anywhere in src/pages, src/layouts or src/components. The handoff is
- * explicit that these eight colours are the palette and that new ones are
- * never invented; a palette that is only a convention drifts within a month.
+ * anywhere in src/pages, src/layouts or src/components.
  */
 
 :root {
-  /* ── Brand palette ──────────────────────────────────────────────────── */
-  --district-green: #1b342c; /* anchor, default page background            */
-  --shade: #10201b;          /* depth: sidebar, image wells, code blocks   */
-  --driving-mist: #4a5d53;   /* link underlines, active UI                 */
-  --earth-brown: #5c4a3f;    /* ACCENT ONLY — badges, subscribe. Never a ground. */
-  --moss-pale: #c9cfc4;      /* body copy on dark                          */
-  --slate-grey: #7c8a83;     /* metadata, inactive nav, dividers           */
-  --paper: #efeee8;          /* headings on dark, primary button fill      */
+  /* ── Palette ────────────────────────────────────────────────────────── */
+  --ink: #0a0a0f;    /* page ground                                       */
+  --fg: #edefea;     /* headings, primary text                            */
+  --muted: #98a29b;  /* body copy, metadata, inactive nav                 */
+  --accent: #5fb884; /* mark, active nav, numerals, button border         */
+  --deep: #173d2e;   /* primary button fill                               */
 
-  /* ── Derived surfaces ───────────────────────────────────────────────── */
-  /* Hairline dividers: 1px solid, Moss Pale at 12%. */
-  --hairline: rgba(201, 207, 196, 0.12);
-  /* Input and outlined-button borders sit slightly brighter than a hairline. */
-  --edge: rgba(201, 207, 196, 0.2);
-  --edge-strong: rgba(201, 207, 196, 0.35);
-  --edge-hover: rgba(201, 207, 196, 0.6);
+  /* ── Derived ────────────────────────────────────────────────────────── */
+  --hairline: rgba(237, 239, 234, 0.08);  /* 1px dividers, cell gaps      */
+  --underline: rgba(237, 239, 234, 0.2);  /* quiet link underline         */
 
   /* ── Type ───────────────────────────────────────────────────────────── */
-  --font-display: 'Archivo Variable', Archivo, system-ui, -apple-system, sans-serif;
-  --font-body: var(--font-display);
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: 'Space Grotesk', 'IBM Plex Sans Thai', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-thai: 'IBM Plex Sans Thai', system-ui, sans-serif;
+  --font-wordmark: 'Archivo Variable', Archivo, system-ui, sans-serif;
 
   /* ── Geometry ───────────────────────────────────────────────────────── */
-  /* 2px everywhere — buttons, badges, inputs, wells. Nothing rounder. */
   --radius: 2px;
-  --sidebar-w: 380px;
-  /* Below this the sidebar collapses to a top bar. Not mocked; the handoff
-     specifies the rule and this is the single place it is expressed. */
-  --bp-sidebar: 900px;
+  --max-w: 1160px;
+  --gutter: 40px;
 
   /* ── Motion ─────────────────────────────────────────────────────────── */
-  /* "~120ms ease transitions; no motion beyond colour." */
   --t: 120ms ease;
+}
+
+/* Phones: keep a 20px side gutter so nothing scrolls sideways. */
+@media (max-width: 600px) {
+  :root {
+    --gutter: 20px;
+  }
 }

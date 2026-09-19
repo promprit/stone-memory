@@ -1,0 +1,54 @@
+---
+/**
+ * Footer: small mark + copyright left; /PRESS and the tagline right.
+ * /press is not in the header nav (the design has four routes), so this is
+ * its only entry point.
+ */
+import Mark from './Mark.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <span class="left">
+    <Mark size={16} variant="small" />
+    <span class="meta">© {year} DRYAS STUDIO</span>
+  </span>
+  <span class="right">
+    <a href="/press" class="meta press">/PRESS</a>
+    <span class="meta">DESIGN → DEPLOY · BANGKOK</span>
+  </span>
+</footer>
+
+<style>
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 24px var(--gutter);
+    border-top: 1px solid var(--hairline);
+    flex-wrap: wrap;
+  }
+
+  .left,
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 10px 24px;
+    flex-wrap: wrap;
+  }
+  .left {
+    gap: 10px;
+  }
+
+  .meta {
+    font: 400 11px var(--font-mono);
+    letter-spacing: 0.16em;
+    color: var(--muted);
+  }
+
+  .press:hover {
+    color: var(--fg);
+  }
+</style>

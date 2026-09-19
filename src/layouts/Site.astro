@@ -1,0 +1,45 @@
+---
+/**
+ * The v3 page layout: header, main column, footer, full-viewport min-height.
+ * `active` marks the current route in the header nav; omit it on /, /press
+ * and 404, which are not in the nav.
+ */
+import Base from './Base.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import type { Route } from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  bareTitle?: boolean;
+  active?: Route;
+}
+
+const { title, description, bareTitle, active } = Astro.props;
+---
+
+<Base title={title} description={description} bareTitle={bareTitle}>
+  <div class="site">
+    <SiteHeader active={active} />
+    <main id="main" class="main">
+      <slot />
+    </main>
+    <SiteFooter />
+  </div>
+</Base>
+
+<style>
+  .site {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+</style>

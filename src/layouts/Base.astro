@@ -2,33 +2,34 @@
 /**
  * The document shell. Everything on the site renders inside this.
  *
- * Fonts are self-hosted via Fontsource rather than linked from Google Fonts
- * as the design canvas does — a prototype linking a CDN is right; a
- * production page adding a third-party connection to its critical path is
- * not. See the design doc §3.
+ * Fonts are self-hosted via Fontsource (the design links Google Fonts; a
+ * production page should not add a third-party connection to its critical
+ * path). Only the weights the design uses are imported.
  */
-// Latin subsets only — the site is English. Fontsource's full entrypoints
-// also ship Cyrillic, Greek and Vietnamese faces; unicode-range means a
-// browser never downloads them, but they still bloat the deploy.
+import '@fontsource/space-grotesk/latin-400.css';
+import '@fontsource/space-grotesk/latin-ext-400.css';
+import '@fontsource/space-grotesk/latin-600.css';
+import '@fontsource/space-grotesk/latin-ext-600.css';
+import '@fontsource/ibm-plex-mono/latin-400.css';
+import '@fontsource/ibm-plex-mono/latin-ext-400.css';
+import '@fontsource/ibm-plex-mono/latin-500.css';
+import '@fontsource/ibm-plex-mono/latin-ext-500.css';
+import '@fontsource/ibm-plex-sans-thai/thai-400.css';
 import '@fontsource-variable/archivo';
-import '@fontsource/jetbrains-mono/latin-400.css';
-import '@fontsource/jetbrains-mono/latin-ext-400.css';
-import '@fontsource/jetbrains-mono/latin-500.css';
-import '@fontsource/jetbrains-mono/latin-ext-500.css';
 import '../styles/tokens.css';
 import '../styles/base.css';
-import { shade } from '../lib/tokens';
+import { ink } from '../lib/tokens';
 
 interface Props {
   title: string;
   description?: string;
-  /** Titles that already carry the name (the home page) skip the suffix rule. */
+  /** Titles that already carry the name (the home page) skip the suffix. */
   bareTitle?: boolean;
 }
 
 const {
   title,
-  description = 'Dryas Studio is a digital agency. Our service, Sidecraft, ships websites in weeks.',
+  description = 'Dryas Studio is a digital agency in Bangkok. Sidecraft, our service, takes websites from design to deploy in weeks — then runs them.',
   bareTitle = false,
 } = Astro.props;
 
@@ -44,12 +45,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-
-    {/* The brand rules require the small-cut variant at <=28px, which a
-        favicon always is. */}
-    <link rel="icon" href="/assets/dryas-symbol-small-cut.svg" type="image/svg+xml" />
-    <meta name="theme-color" content={shade} />
-
+    <link rel="icon" href="/assets/dryas-favicon-v3.svg" type="image/svg+xml" />
+    <meta name="theme-color" content={ink} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Dryas Studio" />
     <meta property="og:title" content={fullTitle} />
@@ -66,8 +63,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         left: -9999px;
         top: 0;
         z-index: 100;
-        background: var(--paper);
-        color: var(--shade);
+        background: var(--accent);
+        color: var(--ink);
         font: 500 12px var(--font-mono);
         letter-spacing: 0.1em;
         padding: 12px 18px;

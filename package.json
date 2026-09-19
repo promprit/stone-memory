@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "check": "astro check && tsc --noEmit -p functions",
     "test": "node scripts/check-literals.mjs",
-    "verify": "npm run test && npm run check && npm run build"
+    "test:dist": "node scripts/check-dist.mjs",
+    "verify": "npm run test && npm run check && npm run build && npm run test:dist"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
@@ -21,6 +22,9 @@
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.2.5",
-    "@fontsource/jetbrains-mono": "^5.2.5"
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/ibm-plex-sans-thai": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.2.5",
+    "@fontsource/space-grotesk": "^5.3.0"
   }
 }

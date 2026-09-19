@@ -1,39 +1,28 @@
 ---
 /**
- * 404.
- *
- * Astro emits this as `dist/404.html`; Cloudflare Pages serves that file with
- * a real 404 status for any unmatched path. Without it Pages falls back to
- * `index.html` at 200 — a soft 404, which invites the crawler to index every
- * dead URL as a copy of the home page.
- *
- * No sidebar slot: there is nothing route-specific to put there, and the
- * shell defaults to closing with the copyright line.
+ * 404. Astro emits dist/404.html; Cloudflare Pages serves it with a real 404
+ * status for any unmatched path, instead of a soft 404 on index.html.
  */
-import Shell from '../layouts/Shell.astro';
+import Site from '../layouts/Site.astro';
 ---
 
-<Shell
-  title="Not found"
-  description="That page does not exist."
-  active={undefined}
->
-  <div class="page">
-    <section>
-      <p class="kicker">404</p>
-      <h1 class="display heading">Page not found</h1>
-      <p class="body">That address does not exist, or it has moved.</p>
-      <a href="/" class="btn btn-outline">← Back to the studio</a>
-    </section>
-  </div>
-</Shell>
+<Site title="Not found" description="That page does not exist.">
+  <section class="wrap page">
+    <p class="kicker">404</p>
+    <h1 class="page-title title">Page not found</h1>
+    <p class="lede body">That address does not exist, or it has moved.</p>
+    <a href="/" class="link-arrow">← BACK TO HOME</a>
+  </section>
+</Site>
 
 <style>
-  .page { max-width: 640px; padding: 72px 96px; }
-  .heading { margin-block: 8px 16px; }
-  .body { margin: 0 0 24px; color: var(--moss-pale); }
-
-  @media (max-width: 900px) {
-    .page { padding: 40px 24px; }
+  .page {
+    padding-block: clamp(56px, 8vw, 110px) 96px;
+  }
+  .title {
+    margin-top: 24px;
+  }
+  .body {
+    margin: 22px 0 40px;
   }
 </style>

@@ -24,7 +24,5 @@ function token(name: string): string {
   return match[1].trim();
 }
 
-export const districtGreen = token('district-green');
-export const shade = token('shade');
-export const paper = token('paper');
-export const mossPale = token('moss-pale');
+export const ink = token('ink');
+export const accent = token('accent');
