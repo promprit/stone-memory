@@ -1,189 +1,173 @@
 ---
 /**
- * Home — screen `1c`, layout kept.
- *
- * Sidebar: 64px mark, studio name, mono tagline, intro paragraph, route nav,
- * email signup pinned to the bottom.
- * Main: the studio band naming the service lines, then the footer.
- *
- * Placeholder copy (2026-09-13): Dryas Studio is a digital agency; Sidecraft
- * is its service and BrewMind a client. The full agency site lands in the
- * planning phase.
+ * Home — hero, three-stat strip, "In production" client list.
  */
-import Shell from '../layouts/Shell.astro';
-import EmailSignup from '../components/EmailSignup.astro';
-import StudioFooter from '../components/StudioFooter.astro';
+import Site from '../layouts/Site.astro';
+import Mark from '../components/Mark.astro';
 
-const groups = [
-  {
-    kicker: 'Our service',
-    items: [{ name: 'Sidecraft', pitch: 'Websites that ship in weeks — design to deploy.' }],
-  },
-  {
-    kicker: 'Clients',
-    items: [{ name: 'BrewMind', pitch: 'AI coffee recipe platform.' }],
-  },
+const stats = [
+  { value: '01', label: 'Service — Sidecraft' },
+  { value: '2–4', label: 'Weeks to live' },
+  { value: '24/7', label: 'Monitoring after launch' },
+];
+
+const work = [
+  { name: 'BrewMind', pitch: 'AI coffee recipe platform — dark-first SaaS.' },
+  { name: 'Collex', pitch: 'Collectibles retail — landing, gallery and contact at mycollex.com.' },
 ];
 ---
 
-<Shell
-  title="Dryas Studio"
-  bareTitle
-  description="Dryas Studio is a digital agency. Our service, Sidecraft, ships websites in weeks."
-  markSize={64}
->
-  <Fragment slot="sidebar-top">
-    <div>
-      <div class="studio-name">Dryas Studio</div>
-      <div class="tagline">DIGITAL AGENCY · 2026</div>
-    </div>
+<Site title="Dryas Studio — websites that ship in weeks" bareTitle>
+  <section class="wrap hero">
+    <Mark size={560} strokeWidth={2} class="watermark" />
+    <p class="kicker">Digital agency · Bangkok · 2026</p>
+    <h1 class="headline">Websites that ship in <span class="accent">weeks.</span></h1>
     <p class="intro">
-      A digital agency. We build websites, products and productized services.
+      Design to deploy, one studio, no hand-offs. Then monitoring, incidents and changes — handled,
+      for years.
     </p>
-  </Fragment>
-
-  <EmailSignup slot="sidebar-bottom" list="updates" label="Agency news by email" cta="→" />
-
-  {/* ── Agency band ────────────────────────────────────────────────────── */}
-  <section class="feature">
-    <div class="feature-meta">
-      <span class="badge">DIGITAL AGENCY</span>
-      <span class="status">STATUS: NEW SITE COMING</span>
+    <p lang="th" class="th intro-th">จากดีไซน์ถึงเปิดใช้งานจริงในไม่กี่สัปดาห์ แล้วดูแลต่อหลังเปิดตัว</p>
+    <div class="actions">
+      <a href="/contact" class="btn">START A PROJECT</a>
+      <a href="/process" class="link-arrow">HOW IT WORKS →</a>
     </div>
-
-    <h1 class="agency-title">DRYAS STUDIO</h1>
-    <p class="pitch">The digital agency behind Sidecraft — websites that ship in weeks.</p>
   </section>
 
-  {
-    groups.map(({ kicker, items }) => (
-      <section class="lines">
-        <h2 class="kicker">{kicker}</h2>
-        <ul class="line-list">
-          {items.map(({ name, pitch }) => (
-            <li class="line">
-              <span class="line-name">{name}</span>
-              <span class="line-pitch">{pitch}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))
-  }
+  <section class="rule-top" aria-label="Studio at a glance">
+    <div class="cells stats">
+      {
+        stats.map(({ value, label }) => (
+          <div class="stat">
+            <div class="stat-value">{value}</div>
+            <div class="stat-label">{label}</div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
 
-  <StudioFooter />
-</Shell>
+  <section class="rule-top work-band">
+    <div class="wrap">
+      <h2 class="kicker work-head">In production</h2>
+      <ul class="work">
+        {
+          work.map(({ name, pitch }) => (
+            <li class="row">
+              <span class="row-name">{name}</span>
+              <span class="row-pitch">{pitch}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Site>
 
 <style>
-  /* ── Sidebar ──────────────────────────────────────────────────────────── */
-
-  .studio-name {
-    font: 500 30px/1.15 var(--font-display);
-    letter-spacing: 0.06em;
-    color: var(--paper);
-    text-transform: uppercase;
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(72px, 11vw, 150px) 80px;
   }
 
-  .tagline {
-    font: 400 12px var(--font-mono);
-    letter-spacing: 0.32em;
-    color: var(--slate-grey);
-    margin-top: 8px;
+  /* Oversized mark behind the hero copy, as in the design. */
+  .hero :global(.watermark) {
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: min(46vw, 560px);
+    height: auto;
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
+  .hero .kicker {
+    margin-bottom: 30px;
+  }
+
+  .headline {
+    font: 600 clamp(46px, 7.5vw, 100px) / 1 var(--font-sans);
+    letter-spacing: -0.04em;
+    color: var(--fg);
+    max-width: 13ch;
+    text-wrap: balance;
   }
 
   .intro {
-    font: 400 14px/1.7 var(--font-body);
-    color: var(--moss-pale);
+    margin-top: 30px;
+    font: 400 18px/1.7 var(--font-sans);
+    color: var(--muted);
+    max-width: 46ch;
   }
 
-  /* ── Agency band ──────────────────────────────────────────────────────── */
-
-  .feature {
-    padding: 48px 56px;
-    border-bottom: 1px solid var(--hairline);
+  .intro-th {
+    margin-top: 12px;
+    max-width: 46ch;
   }
 
-  .feature-meta {
+  .actions {
     display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
+    gap: 16px;
+    margin-top: 48px;
     flex-wrap: wrap;
+    align-items: center;
   }
 
-  .status {
+  .stats {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .stat {
+    padding: 34px var(--gutter);
+  }
+
+  .stat-value {
+    font: 500 28px var(--font-mono);
+    color: var(--accent);
+  }
+
+  .stat-label {
     font: 400 11px var(--font-mono);
-    letter-spacing: 0.14em;
-    color: var(--slate-grey);
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 10px;
   }
 
-  .agency-title {
-    font: 500 56px/1 var(--font-display);
-    letter-spacing: 0.08em;
-    color: var(--paper);
+  .work-band {
+    padding-block: 56px 80px;
   }
 
-  .pitch {
-    margin: 18px 0 0;
-    font: 400 15px/1.65 var(--font-body);
-    color: var(--moss-pale);
-    max-width: 480px;
+  .work-head {
+    margin-bottom: 8px;
   }
 
-  /* ── Service lines ────────────────────────────────────────────────────── */
-
-  .lines {
-    padding: 40px 56px;
-  }
-  .lines + .lines {
-    padding-top: 0;
-  }
-
-  .lines .kicker {
-    margin-bottom: 20px;
-  }
-
-  .line-list {
+  .work {
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
-  .line {
+  .row {
     display: flex;
-    gap: 24px;
-    padding: 16px 0;
-    border-top: 1px solid var(--hairline);
-  }
-  .line:last-child {
+    gap: 8px 32px;
+    padding: 22px 0;
     border-bottom: 1px solid var(--hairline);
+    flex-wrap: wrap;
+    align-items: baseline;
   }
 
-  .line-name {
-    width: 140px;
+  .row-name {
+    width: 160px;
     flex: none;
-    font: 500 13px var(--font-mono);
-    letter-spacing: 0.12em;
-    color: var(--paper);
-    text-transform: uppercase;
+    font: 600 17px var(--font-sans);
+    letter-spacing: -0.01em;
+    color: var(--fg);
   }
 
-  .line-pitch {
-    font: 400 14px/1.6 var(--font-body);
-    color: var(--moss-pale);
-  }
-
-  @media (max-width: 900px) {
-    .feature,
-    .lines {
-      padding: 32px 24px;
-    }
-    .agency-title {
-      font-size: 44px;
-    }
-    .line {
-      flex-direction: column;
-      gap: 4px;
-    }
+  .row-pitch {
+    font: 400 14px/1.6 var(--font-sans);
+    color: var(--muted);
   }
 </style>

@@ -35,7 +35,71 @@ const FORBIDDEN = ['data-signup', '<script', 'fonts.googleapis.com'];
  * must:   substrings unique to the page
  */
 const PAGES = [
+  {
+    file: 'index.html',
+    active: null,
+    thai: true,
+    must: [
+      'Websites that ship in',
+      'START A PROJECT',
+      'HOW IT WORKS →',
+      'Weeks to live',
+      'Monitoring after launch',
+      'BrewMind',
+      'Collex',
+      'จากดีไซน์ถึงเปิดใช้งานจริงในไม่กี่สัปดาห์ แล้วดูแลต่อหลังเปิดตัว',
+    ],
+  },
   { file: '404.html', active: null, thai: false, must: ['Page not found', '← BACK TO HOME'] },
+  {
+    file: 'services/index.html',
+    active: 'services',
+    thai: false,
+    must: [
+      'Sidecraft',
+      'Brand-true screens, real copy, every state',
+      'Uptime checks every 15 minutes',
+      'GET A QUOTE',
+      'fixed price book',
+    ],
+  },
+  {
+    file: 'process/index.html',
+    active: 'process',
+    thai: false,
+    must: ['Scope', 'Days 1–3', 'Weeks 2–3', 'Ship + care', 'Week 4 →', 'nine-point QA gate'],
+  },
+  {
+    file: 'about/index.html',
+    active: 'about',
+    thai: true,
+    must: [
+      'A studio of one, built like a system.',
+      'Dryas octopetala',
+      'Sidecraft OS',
+      'aria-label="Dryas Studio mark"',
+      'EN · TH',
+      'สตูดิโอเล็ก ๆ ในกรุงเทพฯ ที่ออกแบบ สร้าง และดูแลเว็บไซต์เองทุกขั้นตอน',
+    ],
+  },
+  {
+    file: 'contact/index.html',
+    active: 'contact',
+    thai: true,
+    must: [
+      'Tell us what you need live in four weeks.',
+      'href="mailto:hello@dryasstudio.com"',
+      'href="https://x.com/dryasstudio"',
+      'One business day',
+      'คุยกันก่อนได้ ไม่มีค่าใช้จ่าย — ตอบกลับภายในหนึ่งวันทำการ',
+    ],
+  },
+  {
+    file: 'press/index.html',
+    active: null,
+    thai: false,
+    must: ['Press kit', 'Fact sheet', 'BREWMIND · COLLEX', 'PRESS@DRYASSTUDIO.COM', 'KIT ON REQUEST'],
+  },
 ];
 
 const failures = [];
