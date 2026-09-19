@@ -25,16 +25,23 @@ interface Props {
   description?: string;
   /** Titles that already carry the name (the home page) skip the suffix. */
   bareTitle?: boolean;
+  /** Keep the page out of search results (404). Drops the canonical too. */
+  noindex?: boolean;
+  /** schema.org JSON-LD for this page. Data, not script: no JS ships. */
+  schema?: Record<string, unknown>;
 }
 
 const {
   title,
   description = 'Dryas Studio is a digital agency in Bangkok. Sidecraft, our service, takes websites from design to deploy in weeks — then runs them.',
   bareTitle = false,
+  noindex = false,
+  schema,
 } = Astro.props;
 
 const fullTitle = bareTitle ? title : `${title} — Dryas Studio`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/assets/social/dryas-post-1600x900.png', Astro.site);
 ---
 
 <!doctype html>
@@ -44,15 +51,21 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <link rel="icon" href="/assets/dryas-favicon-v3.svg" type="image/svg+xml" />
     <meta name="theme-color" content={ink} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Dryas Studio" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    {!noindex && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1600" />
+    <meta property="og:image:height" content="900" />
+    <meta property="og:image:alt" content="Dryas Studio mark and wordmark" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@dryasstudio" />
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
   </head>
   <body>
     <a href="#main" class="skip">Skip to content</a>

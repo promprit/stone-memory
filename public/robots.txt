@@ -1,0 +1,6 @@
+# Cloudflare prepends its managed content-signal block to this file.
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://dryasstudio.com/sitemap.xml

@@ -14,12 +14,14 @@ interface Props {
   description?: string;
   bareTitle?: boolean;
   active?: Route;
+  noindex?: boolean;
+  schema?: Record<string, unknown>;
 }
 
-const { title, description, bareTitle, active } = Astro.props;
+const { title, description, bareTitle, active, noindex, schema } = Astro.props;
 ---
 
-<Base title={title} description={description} bareTitle={bareTitle}>
+<Base {title} {description} {bareTitle} {noindex} {schema}>
   <div class="site">
     <SiteHeader active={active} />
     <main id="main" class="main">

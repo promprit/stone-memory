@@ -15,9 +15,27 @@ const work = [
   { name: 'BrewMind', pitch: 'AI coffee recipe platform — dark-first SaaS.' },
   { name: 'Collex', pitch: 'Collectibles retail — landing, gallery and contact at mycollex.com.' },
 ];
+
+/** Only facts the site states elsewhere (about, press, contact). */
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Dryas Studio',
+  url: 'https://dryasstudio.com/',
+  logo: 'https://dryasstudio.com/assets/social/dryas-avatar-800x800.png',
+  email: 'hello@dryasstudio.com',
+  foundingDate: '2026',
+  address: { '@type': 'PostalAddress', addressLocality: 'Bangkok', addressCountry: 'TH' },
+  sameAs: ['https://x.com/dryasstudio'],
+};
 ---
 
-<Site title="Dryas Studio — websites that ship in weeks" bareTitle>
+<Site
+  title="Web Design & Development in Bangkok — Dryas Studio"
+  description="Dryas Studio is a web design and development agency in Bangkok. Websites from design to deploy in 2–4 weeks, then monitored and maintained."
+  bareTitle
+  schema={organization}
+>
   <section class="wrap hero">
     <Mark size={560} strokeWidth={2} class="watermark" />
     <p class="kicker">Digital agency · Bangkok · 2026</p>
@@ -28,8 +46,8 @@ const work = [
     </p>
     <p lang="th" class="th intro-th">จากดีไซน์ถึงเปิดใช้งานจริงในไม่กี่สัปดาห์ แล้วดูแลต่อหลังเปิดตัว</p>
     <div class="actions">
-      <a href="/contact" class="btn">START A PROJECT</a>
-      <a href="/process" class="link-arrow">HOW IT WORKS →</a>
+      <a href="/contact/" class="btn">START A PROJECT</a>
+      <a href="/process/" class="link-arrow">HOW IT WORKS →</a>
     </div>
   </section>
 
