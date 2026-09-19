@@ -1,0 +1,107 @@
+---
+/**
+ * /services — Sidecraft, the one service: four stages, then a quote CTA.
+ */
+import Site from '../layouts/Site.astro';
+
+const stages = [
+  { n: '01', title: 'Design', body: 'Brand-true screens, real copy, every state — signed off before a line of code.' },
+  { n: '02', title: 'Build', body: 'Static-first, fast by default. Performance budgets are requirements, not hopes.' },
+  { n: '03', title: 'Deploy', body: 'Edge hosting, custom domain, SSL — live on your own infrastructure, not ours.' },
+  { n: '04', title: 'Care', body: 'Uptime checks every 15 minutes, incident handling, changes on request.' },
+];
+---
+
+<Site
+  title="Services"
+  description="Sidecraft takes a website from first scope to live production, then stays on as its operator. Fixed scope, weekly cadence."
+  active="services"
+>
+  <section class="wrap intro">
+    <p class="kicker">Services</p>
+    <h1 class="page-title title">Sidecraft<span class="accent">.</span></h1>
+    <p class="lede body">
+      One service, the whole delivery: we take a website from first scope to live production — then
+      stay on as its operator. Fixed scope, weekly cadence, no agency overhead.
+    </p>
+  </section>
+
+  <section class="rule-top">
+    <div class="cells stages">
+      {
+        stages.map(({ n, title, body }) => (
+          <div class="stage">
+            <div class="n">{n}</div>
+            <h2 class="stage-title">{title}</h2>
+            <p class="stage-body">{body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="rule-top cta-band">
+    <div class="wrap cta">
+      <p class="cta-copy">
+        Every engagement is quoted up front against a fixed price book — you know the number before
+        we start.
+      </p>
+      <a href="/contact" class="btn">GET A QUOTE</a>
+    </div>
+  </section>
+</Site>
+
+<style>
+  .intro {
+    padding-block: clamp(56px, 8vw, 110px) 64px;
+  }
+  .title {
+    margin-top: 24px;
+  }
+  .body {
+    margin-top: 22px;
+  }
+
+  .stages {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .stage {
+    padding: 36px var(--gutter);
+  }
+
+  .n {
+    font: 500 13px var(--font-mono);
+    color: var(--accent);
+  }
+
+  .stage-title {
+    font: 600 19px var(--font-sans);
+    color: var(--fg);
+    margin-top: 14px;
+  }
+
+  .stage-body {
+    font: 400 14px/1.65 var(--font-sans);
+    color: var(--muted);
+    margin-top: 10px;
+  }
+
+  .cta-band {
+    padding-block: 56px 80px;
+  }
+
+  .cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .cta-copy {
+    font: 400 16px/1.6 var(--font-sans);
+    color: var(--muted);
+    max-width: 50ch;
+  }
+</style>

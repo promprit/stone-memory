@@ -1,0 +1,135 @@
+---
+/**
+ * /process — four numbered steps with their timing.
+ */
+import Site from '../layouts/Site.astro';
+
+const steps = [
+  {
+    n: '01',
+    title: 'Scope',
+    body: 'A short call, then a fixed quote from the price book. Pages, features, deadline — agreed in writing before anything starts.',
+    when: 'Days 1–3',
+  },
+  {
+    n: '02',
+    title: 'Design',
+    body: 'High-fidelity screens with your real content, reviewed live. One round of revisions is in every quote.',
+    when: 'Week 1',
+  },
+  {
+    n: '03',
+    title: 'Build',
+    body: 'An eight-step build checklist, visible to you, with a staging link from day one. A nine-point QA gate before anything goes live.',
+    when: 'Weeks 2–3',
+  },
+  {
+    n: '04',
+    title: 'Ship + care',
+    body: 'Go-live on your domain, then monitoring every 15 minutes, incident response, and change requests at a fixed rate.',
+    when: 'Week 4 →',
+  },
+];
+---
+
+<Site
+  title="Process"
+  description="Four steps, one owner, weekly checkpoints: scope, design, build, then ship and care."
+  active="process"
+>
+  <section class="wrap intro">
+    <p class="kicker">Process</p>
+    <h1 class="page-title title">Design <span class="accent">→</span> deploy.</h1>
+    <p class="lede body">
+      Four steps, one owner, weekly checkpoints. You see the real site every week — never a slide
+      deck of promises.
+    </p>
+  </section>
+
+  <section class="wrap steps-band">
+    <ol class="steps">
+      {
+        steps.map(({ n, title, body, when }) => (
+          <li class="step">
+            <span class="n">{n}</span>
+            <div class="step-main">
+              <h2 class="step-title">{title}</h2>
+              <p class="step-body">{body}</p>
+            </div>
+            <span class="when">{when}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</Site>
+
+<style>
+  .intro {
+    padding-block: clamp(56px, 8vw, 110px) 56px;
+  }
+  .title {
+    margin-top: 24px;
+  }
+  .body {
+    margin-top: 22px;
+  }
+
+  .steps-band {
+    padding-bottom: 80px;
+  }
+
+  .steps {
+    list-style: none;
+    padding: 0;
+  }
+
+  .step {
+    display: flex;
+    gap: 16px 32px;
+    padding: 32px 0;
+    border-top: 1px solid var(--hairline);
+    flex-wrap: wrap;
+  }
+  .step:last-child {
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .n {
+    width: 80px;
+    flex: none;
+    font: 500 30px var(--font-mono);
+    color: var(--accent);
+  }
+
+  .step-main {
+    flex: 1;
+    min-width: 260px;
+  }
+
+  .step-title {
+    font: 600 20px var(--font-sans);
+    color: var(--fg);
+  }
+
+  .step-body {
+    font: 400 15px/1.65 var(--font-sans);
+    color: var(--muted);
+    margin-top: 8px;
+    max-width: 56ch;
+  }
+
+  .when {
+    font: 400 11px var(--font-mono);
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 600px) {
+    .step-main {
+      min-width: 0;
+      flex-basis: 100%;
+    }
+  }
+</style>
