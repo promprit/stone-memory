@@ -1,200 +1,152 @@
 ---
 /**
- * /press — screen `2d Press kit`.
- *
- * Sidebar carries the primary DOWNLOAD FULL KIT (.ZIP) button. Main is a
- * two-column grid: the fact sheet on the left, logo & mark swatches on the
- * right.
- *
- * The light swatch is the one place on the site with a Paper ground — the
- * green mark needs it, and the brand rules require a solid plate.
+ * /press — fact sheet and marks. Not in the header nav; linked from the footer.
+ * The downloadable kit does not exist yet, so the page says it is on request
+ * rather than showing a dead download button.
  */
-import Shell from '../layouts/Shell.astro';
+import Site from '../layouts/Site.astro';
+import Mark from '../components/Mark.astro';
 
 const facts = [
   { label: 'Agency', value: 'DRYAS STUDIO' },
   { label: 'Type', value: 'DIGITAL AGENCY' },
+  { label: 'Base', value: 'BANGKOK' },
   { label: 'Service', value: 'SIDECRAFT' },
-  { label: 'Clients', value: 'BREWMIND' },
+  { label: 'Clients', value: 'BREWMIND · COLLEX' },
   { label: 'Founded', value: '2026' },
   { label: 'Contact', value: 'PRESS@DRYASSTUDIO.COM' },
 ];
 ---
 
-<Shell
-  title="Press"
-  description="Press kit, fact sheet and logos for Dryas Studio, a digital agency."
-  active="press"
->
-  {/* Not yet a real file — the kit is assembled once the brand assets
-      land. See design doc §8. */}
-  <a slot="sidebar" href="#" class="btn btn-primary kit">DOWNLOAD FULL KIT (.ZIP)</a>
+<Site title="Press" description="Press kit, fact sheet and marks for Dryas Studio, a digital agency in Bangkok.">
+  <section class="wrap intro">
+    <p class="kicker">Press</p>
+    <h1 class="page-title title">Press kit</h1>
+  </section>
 
-
-  <div class="page">
-    <section>
-      <p class="kicker">Press</p>
-      <h1 class="display heading">Press kit</h1>
-    </section>
-
-    <div class="cols">
-      <section class="facts">
-        <p class="kicker facts-head">Fact sheet</p>
-        <dl class="fact-rows">
-          {
-            facts.map(({ label, value }) => (
-              <div class="fact">
-                <dt>{label}</dt>
-                <dd>{value}</dd>
-              </div>
-            ))
-          }
-        </dl>
-      </section>
-
-      <section>
-        <p class="kicker">Logo &amp; mark</p>
-        <div class="swatches">
-          <div class="swatch dark">
-            <img src="/assets/dryas-symbol-paper.svg" alt="Dryas Studio mark, paper variant" />
-          </div>
-          <div class="swatch light">
-            <img src="/assets/dryas-symbol.svg" alt="Dryas Studio mark, District Green variant" />
-          </div>
-          <div class="swatch dark wide">
-            <img
-              src="/assets/dryas-lockup-horizontal-reversed.svg"
-              alt="Dryas Studio horizontal lockup, reversed"
-            />
-          </div>
-        </div>
-        <p class="footnote">SVG + PNG IN THE KIT · CLEARSPACE RULES INCLUDED</p>
-      </section>
+  <section class="wrap cols">
+    <div>
+      <h2 class="kicker head">Fact sheet</h2>
+      <dl class="facts">
+        {
+          facts.map(({ label, value }) => (
+            <div class="fact">
+              <dt>{label}</dt>
+              <dd>{value}</dd>
+            </div>
+          ))
+        }
+      </dl>
     </div>
-  </div>
 
-</Shell>
+    <div>
+      <h2 class="kicker head">Mark</h2>
+      <div class="swatches">
+        <div class="swatch">
+          <Mark size={64} label="Dryas Studio mark" />
+        </div>
+        <div class="swatch">
+          <Mark size={28} variant="small" label="Dryas Studio mark, small cut" />
+        </div>
+        <div class="swatch wide" role="img" aria-label="Dryas Studio lockup">
+          <Mark size={48} />
+          <span class="lockup" aria-hidden="true">
+            <span class="name">DRYAS</span>
+            <span class="sub">STUDIO</span>
+          </span>
+        </div>
+      </div>
+      <p class="footnote">KIT ON REQUEST — PRESS@DRYASSTUDIO.COM</p>
+    </div>
+  </section>
+</Site>
 
 <style>
-  .kit {
-    display: block;
-    padding: 14px 20px;
+  .intro {
+    padding-block: clamp(56px, 8vw, 110px) 48px;
   }
-
-
-  .page {
-    padding: 72px 96px;
-    display: flex;
-    flex-direction: column;
-    gap: 44px;
-  }
-
-  .heading {
-    margin: 16px 0 0;
-    font-size: 44px;
-    line-height: 1.15;
-    letter-spacing: 0.04em;
+  .title {
+    margin-top: 24px;
   }
 
   .cols {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
     gap: 56px;
+    padding-bottom: 96px;
   }
 
-  /* ── Fact sheet ───────────────────────────────────────────────────────── */
-
-  .facts-head {
+  .head {
     margin-bottom: 14px;
-  }
-
-  .fact-rows {
-    margin: 0;
-    font: 400 13px var(--font-mono);
   }
 
   .fact {
     display: flex;
     justify-content: space-between;
     gap: 16px;
-    padding: 13px 0;
+    padding: 14px 0;
     border-top: 1px solid var(--hairline);
+    font: 400 13px var(--font-mono);
+    letter-spacing: 0.08em;
   }
   .fact:last-child {
     border-bottom: 1px solid var(--hairline);
   }
 
   .fact dt {
-    color: var(--slate-grey);
+    color: var(--muted);
     text-transform: uppercase;
   }
 
   .fact dd {
-    margin: 0;
-    color: var(--paper);
+    color: var(--fg);
     text-align: right;
   }
-
-  /* ── Swatches ─────────────────────────────────────────────────────────── */
 
   .swatches {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .swatch {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 110px;
-  }
-
-  .swatch.dark {
-    background: var(--shade);
+    gap: 1px;
+    background: var(--hairline);
     border: 1px solid var(--hairline);
   }
 
-  /* The only Paper ground on the site — the green mark requires it, and the
-     brand rules require a solid plate under a mark. */
-  .swatch.light {
-    background: var(--paper);
+  .swatch {
+    background: var(--ink);
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
   }
 
   .swatch.wide {
     grid-column: 1 / -1;
   }
 
-  .swatch img {
-    height: 48px;
-    width: auto;
+  .lockup {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
   }
-  /* The lockup ships with its own District Green plate baked in, unlike the
-     two symbols. Let it span the card so it reads as a plated lockup rather
-     than a green block floating on Shade. */
-  .swatch.wide img {
-    width: 100%;
-    height: auto;
-    max-height: 100%;
+
+  .name {
+    font: 500 22px var(--font-wordmark);
+    letter-spacing: 0.22em;
+    color: var(--fg);
+  }
+
+  .sub {
+    font: 400 10px var(--font-mono);
+    letter-spacing: 0.62em;
+    color: var(--accent);
+    margin-top: 5px;
   }
 
   .footnote {
     font: 400 11px var(--font-mono);
     letter-spacing: 0.12em;
-    color: var(--slate-grey);
-    margin-top: 10px;
-  }
-
-  @media (max-width: 900px) {
-    .page {
-      padding: 40px 24px;
-    }
-    .heading {
-      font-size: 32px;
-    }
-    .cols {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
+    color: var(--muted);
+    margin-top: 12px;
   }
 </style>
