@@ -1,0 +1,98 @@
+---
+/**
+ * /contact — headline and three contact rows. No form: email is the channel.
+ */
+import Site from '../layouts/Site.astro';
+---
+
+<Site
+  title="Contact"
+  description="Tell Dryas Studio what you need live in four weeks. Reply within one business day."
+  active="contact"
+>
+  <section class="wrap contact">
+    <p class="kicker">Contact</p>
+    <h1 class="title">Tell us what you need live in four weeks.</h1>
+    <p lang="th" class="th sub">คุยกันก่อนได้ ไม่มีค่าใช้จ่าย — ตอบกลับภายในหนึ่งวันทำการ</p>
+
+    <dl class="rows">
+      <div class="row">
+        <dt>EMAIL</dt>
+        <dd><a href="mailto:hello@dryasstudio.com" class="email">hello@dryasstudio.com</a></dd>
+      </div>
+      <div class="row">
+        <dt>X</dt>
+        <dd><a href="https://x.com/dryasstudio" class="quiet">@dryasstudio</a></dd>
+      </div>
+      <div class="row">
+        <dt>REPLY TIME</dt>
+        <dd class="plain">One business day</dd>
+      </div>
+    </dl>
+  </section>
+</Site>
+
+<style>
+  .contact {
+    padding-block: clamp(64px, 10vw, 140px) 96px;
+  }
+
+  .title {
+    margin-top: 28px;
+    font: 600 clamp(36px, 5vw, 64px) / 1.1 var(--font-sans);
+    letter-spacing: -0.035em;
+    color: var(--fg);
+    max-width: 20ch;
+    text-wrap: balance;
+  }
+
+  .sub {
+    margin-top: 16px;
+  }
+
+  .rows {
+    margin-top: 48px;
+    max-width: 640px;
+  }
+
+  .row {
+    display: flex;
+    gap: 8px 24px;
+    padding: 22px 0;
+    border-top: 1px solid var(--hairline);
+    flex-wrap: wrap;
+  }
+  .row:last-child {
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .row dt {
+    width: 110px;
+    flex: none;
+    font: 400 12px var(--font-mono);
+    letter-spacing: 0.16em;
+    color: var(--muted);
+  }
+
+  .email {
+    font: 500 15px var(--font-mono);
+    color: var(--fg);
+    border-bottom: 1px solid var(--accent);
+  }
+  .email:hover {
+    color: var(--accent);
+  }
+
+  .quiet {
+    font: 500 15px var(--font-mono);
+    color: var(--muted);
+  }
+  .quiet:hover {
+    color: var(--fg);
+  }
+
+  .plain {
+    font: 400 15px var(--font-mono);
+    color: var(--muted);
+  }
+</style>
