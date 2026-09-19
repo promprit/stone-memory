@@ -37,9 +37,8 @@ Astro 7, static output, no adapter. Fonts are self-hosted (Fontsource, latin
 subsets) rather than linked from Google Fonts — a production page should not
 add a third-party connection to its critical path.
 
-**The whole site ships one `<script>`**, on the home page, for the email form.
-Every other page ships zero. The collapsed mobile nav wraps rather than using a
-hamburger, precisely so it needs none.
+**The site ships no client JavaScript.** Every page is static HTML and CSS.
+The mobile header nav wraps rather than using a hamburger, so it needs none.
 
 `public/_routes.json` confines the Functions runtime to `/api/*`, so every page
 is served straight from the asset CDN with no Worker invocation.
@@ -52,15 +51,17 @@ the build on a hex, `rgb()` or `hsl()` anywhere in `src/pages`, `src/layouts` or
 
 ## Known gaps
 
-**Placeholder copy.** Home, about and press describe the agency in one line
-each until the agency site is planned.
+**Signup has no UI.** Site v3 (2026-09-19) removed the email form.
+`functions/api/subscribe.ts` is kept for a later newsletter; with
+`BUTTONDOWN_API_KEY` unset it answers `501`.
 
-**Signup is not wired up.** `BUTTONDOWN_API_KEY` is unset, so `/api/subscribe`
-answers `501` and the form says so. That is a defined state, not a crash.
+**No downloadable press kit.** `/press` says the kit is on request. The files in
+`public/assets/` still use the pre-v3 green palette and are not linked from any
+page except as social images.
 
-**The favicon is weak on dark browser chrome.** The delivered
-`dryas-symbol-small-cut.svg` is stroked District Green — made for light grounds.
+**Build-output check.** `npm run test:dist` (part of `npm run verify`) asserts
+every route's HTML after a build: shared chrome, one `<h1>`, the active nav
+item, key copy, and Thai text only where the design has it.
 
-**Image wells are placeholders.** Drop files into
-[`public/images/`](public/images/README.md) and the wells pick them up on the
-next build with no code change.
+**Design source.** `docs/design/v3/Dryas Site v3.html` is the Claude Design
+bundle this site was built from. Open it in a browser to compare.
