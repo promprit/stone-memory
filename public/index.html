@@ -300,13 +300,19 @@
   var smooth = function(a,b,x){ var t = clamp((x-a)/(b-a),0,1); return t*t*(3-2*t); };
   window.STORY = { p: 0, c: 0, CH: CH, inView: true };
 
+  /* Scroll to the middle of chapter i. The target is remembered briefly so rapid
+     arrow presses chain off it: STORY.c lags while the smooth scroll runs. */
+  var target = -1, targetAt = 0;
+  function goTo(i){
+    target = i; targetAt = Date.now();
+    var total = story.offsetHeight - innerHeight;
+    scrollTo({ top: story.offsetTop + (i + 0.5) / CH * total, behavior: reduce ? 'auto' : 'smooth' });
+  }
+
   var dots = caps.map(function(cap, i){
     var b = document.createElement('button'); b.type = 'button';
     b.setAttribute('aria-label', 'Go to ' + cap.getAttribute('data-name'));
-    b.addEventListener('click', function(){
-      var total = story.offsetHeight - innerHeight;
-      scrollTo({ top: story.offsetTop + (i + 0.5) / CH * total, behavior: reduce ? 'auto' : 'smooth' });
-    });
+    b.addEventListener('click', function(){ goTo(i); });
     rail.appendChild(b); return b;
   });
 
@@ -342,9 +348,28 @@
     var i = el ? caps.indexOf(el.querySelector('.cap')) : -1;
     if (i < 0) return;
     e.preventDefault();
-    var total = story.offsetHeight - innerHeight;
-    scrollTo({ top: story.offsetTop + (i + 0.5) / CH * total, behavior: reduce ? 'auto' : 'smooth' });
+    goTo(i);
   });
+
+  /* Arrow keys step one chapter. Down/Right go to the first chapter whose middle
+     is below the current position, Up/Left to the last one above it. The first
+     and last chapters hold from the page edge to their middle, so the position
+     is clamped to keep the first press from being a no-op. Past either end, and
+     with modifiers or a focused field, the browser's own scrolling applies. */
+  var STEP = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 };
+  function onKey(e){
+    var dir = STEP[e.key], t = e.target;
+    if (!dir || e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+    if (!root.classList.contains('scrolly')) return;
+    var from = target >= 0 && Date.now() - targetAt < 700 ? target + 0.5 : STORY.c;
+    from = clamp(from, 0.5, CH - 0.5);
+    var i = dir > 0 ? Math.floor(from - 0.45) + 1 : Math.ceil(from - 0.55) - 1;
+    if (i < 0 || i >= CH) return;
+    e.preventDefault();
+    goTo(i);
+  }
+  addEventListener('keydown', onKey);
   addEventListener('scroll', req, { passive: true });
   addEventListener('resize', req);
   update();

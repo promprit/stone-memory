@@ -83,6 +83,8 @@ const LANDING = {
     ),
     'Anything. Built by AI.',
     'href="https://dryasstudio.com/contact/"',
+    // Arrow keys step chapters; a new handover of the design file must keep it.
+    "addEventListener('keydown', onKey)",
   ],
 };
 
