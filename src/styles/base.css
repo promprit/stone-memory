@@ -1,6 +1,6 @@
 /*
- * Base layer: reset plus the primitives every v3 page shares.
- * Colours come from tokens.css only.
+ * Base layer: reset plus the primitives the Astro pages share, styled after
+ * the landing page (public/index.html). Colours come from tokens.css only.
  */
 
 *,
@@ -19,7 +19,7 @@ body {
   color: var(--fg);
   font-family: var(--font-sans);
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -37,7 +37,7 @@ a {
 
 :focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
 ::selection {
@@ -57,7 +57,6 @@ ol {
 
 /* ── Layout ───────────────────────────────────────────────────────────── */
 
-/* Centred 1160px column with the side gutter. */
 .wrap {
   width: 100%;
   max-width: var(--max-w);
@@ -65,42 +64,41 @@ ol {
   padding-inline: var(--gutter);
 }
 
-.rule-top {
-  border-top: 1px solid var(--hairline);
-}
-
-/* Hairline grid: a 1px gap over a hairline ground draws the dividers. */
-.cells {
-  display: grid;
-  gap: 1px;
-  background: var(--hairline);
-  max-width: var(--max-w);
-  margin: 0 auto;
-}
-.cells > * {
-  background: var(--ink);
-}
-
 /* ── Type ─────────────────────────────────────────────────────────────── */
 
+/* Landing `.cap .n`: mono label followed by a short rule. */
 .kicker {
-  font: 400 11px var(--font-mono);
-  letter-spacing: 0.24em;
-  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+  color: var(--muted);
+}
+.kicker::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--line);
 }
 
+/* Landing `.cap h2`. */
 .page-title {
-  font: 600 clamp(38px, 5vw, 64px) / 1.05 var(--font-sans);
-  letter-spacing: -0.035em;
+  font: 700 clamp(36px, 5.2vw, 74px) / 1 var(--font-display);
+  font-stretch: 108%;
+  letter-spacing: -0.025em;
   color: var(--fg);
   text-wrap: balance;
 }
 
+/* Landing `.cap p`. */
 .lede {
-  font: 400 17px/1.7 var(--font-sans);
+  font-size: clamp(17px, 1.4vw, 20px);
+  line-height: 1.6;
   color: var(--muted);
-  max-width: 52ch;
+  max-width: 40ch;
+  text-wrap: pretty;
 }
 
 /* Thai lines: always lang="th", always Plex Sans Thai. */
@@ -109,39 +107,47 @@ ol {
   color: var(--muted);
 }
 
-.accent {
-  color: var(--accent);
-}
+/* ── Actions (landing `.btn`, `.btn.go`) ──────────────────────────────── */
 
-/* ── Actions ──────────────────────────────────────────────────────────── */
-
-/* Primary: deep fill, accent border; hover fills accent. */
 .btn {
-  display: inline-block;
-  font: 500 13px var(--font-mono);
-  letter-spacing: 0.12em;
-  background: var(--deep);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 20px;
+  font: 500 12px/1 var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
   color: var(--fg);
-  border: 1px solid var(--accent);
-  padding: 16px 30px;
-  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  border-radius: 999px;
 }
 .btn:hover {
+  border-color: var(--fg);
+}
+.btn.go {
   background: var(--accent);
+  border-color: var(--accent);
   color: var(--ink);
 }
+.btn.go:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
 
-/* Secondary: mono text with a quiet underline; hover turns accent. */
+/* Quiet text link with an arrow. */
 .link-arrow {
-  font: 500 13px var(--font-mono);
-  letter-spacing: 0.12em;
+  font: 500 12px var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--muted);
-  border-bottom: 1px solid var(--underline);
+  border-bottom: 1px solid var(--line);
   padding-bottom: 3px;
 }
 .link-arrow:hover {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
+  color: var(--fg);
+  border-bottom-color: var(--fg);
 }
 
 .sr-only {

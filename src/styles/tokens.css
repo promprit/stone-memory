@@ -1,5 +1,6 @@
 /*
- * Dryas Studio brand tokens — site v3 (Claude Design "Dryas Site v3").
+ * Dryas Studio tokens — matched to the landing page (public/index.html), so
+ * /contact/ and 404 read as the same site.
  *
  * THIS IS THE ONLY FILE IN THE BUILD THAT MAY CONTAIN A COLOUR LITERAL.
  * `npm test` (scripts/check-literals.mjs) fails on a hex, rgb() or hsl()
@@ -7,35 +8,31 @@
  */
 
 :root {
-  /* ── Palette ────────────────────────────────────────────────────────── */
-  --ink: #0a0a0f;    /* page ground                                       */
-  --fg: #edefea;     /* headings, primary text                            */
-  --muted: #98a29b;  /* body copy, metadata, inactive nav                 */
-  --accent: #5fb884; /* mark, active nav, numerals, button border         */
-  --deep: #173d2e;   /* primary button fill                               */
+  color-scheme: dark;
 
-  /* ── Derived ────────────────────────────────────────────────────────── */
-  --hairline: rgba(237, 239, 234, 0.08);  /* 1px dividers, cell gaps      */
-  --underline: rgba(237, 239, 234, 0.2);  /* quiet link underline         */
+  /* ── Palette (landing: --bg, --paper, --brand) ─────────────────────── */
+  --ink: #0a0a0f;          /* page ground                                  */
+  --fg: #f2f0ea;           /* headings, primary text                       */
+  --accent: #3dff8b;       /* logo, primary button, kicker, focus ring     */
+  --accent-hover: #7bffb0; /* primary button hover                         */
 
-  /* ── Type ───────────────────────────────────────────────────────────── */
-  --font-sans: 'Space Grotesk', 'IBM Plex Sans Thai', system-ui, -apple-system, sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-thai: 'IBM Plex Sans Thai', system-ui, sans-serif;
-  --font-wordmark: 'Archivo Variable', Archivo, system-ui, sans-serif;
+  /* ── Derived (landing: --dim, --line, --faint) ─────────────────────── */
+  --muted: rgba(242, 240, 234, 0.8);     /* body copy, metadata, nav      */
+  --line: rgba(242, 240, 234, 0.14);     /* row rules, secondary border   */
+  --hairline: rgba(242, 240, 234, 0.1);  /* header and footer rules       */
+  --header-ground: rgba(10, 10, 15, 0.82);
+  --logo-glow: rgba(61, 255, 139, 0.55);
+
+  /* ── Type (landing: --display, --body, --mono, --thai) ─────────────── */
+  --font-display: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif;
+  --font-sans: 'IBM Plex Sans', 'IBM Plex Sans Thai', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --font-thai: 'IBM Plex Sans Thai', 'IBM Plex Sans', sans-serif;
 
   /* ── Geometry ───────────────────────────────────────────────────────── */
-  --radius: 2px;
-  --max-w: 1160px;
-  --gutter: 40px;
+  --max-w: 1200px;
+  --gutter: clamp(20px, 4vw, 48px);
 
   /* ── Motion ─────────────────────────────────────────────────────────── */
-  --t: 120ms ease;
-}
-
-/* Phones: keep a 20px side gutter so nothing scrolls sideways. */
-@media (max-width: 600px) {
-  :root {
-    --gutter: 20px;
-  }
+  --t: 0.2s ease;
 }

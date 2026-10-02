@@ -14,6 +14,10 @@
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Vendored three.js (scripts/vendor-landing.mjs). The path carries the version.
+/vendor/*
+  Cache-Control: public, max-age=31536000, immutable
+
 # Self-hosted fonts ship with the build and never change under a given name.
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
@@ -23,5 +27,5 @@
 /assets/*
   Cache-Control: public, max-age=3600, must-revalidate
 
-# No CSP yet. The landing page (public/index.html) loads scripts from unpkg.com
-# and fonts from Google Fonts; a CSP must allow both.
+# No CSP yet. Everything is same-origin; the landing page's one inline module
+# script and inline import map would need hashes or 'unsafe-inline'.

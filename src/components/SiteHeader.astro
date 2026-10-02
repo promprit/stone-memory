@@ -1,12 +1,11 @@
 ---
 /**
- * Top bar: mark + DRYAS / STUDIO lockup on the left, route nav on the right.
- * Since the landing page (public/index.html) absorbed services, process and
- * about, /contact/ is the only route left to list.
- * Active route is accent; the rest are muted and brighten to fg on hover.
+ * Top bar, matched to the landing page's: glowing mark + DRYAS on the left;
+ * the landing page's two chapter links and the "Start a project" pill on the
+ * right. The pill is the /contact/ route, so it carries aria-current there.
+ * Sticky and solid rather than the landing page's scroll-triggered fade,
+ * since these pages ship no JavaScript.
  */
-import Mark from './Mark.astro';
-
 export type Route = 'contact';
 
 interface Props {
@@ -14,96 +13,82 @@ interface Props {
 }
 
 const { active } = Astro.props;
-
-const items: { key: Route; label: string; href: string }[] = [
-  { key: 'contact', label: '/CONTACT', href: '/contact/' },
-];
 ---
 
-<header class="header">
-  <a href="/" class="brand" aria-label="Dryas Studio — home">
-    <Mark size={38} />
-    <span class="lockup" aria-hidden="true">
-      <span class="name">DRYAS</span>
-      <span class="sub">STUDIO</span>
-    </span>
+<header class="top">
+  <a class="wordmark" href="/" aria-label="Dryas Studio — home">
+    <svg class="logo" viewBox="0 0 40 40" width="28" height="28" aria-hidden="true">
+      <path d="M20 5.5 L35.5 33.5 H4.5 Z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"></path>
+      <path d="M20 33.5 V19" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path>
+    </svg>
+    <span>DRYAS</span>
   </a>
   <nav class="nav" aria-label="Site">
-    {
-      items.map(({ key, label, href }) => (
-        <a
-          href={href}
-          class:list={['item', { active: key === active }]}
-          aria-current={key === active ? 'page' : undefined}
-        >
-          {label}
-        </a>
-      ))
-    }
+    <a class="l" href="/#ch-1">How we build</a>
+    <a class="l" href="/#services">Services</a>
+    <a class="btn go" href="/contact/" aria-current={active === 'contact' ? 'page' : undefined}>Start a project</a>
   </nav>
 </header>
 
 <style>
-  .header {
+  .top {
+    position: sticky;
+    top: 0;
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
-    padding: 18px var(--gutter);
+    gap: 20px;
+    padding: 22px var(--gutter);
+    background: var(--header-ground);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--hairline);
-    flex-wrap: wrap;
   }
 
-  .brand {
+  .wordmark {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
   }
 
-  .lockup {
-    display: flex;
-    flex-direction: column;
-    line-height: 1;
-  }
-
-  .name {
-    font: 500 17px var(--font-wordmark);
-    letter-spacing: 0.22em;
-    color: var(--fg);
-  }
-
-  .sub {
-    font: 400 8px var(--font-mono);
-    letter-spacing: 0.62em;
+  .logo {
     color: var(--accent);
-    margin-top: 4px;
+    filter: drop-shadow(0 0 6px var(--logo-glow));
+  }
+
+  .wordmark span {
+    font: 800 19px/1 var(--font-display);
+    font-stretch: 125%;
+    letter-spacing: 0.08em;
   }
 
   .nav {
     display: flex;
-    gap: 28px;
-    font: 500 12px var(--font-mono);
-    letter-spacing: 0.14em;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
   }
 
-  .item {
+  .l {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 12px;
+    font: 500 11px/1 var(--font-mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--muted);
   }
-  .item:hover {
+  .l:hover {
     color: var(--fg);
   }
-  .item.active {
-    color: var(--accent);
-  }
 
-  @media (max-width: 600px) {
-    .nav {
-      gap: 0 20px;
+  @media (max-width: 860px) {
+    .top {
+      padding-block: 16px;
     }
-    /* >=44px touch target without changing the type. */
-    .item {
-      padding: 14px 0;
+    .l {
+      display: none;
     }
   }
 </style>

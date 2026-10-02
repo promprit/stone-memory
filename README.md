@@ -42,15 +42,24 @@ npm run build && npx wrangler pages dev dist
 ## How it is built
 
 **Two kinds of page.** The landing page is a hand-off file in `public/`, copied
-into `dist/` untouched: it loads three.js 0.160 from unpkg and its fonts from
-Google Fonts, and defines its own colours. Edit it as the design, not through
-Astro. Every other page (`/contact/`, 404) is Astro 7, static output, no
-adapter, with self-hosted fonts (Fontsource) and no client JavaScript.
+into `dist/` untouched, and defines its own colours. Edit it as the design, not
+through Astro. Every other page (`/contact/`, 404) is Astro 7, static output, no
+adapter, no client JavaScript, styled to match the landing page.
+
+**Nothing loads from a third party.** The landing page's three.js (pinned
+`three@0.160.0` in `package.json`) and fonts (Fontsource) are copied into
+`public/vendor/` and `public/fonts/` by
+[`scripts/vendor-landing.mjs`](scripts/vendor-landing.mjs), an Astro
+integration that runs before every `astro dev` and `astro build`. Both
+directories are generated and gitignored. Upgrading three means bumping the
+package and the paths in the page's import map together; `npm run test:dist`
+fails if any file the page loads is missing from `dist/`.
 
 `public/_routes.json` confines the Functions runtime to `/api/*`, so every page
 is served straight from the asset CDN with no Worker invocation.
 
-**Astro-page colours are defined once**, in `src/styles/tokens.css`. `npm test`
+**Astro-page colours are defined once**, in `src/styles/tokens.css`, using the
+landing page's palette. `npm test`
 fails the build on a hex, `rgb()` or `hsl()` anywhere in `src/pages`,
 `src/layouts` or `src/components`. The landing page is outside that guard. A palette that is only a convention drifts within a month.
 
@@ -62,15 +71,17 @@ fails the build on a hex, `rgb()` or `hsl()` anywhere in `src/pages`,
 `functions/api/subscribe.ts` is kept for a later newsletter; with
 `BUTTONDOWN_API_KEY` unset it answers `501`.
 
-**`/contact/` is still in the v3 style.** It predates the landing page's palette
-and type. The files in `public/assets/` also use the pre-v3 green palette.
+**Old brand files.** The marks and social images in `public/assets/` (other
+than `dryas-favicon-v4.svg`) still use the pre-v3 green palette and are linked
+from no page.
 
 **Build-output check.** `npm run test:dist` (part of `npm run verify`) asserts
 every route's HTML after a build. Astro pages: shared chrome, one `<h1>`, the
 active nav item, key copy, and Thai text only where the design has it. The
 landing page: metadata in `<head>`, one `<h1>`, every chapter, the contact
-link, and `og.jpg`.
+link, `og.jpg`, no third-party URL, and every same-origin file it loads
+(followed through module imports and stylesheet `url()`s).
 
 **Design source.** `public/index.html` is its own source. `docs/design/v3/Dryas
-Site v3.html` is the Claude Design bundle the v3 pages (now only `/contact/`)
-were built from.
+Site v3.html` is the Claude Design bundle the retired v3 pages were built
+from.

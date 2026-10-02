@@ -19,9 +19,11 @@ const dist = fileURLToPath(new URL('../dist/', import.meta.url));
 /** Present on every page. */
 const CHROME = [
   'aria-label="Site"',
+  'href="/#ch-1"',
+  'href="/#services"',
   'href="/contact/"',
-  'DESIGN → DEPLOY · BANGKOK',
-  'property="og:image" content="https://dryasstudio.com/assets/social/dryas-post-1600x900.png"',
+  'Dryas Studio · Bangkok',
+  'property="og:image" content="https://dryasstudio.com/og.jpg"',
   'name="twitter:card" content="summary_large_image"',
 ];
 
@@ -44,7 +46,8 @@ const PAGES = [
     active: 'contact',
     thai: true,
     must: [
-      'Tell us what you need live in four weeks.',
+      'What do you want to exist?',
+      'Tell us the idea. We reply within one business day, and the first call is free.',
       'href="mailto:hello@dryasstudio.com"',
       'href="https://x.com/dryasstudio"',
       'One business day',
@@ -56,11 +59,14 @@ const PAGES = [
 /**
  * The landing page. It is the design file as handed over, so it is checked for
  * what must survive the copy, not for the Astro chrome: metadata in <head>
- * (search engines ignore a canonical in <body>), one <h1>, every chapter, and
- * the links out to /contact/.
+ * (search engines ignore a canonical in <body>), one <h1>, every chapter, the
+ * links out to /contact/, and every same-origin file it loads (see
+ * checkLocalAssets).
  */
 const LANDING = {
   file: 'index.html',
+  /** It must load nothing from a third party: three.js and fonts are vendored. */
+  forbidden: ['unpkg.com', 'fonts.googleapis.com', 'fonts.gstatic.com'],
   head: [
     '<title>Dryas Studio | AI Website &amp; App Development Studio in Bangkok</title>',
     '<link rel="canonical" href="https://dryasstudio.com/">',
@@ -81,6 +87,49 @@ const LANDING = {
 };
 
 const failures = [];
+
+/**
+ * Every same-origin file the landing page loads must be in dist/: hrefs in
+ * <link>, import-map targets, each `three/addons/` import, every relative
+ * import inside those modules, and every url() in a loaded stylesheet. These
+ * come from scripts/vendor-landing.mjs, so a version bump or a new addon that
+ * is not vendored fails here instead of on the live site.
+ */
+function checkLocalAssets(html, fail) {
+  const toFile = (url) => join(dist, url.replace(/^\//, ''));
+  const queue = [];
+  for (const [, href] of html.matchAll(/<link[^>]+href="(\/[^"]+)"/g)) queue.push(href);
+  const map = html.match(/<script type="importmap">([\s\S]*?)<\/script>/);
+  const imports = map ? JSON.parse(map[1]).imports : {};
+  for (const target of Object.values(imports)) if (!target.endsWith('/')) queue.push(target);
+  const addons = imports['three/addons/'];
+  for (const [, rel] of html.matchAll(/from 'three\/addons\/([^']+)'/g)) {
+    if (!addons) fail('imports three/addons/ but the import map does not map it');
+    else queue.push(addons + rel);
+  }
+  if (!queue.length) fail('loads no local assets (import map or stylesheet missing?)');
+  const seen = new Set();
+  while (queue.length) {
+    const url = queue.pop();
+    if (seen.has(url)) continue;
+    seen.add(url);
+    const file = toFile(url);
+    if (!existsSync(file)) {
+      fail(`loads ${url}, which is not in dist/`);
+      continue;
+    }
+    const dir = url.slice(0, url.lastIndexOf('/') + 1);
+    const text = /\.(js|css)$/.test(url) ? readFileSync(file, 'utf8') : '';
+    if (url.endsWith('.js')) {
+      for (const [, spec] of text.matchAll(/from\s*['"](\.{1,2}\/[^'"]+)['"]/g)) {
+        queue.push(new URL(spec, `https://x${dir}`).pathname);
+      }
+    }
+    if (url.endsWith('.css')) {
+      for (const [, ref] of text.matchAll(/url\(([^)]+)\)/g)) queue.push(new URL(ref, `https://x${dir}`).pathname);
+    }
+  }
+}
 
 const sitemapPath = join(dist, 'sitemap.xml');
 if (!existsSync(sitemapPath)) failures.push('sitemap.xml: missing');
@@ -143,6 +192,8 @@ for (const { file, active, thai, must } of PAGES) {
     const h1s = html.match(/<h1[\s>]/g) ?? [];
     if (h1s.length !== 1) fail(`expected 1 <h1>, found ${h1s.length}`);
     if (html.includes('content="noindex"')) fail('unexpected noindex');
+    for (const s of LANDING.forbidden) if (html.includes(s)) fail(`contains forbidden ${JSON.stringify(s)}`);
+    checkLocalAssets(html, fail);
   }
 }
 if (!existsSync(join(dist, 'og.jpg'))) failures.push('og.jpg: missing (the landing page uses it as og:image)');
