@@ -2,20 +2,16 @@
 /**
  * The document shell. Everything on the site renders inside this.
  *
- * Fonts are self-hosted via Fontsource (the design links Google Fonts; a
- * production page should not add a third-party connection to its critical
- * path). Only the weights the design uses are imported.
+ * Fonts are self-hosted via Fontsource: the landing page's families
+ * (Archivo with its width axis, IBM Plex Sans and Mono) plus Plex Sans Thai.
+ * Only the weights the pages use are imported.
  */
-import '@fontsource/space-grotesk/latin-400.css';
-import '@fontsource/space-grotesk/latin-ext-400.css';
-import '@fontsource/space-grotesk/latin-600.css';
-import '@fontsource/space-grotesk/latin-ext-600.css';
+import '@fontsource-variable/archivo/standard.css';
+import '@fontsource/ibm-plex-sans/latin-400.css';
+import '@fontsource/ibm-plex-sans/latin-500.css';
 import '@fontsource/ibm-plex-mono/latin-400.css';
-import '@fontsource/ibm-plex-mono/latin-ext-400.css';
 import '@fontsource/ibm-plex-mono/latin-500.css';
-import '@fontsource/ibm-plex-mono/latin-ext-500.css';
 import '@fontsource/ibm-plex-sans-thai/thai-400.css';
-import '@fontsource-variable/archivo';
 import '../styles/tokens.css';
 import '../styles/base.css';
 import { ink } from '../lib/tokens';
@@ -23,7 +19,7 @@ import { ink } from '../lib/tokens';
 interface Props {
   title: string;
   description?: string;
-  /** Titles that already carry the name (the home page) skip the suffix. */
+  /** Titles that already carry the name skip the suffix. */
   bareTitle?: boolean;
   /** Keep the page out of search results (404). Drops the canonical too. */
   noindex?: boolean;
@@ -33,15 +29,15 @@ interface Props {
 
 const {
   title,
-  description = 'Dryas Studio is a digital agency in Bangkok. Sidecraft, our service, takes websites from design to deploy in weeks — then runs them.',
+  description = 'Imagine it. AI builds it. Dryas Studio turns ideas into websites, apps, platforms and digital businesses with AI. Based in Bangkok.',
   bareTitle = false,
   noindex = false,
   schema,
 } = Astro.props;
 
-const fullTitle = bareTitle ? title : `${title} — Dryas Studio`;
+const fullTitle = bareTitle ? title : `${title} | Dryas Studio`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL('/assets/social/dryas-post-1600x900.png', Astro.site);
+const ogImage = new URL('/og.jpg', Astro.site);
 ---
 
 <!doctype html>
@@ -52,7 +48,7 @@ const ogImage = new URL('/assets/social/dryas-post-1600x900.png', Astro.site);
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
-    <link rel="icon" href="/assets/dryas-favicon-v3.svg" type="image/svg+xml" />
+    <link rel="icon" href="/assets/dryas-favicon-v4.svg" type="image/svg+xml" />
     <meta name="theme-color" content={ink} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Dryas Studio" />
@@ -60,9 +56,9 @@ const ogImage = new URL('/assets/social/dryas-post-1600x900.png', Astro.site);
     <meta property="og:description" content={description} />
     {!noindex && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content="1600" />
-    <meta property="og:image:height" content="900" />
-    <meta property="og:image:alt" content="Dryas Studio mark and wordmark" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Dryas Studio — Imagine it. AI builds it." />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@dryasstudio" />
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
@@ -81,7 +77,7 @@ const ogImage = new URL('/assets/social/dryas-post-1600x900.png', Astro.site);
         font: 500 12px var(--font-mono);
         letter-spacing: 0.1em;
         padding: 12px 18px;
-        border-radius: var(--radius);
+        border-radius: 999px;
       }
       .skip:focus {
         left: 12px;

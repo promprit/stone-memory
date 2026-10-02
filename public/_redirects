@@ -13,3 +13,15 @@
 # 302, not 301: browsers must not cache it forever if the OS origin ever moves.
 /sidecraft/os    https://os.dryasstudio.com/        302
 /sidecraft/os/*  https://os.dryasstudio.com/:splat  302
+
+# 2026-10-02: the site became one scroll-driven landing page (public/index.html).
+# The old v3 pages it absorbed point at their chapter on it. /contact/ stays a
+# page: the landing page's "Start a project" buttons link to it.
+/services   /#services  301
+/services/  /#services  301
+/process    /#ch-1      301
+/process/   /#ch-1      301
+/about      /           301
+/about/     /           301
+/press      /           301
+/press/     /           301

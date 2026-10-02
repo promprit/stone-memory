@@ -1,6 +1,8 @@
 /**
- * /sitemap.xml — every page route except 404, built from src/pages so a new
- * page is listed without touching this file. Referenced from robots.txt.
+ * /sitemap.xml — the home page plus every page route except 404, built from
+ * src/pages so a new page is listed without touching this file. Referenced
+ * from robots.txt. Home is listed by hand: it is the static landing page in
+ * public/index.html, not an Astro page.
  */
 import type { APIRoute } from 'astro';
 
@@ -8,6 +10,7 @@ const pages = Object.keys(import.meta.glob('./*.astro'))
   .map((file) => file.replace(/^\.\//, '').replace(/\.astro$/, ''))
   .filter((name) => name !== '404')
   .map((name) => (name === 'index' ? '/' : `/${name}/`))
+  .concat('/')
   .sort();
 
 export const GET: APIRoute = ({ site }) => {

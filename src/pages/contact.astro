@@ -1,98 +1,108 @@
 ---
 /**
- * /contact — headline and three contact rows. No form: email is the channel.
+ * /contact — where every "Start a project" button on the landing page lands.
+ * Headline and lede are the landing page's own Contact chapter; below them,
+ * the three ways to reach us. No form: email is the channel.
  */
 import Site from '../layouts/Site.astro';
 ---
 
 <Site
-  title="Start a Website Project"
-  description="Start a website project with Dryas Studio in Bangkok. Tell us what you need live in four weeks — reply within one business day."
+  title="Start a Project"
+  description="Start a project with Dryas Studio in Bangkok. Tell us the idea: we reply within one business day, and the first call is free."
   active="contact"
 >
   <section class="wrap contact">
     <p class="kicker">Contact</p>
-    <h1 class="title">Tell us what you need live in four weeks.</h1>
+    <h1 class="page-title title">What do you want to exist?</h1>
+    <p class="lede lead">
+      Tell us the idea. We reply within one business day, and the first call is free.
+    </p>
     <p lang="th" class="th sub">คุยกันก่อนได้ ไม่มีค่าใช้จ่าย — ตอบกลับภายในหนึ่งวันทำการ</p>
 
     <dl class="rows">
       <div class="row">
-        <dt>EMAIL</dt>
+        <dt>Email</dt>
         <dd><a href="mailto:hello@dryasstudio.com" class="email">hello@dryasstudio.com</a></dd>
       </div>
       <div class="row">
         <dt>X</dt>
-        <dd><a href="https://x.com/dryasstudio" class="quiet">@dryasstudio</a></dd>
+        <dd><a href="https://x.com/dryasstudio" class="handle">@dryasstudio</a></dd>
       </div>
       <div class="row">
-        <dt>REPLY TIME</dt>
-        <dd class="plain">One business day</dd>
+        <dt>Reply time</dt>
+        <dd>One business day</dd>
       </div>
     </dl>
+
+    <div class="cta">
+      <a class="btn go" href="mailto:hello@dryasstudio.com">Email us</a>
+      <a class="btn" href="/">Back to home</a>
+    </div>
   </section>
 </Site>
 
 <style>
   .contact {
-    padding-block: clamp(64px, 10vw, 140px) 96px;
+    padding-block: clamp(80px, 11vw, 140px);
   }
 
   .title {
-    margin-top: 28px;
-    font: 600 clamp(36px, 5vw, 64px) / 1.1 var(--font-sans);
-    letter-spacing: -0.035em;
-    color: var(--fg);
-    max-width: 20ch;
-    text-wrap: balance;
+    margin-top: 22px;
+    max-width: 14ch;
+  }
+
+  .lead {
+    margin-top: 24px;
   }
 
   .sub {
-    margin-top: 16px;
+    margin-top: 12px;
   }
 
+  /* Landing `.cap .list`: hairline rows, display name left, mono right. */
   .rows {
     margin-top: 48px;
-    max-width: 640px;
+    max-width: 600px;
+    border-top: 1px solid var(--line);
   }
 
   .row {
     display: flex;
-    gap: 8px 24px;
-    padding: 22px 0;
-    border-top: 1px solid var(--hairline);
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
     flex-wrap: wrap;
-  }
-  .row:last-child {
-    border-bottom: 1px solid var(--hairline);
   }
 
   .row dt {
-    width: 110px;
-    flex: none;
-    font: 400 12px var(--font-mono);
-    letter-spacing: 0.16em;
+    font: 500 11px/1.4 var(--font-mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--muted);
   }
 
-  .email {
-    font: 500 15px var(--font-mono);
-    color: var(--fg);
-    border-bottom: 1px solid var(--accent);
+  .row dd {
+    font: 700 clamp(17px, 1.5vw, 21px) / 1.2 var(--font-display);
+    font-stretch: 108%;
   }
-  .email:hover {
+
+  .email,
+  .handle {
+    border-bottom: 1px solid var(--line);
+  }
+  .email:hover,
+  .handle:hover {
     color: var(--accent);
+    border-bottom-color: var(--accent);
   }
 
-  .quiet {
-    font: 500 15px var(--font-mono);
-    color: var(--muted);
-  }
-  .quiet:hover {
-    color: var(--fg);
-  }
-
-  .plain {
-    font: 400 15px var(--font-mono);
-    color: var(--muted);
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 40px;
   }
 </style>
