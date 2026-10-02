@@ -1,11 +1,13 @@
 ---
 /**
  * Top bar: mark + DRYAS / STUDIO lockup on the left, route nav on the right.
+ * Since the landing page (public/index.html) absorbed services, process and
+ * about, /contact/ is the only route left to list.
  * Active route is accent; the rest are muted and brighten to fg on hover.
  */
 import Mark from './Mark.astro';
 
-export type Route = 'services' | 'process' | 'about' | 'contact';
+export type Route = 'contact';
 
 interface Props {
   active?: Route;
@@ -14,9 +16,6 @@ interface Props {
 const { active } = Astro.props;
 
 const items: { key: Route; label: string; href: string }[] = [
-  { key: 'services', label: '/SERVICES', href: '/services/' },
-  { key: 'process', label: '/PROCESS', href: '/process/' },
-  { key: 'about', label: '/ABOUT', href: '/about/' },
   { key: 'contact', label: '/CONTACT', href: '/contact/' },
 ];
 ---

@@ -23,4 +23,5 @@
 /assets/*
   Cache-Control: public, max-age=3600, must-revalidate
 
-# No CSP yet. Add one with the new studio site, once its scripts are known.
+# No CSP yet. The landing page (public/index.html) loads scripts from unpkg.com
+# and fonts from Google Fonts; a CSP must allow both.
