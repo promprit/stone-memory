@@ -66,7 +66,10 @@ const PAGES = [
 const LANDING = {
   file: 'index.html',
   /** It must load nothing from a third party: three.js and fonts are vendored. */
-  forbidden: ['unpkg.com', 'fonts.googleapis.com', 'fonts.gstatic.com'],
+  forbidden: ['unpkg.com', 'fonts.googleapis.com', 'fonts.gstatic.com',
+    // Escalation re-runs on a stronger builder; the Orchestrator does not take over.
+    "'takes over'",
+  ],
   head: [
     '<title>Dryas Studio | AI Website &amp; App Development Studio in Bangkok</title>',
     '<link rel="canonical" href="https://dryasstudio.com/">',
@@ -96,6 +99,12 @@ const LANDING = {
     'href="https://dryasstudio.com/contact/"',
     // Arrow keys step chapters; a new handover of the design file must keep it.
     "addEventListener('keydown', onKey)",
+    // 3D labels for the seven-stage loop.
+    "['LEAD MODEL', 'second try'",
+    "['REVIEW', 'spec'",
+    "['REVIEW', 'quality'",
+    "['SECOND OPINIONS', '2 models'",
+    "['TESTS', 'pass'",
   ],
 };
 
@@ -206,6 +215,11 @@ for (const { file, active, thai, must } of PAGES) {
     if (h1s.length !== 1) fail(`expected 1 <h1>, found ${h1s.length}`);
     if (html.includes('content="noindex"')) fail('unexpected noindex');
     for (const s of LANDING.forbidden) if (html.includes(s)) fail(`contains forbidden ${JSON.stringify(s)}`);
+    // One camera keyframe per chapter, or the camera drifts out of step with the captions.
+    const chapters = (html.match(/<section class="chapter"/g) ?? []).length;
+    const k = html.match(/const K = \[([\s\S]*?)\n\];/);
+    const keys = k ? (k[1].match(/^\s*\[V\(/gm) ?? []).length : 0;
+    if (keys !== chapters) fail(`camera has ${keys} keyframes for ${chapters} chapters`);
     checkLocalAssets(html, fail);
   }
 }

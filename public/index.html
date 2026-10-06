@@ -591,6 +591,14 @@ function opusRings(p) {
   scene.add(g); return g;
 }
 const rings = [opusRings(N.plan), opusRings(N.review)];
+// two second-opinion reviewers that flank review during the interrogate step
+const SO = [V(6.6, 6.2, -2.4), V(6.6, 6.2, 2.4)];
+const O2 = [orb(SO[0], 0.45, 320, COL.sonnet), orb(SO[1], 0.45, 320, COL.opus)];
+const soLines = SO.map(p => {
+  const geo = new THREE.BufferGeometry().setFromPoints([p, N.review]);
+  const m = new THREE.LineDashedMaterial({ color: COL.opus, dashSize: 0.18, gapSize: 0.18, transparent: true, opacity: 0 });
+  const l = new THREE.Line(geo, m); l.computeLineDistances(); scene.add(l); track(geo, m); return m;
+});
 const tether = (() => {
   const geo = new THREE.BufferGeometry().setFromPoints(P.esc.getSpacedPoints(60));
   const m = new THREE.LineDashedMaterial({ color: COL.fable, dashSize: 0.25, gapSize: 0.25, transparent: true, opacity: 0.2 });
@@ -660,11 +668,11 @@ const pMat = new THREE.ShaderMaterial({
 const pPoints = new THREE.Points(pGeo, pMat); pPoints.frustumCulled = false; scene.add(pPoints); track(pGeo, pMat);
 
 const RED = COL.deny;
-// one function: where every packet is, for a given chapter value c (0..8)
+// one function: where every packet is, for a given chapter value c (0(0..10)
 function slots(c, time) {
   const s = [];
   if (c >= 0.95 && c < 2.2) s.push({ c: P.in, t: ease(remap(c, 1.15, 1.95)), col: COL.paper, size: 7 });
-  if (c >= 2.05 && c < 6.45) {
+  if (c >= 2.05 && c < 7.45) {                              // builders' work waits at review until it ships
     for (let k = 0; k < 3; k++) {
       let t, col = COL.sonnet, cu = P.br[k];
       if (c < 3) t = 0.24 * ease(remap(c, 2.15, 2.9));
@@ -685,9 +693,9 @@ function slots(c, time) {
       s.push({ c: cu, t, col, size: 5.5 });
     }
   }
-  if (c >= 6.38 && c < 7.05) s.push({ c: P.ship, t: ease(remap(c, 6.45, 6.95)), col: COL.opus, size: 7.5 });
-  if (c >= 6.95) {                                          // finale: the loop keeps running on its own
-    const fade = remap(c, 6.95, 7.3);
+  if (c >= 7.38 && c < 8.05) s.push({ c: P.ship, t: ease(remap(c, 7.45, 7.95)), col: COL.opus, size: 7.5 });
+  if (c >= 7.95) {                                          // finale: the loop keeps running on its own
+    const fade = remap(c, 7.95, 8.3);
     for (let i = 0; i < 3; i++) {
       const u = (time * 0.07 + i / 3) % 1;
       let cu, t, col;
@@ -725,6 +733,7 @@ const K = [
   [V(-6.4, 5.4, 3.6), G.disp[1].g.position.clone()],  // judge: close on a gate
   [V(7, 8.2, 12.5), V(0, 3.4, 0)],                    // build
   [V(12.5, 12, 5.5), V(2.5, 7, -5)],                  // escalate
+  [V(10, 7, 9), V(6, 4.6, 0)],                        // review: close on the review node
   [V(15.5, 5.6, 9.5), V(8.4, 2.6, 0)],                // ship
   [V(13, 9, 24), V(1, 3.6, 0)],                       // motto
   [V(-15, 10, 19), V(0, 3.6, 0)],                     // services
@@ -750,11 +759,14 @@ const LBL = [
   ['JUDGE', 'yes · no · pick one', G.disp[1].g.position, '#F2B544', 1.1, 3.05, 3.95],
   ['DENIED', 'rm -rf data/', N.exec[0], '#FF6B5B', 2.3, 4.45, 4.85],
   ['BUILDER', 'failed twice', G.ret[1].g.position, '#FF6B5B', 1.1, 5.02, 5.3],
-  ['ORCHESTRATOR', 'takes over', N.exec[1], '#4FD1B9', 1.5, 5.26, 5.5],
+  ['LEAD MODEL', 'second try', N.exec[1], '#4FD1B9', 1.5, 5.26, 5.5],
   ['FRONTIER MODEL', 'runs once', N.fable, '#C69BFF', 1.5, 5.55, 6.02],
-  ['ORCHESTRATOR', 'review', N.review, '#4FD1B9', 1.9, 6.0, 6.55],
-  ['SHIPPED', 'live', N.main, '#3DFF8B', 1.1, 6.8, 7.25],
-  ['THE LOOP', 'ship · learn · improve', P.trunk.getPointAt(0.62), '#3DFF8B', 0.5, 7.05, 8.0]
+  ['REVIEW', 'spec', N.review, '#4FD1B9', 1.9, 6.22, 6.6],
+  ['REVIEW', 'quality', N.review, '#4FD1B9', 1.9, 6.6, 6.92],
+  ['SECOND OPINIONS', '2 models', SO[1], '#8AA9FF', 0.9, 6.62, 6.98],
+  ['TESTS', 'pass', N.review, '#3DFF8B', -1.4, 6.85, 7.12],
+  ['SHIPPED', 'live', N.main, '#3DFF8B', 1.1, 7.8, 8.25],
+  ['THE LOOP', 'ship · learn · improve', P.trunk.getPointAt(0.62), '#3DFF8B', 0.5, 8.05, 9.0]
 ].map(([a, b, p, col, offY, from, to]) => {
   const el = document.createElement('div'); el.className = 'nl'; el.style.setProperty('--c', col);
   const s = document.createElement('b'); s.textContent = a; el.appendChild(s); el.appendChild(document.createTextNode(' · ' + b));
@@ -831,12 +843,12 @@ function animate() {
   U.uTime.value = reduce ? time * 0.3 : time; U.uMouse.value.set(mouse.x, 3, mouse.z); U.uImpact.value = mouse.impact;
 
   // reveal the structure chapter by chapter; a faint ghost of the whole loop is always there
-  const fin = remap(c, 6.9, 7.4);
+  const fin = remap(c, 7.9, 8.4);
   T.in.mat.uniforms.uReveal.value = Math.max(remap(c, 1.1, 1.9) * 1.1, fin * 1.1);
   T.br.forEach(t => t.mat.uniforms.uReveal.value = Math.max(remap(c, 2.15, 2.9) * 1.1, fin * 1.1));
   T.esc.mat.uniforms.uReveal.value = remap(c, 5.55, 5.85) * 1.1;
-  T.ship.mat.uniforms.uReveal.value = Math.max(remap(c, 6.4, 6.95), fin) * 1.1;
-  T.trunk.mat.uniforms.uReveal.value = remap(c, 6.75, 7.25) * 1.1;
+  T.ship.mat.uniforms.uReveal.value = Math.max(remap(c, 7.4, 7.95), fin) * 1.1;
+  T.trunk.mat.uniforms.uReveal.value = remap(c, 7.75, 8.25) * 1.1;
   const intro = 0.55 + 0.45 * remap(c, 0.4, 1.0);
   for (const t of [T.in, ...T.br, T.ship, T.trunk]) t.mat.uniforms.uAlpha.value = intro;
   T.esc.mat.uniforms.uAlpha.value = 0.3 + 0.7 * bump(c, 5.5, 6.1);
@@ -846,10 +858,13 @@ function animate() {
   const setOrb = (o, a, lit) => { o.mat.uniforms.uAlpha.value = ghost + (1 - ghost) * a; o.mat.uniforms.uLit.value = lit; };
   setOrb(O.you, Math.max(seen(c, 0.9), fin), bump(c, 0.95, 1.55));
   setOrb(O.plan, Math.max(seen(c, 1.6), fin), bump(c, 1.8, 2.55) + bump(c, 5.25, 5.5) * 0.4);
-  setOrb(O.review, Math.max(seen(c, 5.9), fin), bump(c, 6.0, 6.55));
-  setOrb(O.main, Math.max(seen(c, 6.75), fin), remap(c, 6.85, 7.0) * 0.8);
+  setOrb(O.review, Math.max(seen(c, 5.9), fin), bump(c, 6.22, 6.6) + bump(c, 6.6, 6.92));   // two review stages, two pulses
+  setOrb(O.main, Math.max(seen(c, 7.75), fin), remap(c, 7.85, 8.0) * 0.8);
   setOrb(O.fable, bump(c, 5.45, 6.1) * 1.0 + fin * 0.35, bump(c, 5.6, 6.05));
   O.fable.mat.uniforms.uAlpha.value = 0.22 + 0.78 * Math.max(bump(c, 5.45, 6.1), fin * 0.4);
+  const so = bump(c, 6.6, 6.98);                            // second opinions appear only during the interrogate step
+  O2.forEach(o => { o.mat.uniforms.uAlpha.value = so; o.mat.uniforms.uLit.value = so * 0.6; });
+  soLines.forEach(m => { m.opacity = 0.35 * so; });
 
   // packets, gates, executors
   const s = slots(c, time);
