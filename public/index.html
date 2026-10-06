@@ -27,7 +27,7 @@
   "name": "Dryas Studio",
   "url": "https://dryasstudio.com/",
   "slogan": "Anything. Built by AI.",
-  "description": "AI-native studio that turns ideas into websites, apps, platforms and digital businesses. Fixed price, live in weeks, cared for after launch.",
+  "description": "AI-native studio that turns ideas into websites, apps, platforms and digital businesses. Fixed price, live in weeks, cared for after launch. Every project is delivered with the Dryas Workflow Framework.",
   "image": "https://dryasstudio.com/og.jpg",
   "address": { "@type": "PostalAddress", "addressLocality": "Bangkok", "addressCountry": "TH" },
   "areaServed": ["TH", "Worldwide"],
@@ -43,6 +43,14 @@
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "3D and interactive web experiences", "description": "Configurators, product viewers and live simulations." } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital business building", "description": "From first sketch to launch." } }
     ]
+  },
+  "subjectOf": {
+    "@type": "CreativeWork",
+    "@id": "https://dryasstudio.com/#framework",
+    "name": "Dryas Workflow Framework",
+    "description": "A target operating model for AI-assisted software delivery.",
+    "url": "https://github.com/promprit/dryas-workflow",
+    "creator": { "@id": "https://dryasstudio.com/#studio" }
   }
 }
 </script>
@@ -151,6 +159,8 @@
   .cap h2.motto{font-weight:800;font-size:clamp(44px,6.6vw,96px);letter-spacing:-.035em}
   .cap.wide{width:min(600px,100%)}
   html.scrolly .cap.wide{width:min(600px,48vw)}
+  .cap.wide h2.motto{font-size:clamp(40px,4.8vw,72px)}
+  .cap .svc + .small + .cta{margin-top:20px}
   .cap .list{list-style:none;margin:28px 0 0;padding:0;border-top:1px solid var(--line)}
   .cap .list li{border-bottom:1px solid var(--line)}
   .cap .list li > b,.cap .list li > a{display:flex;justify-content:space-between;align-items:baseline;gap:20px}
@@ -219,7 +229,7 @@
   <section class="chapter" id="ch-0"><div class="cap" data-name="Intro">
     <p class="n">Dryas Studio · AI studio in Bangkok</p>
     <h1>Imagine it. AI builds it.</h1>
-    <p>We turn ideas into websites, apps, platforms, and digital businesses with AI. Scroll to watch how.</p>
+    <p>We turn ideas into websites, apps, platforms, and digital businesses with AI. Every project runs on our own framework. Scroll to watch how.</p>
   </div></section>
 
   <section class="chapter" id="ch-1"><div class="cap" data-name="Brainstorm">
@@ -231,13 +241,13 @@
   <section class="chapter" id="ch-2"><div class="cap" data-name="Plan">
     <p class="n">02 Plan</p>
     <h2>One plan, split three ways.</h2>
-    <p>The <b class="c-opus">Orchestrator</b> checks what worked before, writes the plan in its own branch, and splits it into tasks with clear finish lines.</p>
+    <p>The <b class="c-opus">Orchestrator</b> recalls what worked and what failed before, writes the plan in its own isolated branch, and splits it into small tasks. Each task names the files it may touch and how we'll know it's done.</p>
   </div></section>
 
   <section class="chapter" id="ch-3"><div class="cap" data-name="Judge">
     <p class="n">03 Judge</p>
     <h2>Every handoff is checked.</h2>
-    <p>The <b class="c-jev">Judge</b> is a fast decision model. It answers yes, no or pick-one in about a quarter of a second. It never writes code. It only decides.</p>
+    <p>The <b class="c-jev">Judge</b> is a fast decision model. It answers yes, no or pick-one in a fraction of a second. It never writes code. It only decides.</p>
   </div></section>
 
   <section class="chapter" id="ch-4"><div class="cap" data-name="Build">
@@ -249,19 +259,34 @@
   <section class="chapter" id="ch-5"><div class="cap" data-name="Escalate">
     <p class="n">05 Escalate</p>
     <h2>When it's stuck, it climbs.</h2>
-    <p>A <b class="c-sonnet">Builder</b> gets two tries. Then the <b class="c-opus">Orchestrator</b> takes over. A <b class="c-fable">Frontier model</b>, the most capable AI there is, runs once, and only if that fails too.</p>
+    <p>A <b class="c-sonnet">Builder</b> gets two tries. Then a <b class="c-opus">Lead model</b> takes the task, after we've found out why it failed. A <b class="c-fable">Frontier model</b>, the most capable AI there is, runs once, and only if that fails too. After that, a person steps in.</p>
   </div></section>
 
-  <section class="chapter" id="ch-6"><div class="cap" data-name="Ship">
-    <p class="n">06 Ship</p>
-    <h2>Reviewed. Verified. Merged.</h2>
-    <p>The <b class="c-opus">Orchestrator</b> reviews every result in two stages. Nothing ships until review, verification and automated tests pass.</p>
+  <section class="chapter" id="ch-6"><div class="cap" data-name="Review">
+    <p class="n">06 Review</p>
+    <h2>Checked twice. Then challenged.</h2>
+    <p>The <b class="c-opus">Orchestrator</b> reviews every result in two stages: does it match the design, and is it well built? Contested changes get second opinions from two different AI models. Then the tests run.</p>
   </div></section>
 
-  <section class="chapter" id="ch-7"><div class="cap" data-name="Motto">
-    <p class="n">Our motto</p>
+  <section class="chapter" id="ch-7"><div class="cap" data-name="Ship">
+    <p class="n">07 Ship</p>
+    <h2>Verified. Signed off. Merged.</h2>
+    <p>Nothing merges until the tests pass and the work is verified. A person signs off on anything that goes live. Every outcome is saved, so the next project starts smarter.</p>
+  </div></section>
+
+  <section class="chapter" id="ch-8"><div class="cap wide" data-name="Framework">
+    <p class="n">The Dryas Workflow Framework</p>
     <h2 class="motto">Anything. Built by AI.</h2>
-    <p>Every project runs this loop: one plan, AI builders, a judge on every handoff, and people who sign off. Then we ship, learn, and go round again.</p>
+    <p>Every project we deliver runs on the Dryas Workflow Framework, a target operating model for AI-assisted software delivery. Five layers:</p>
+    <ul class="svc">
+      <li><b>Memory</b><span>What was tried, what worked, what failed.</span></li>
+      <li><b>Governance</b><span>Who decides, and what each AI may touch.</span></li>
+      <li><b>Execution</b><span>Small tasks, kept apart, built test-first.</span></li>
+      <li><b>Escalation</b><span>A stronger model only when a cheaper one failed.</span></li>
+      <li><b>Review</b><span>Nothing merges unverified. A person ships.</span></li>
+    </ul>
+    <p class="small">The method is open. The tools are replaceable.</p>
+    <div class="cta"><a class="btn" href="https://github.com/promprit/dryas-workflow">Read the framework on GitHub →</a></div>
   </div></section>
 
   <section class="chapter" id="services"><div class="cap wide" data-name="Services">
@@ -274,7 +299,7 @@
       <li><b>3D &amp; interactive</b><span>Configurators, product viewers, live simulations like this one.</span></li>
       <li><b>Digital businesses</b><span>Your idea, taken from first sketch to launch.</span></li>
     </ul>
-    <p class="small">Fixed price, quoted before we start. After launch, we stay on and keep it running.</p>
+    <p class="small">Fixed price, quoted before we start. Delivered with the Dryas Workflow Framework. After launch, we stay on and keep it running.</p>
   </div></section>
 
   <section class="chapter" id="contact"><div class="cap" data-name="Contact">

@@ -73,15 +73,26 @@ const LANDING = {
     '<meta name="description"',
     '<meta property="og:image" content="https://dryasstudio.com/og.jpg">',
     '"@type": "ProfessionalService"',
+    // The framework is how every project is delivered; keep it in the structured data.
+    '"@type": "CreativeWork"',
+    'Every project is delivered with the Dryas Workflow Framework.',
     '<script type="importmap">',
   ],
   body: [
     '<canvas id="gl"',
     'Imagine it. AI builds it.',
-    ...['ch-0', 'ch-1', 'ch-2', 'ch-3', 'ch-4', 'ch-5', 'ch-6', 'ch-7', 'services', 'contact'].map(
+    ...['ch-0', 'ch-1', 'ch-2', 'ch-3', 'ch-4', 'ch-5', 'ch-6', 'ch-7', 'ch-8', 'services', 'contact'].map(
       (id) => `<section class="chapter" id="${id}">`,
     ),
+    // The seven-stage loop: Review is its own chapter.
+    'data-name="Review"',
+    'Checked twice. Then challenged.',
+    // The framework chapter names it, links it, and says every project runs on it.
+    'data-name="Framework"',
     'Anything. Built by AI.',
+    'a target operating model for AI-assisted software delivery',
+    'href="https://github.com/promprit/dryas-workflow"',
+    'Delivered with the Dryas Workflow Framework.',
     'href="https://dryasstudio.com/contact/"',
     // Arrow keys step chapters; a new handover of the design file must keep it.
     "addEventListener('keydown', onKey)",
