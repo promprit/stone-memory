@@ -14,7 +14,7 @@ The page is now out of date in three ways:
 
 ## Goal
 
-Visitors see the seven-stage loop and leave knowing Dryas runs a named, open framework, with a link to it.
+Visitors see the seven-stage loop and leave knowing Dryas runs a named, open framework (a target operating model for AI-assisted software delivery), with a link to it. The site uses the repo's own positioning line verbatim.
 
 Audience: prospective clients, not developers. Internal plumbing (hooks, thresholds, `/handoff`, installer, OS support) stays off the site.
 
@@ -67,6 +67,7 @@ Role names keep their colour classes: `c-opus` Orchestrator and Lead model, `c-s
 **08 Framework** (`data-name="Framework"`, `class="cap wide"`, list styled like `.svc`)
 > Kicker: The Dryas Workflow Framework
 > Heading (class `motto`): Anything. Built by AI.
+> Lead line: A target operating model for AI-assisted software delivery. Five layers:
 > - **Memory** — what was tried, what worked, what failed.
 > - **Governance** — who decides, and what each AI may touch.
 > - **Execution** — small tasks, kept apart, built test-first.
@@ -107,11 +108,11 @@ The rail, `CH`, scroll-to-chapter and arrow-key stepping all read `caps.length`,
 ## SEO
 
 - `<meta name="description">`: mention the framework ("…built with the Dryas Workflow Framework…"), kept under ~160 characters.
-- JSON-LD: add a `CreativeWork` node (`name`: Dryas Workflow Framework, `url`: the repo, `creator`: the studio's `@id`).
+- JSON-LD: add a `CreativeWork` node (`name`: Dryas Workflow Framework, `description`: "A target operating model for AI-assisted software delivery.", `url`: the repo, `creator`: the studio's `@id`).
 
 ## Testing
 
-1. **Failing check first.** Extend `scripts/check-dist.mjs` LANDING with: `data-name="Review"`, `data-name="Framework"`, `href="https://github.com/promprit/dryas-workflow"`, `Checked twice. Then challenged.` Run `npm run build && npm run test:dist`; it must fail before the HTML change and pass after.
+1. **Failing check first.** Extend `scripts/check-dist.mjs` LANDING with: `data-name="Review"`, `data-name="Framework"`, `href="https://github.com/promprit/dryas-workflow"`, `Checked twice. Then challenged.`, `A target operating model for AI-assisted software delivery.` Run `npm run build && npm run test:dist`; it must fail before the HTML change and pass after.
 2. `npm run verify` passes.
 3. Playwright against the built site:
    - 11 rail dots; clicking each lands its chapter centred;
