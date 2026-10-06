@@ -162,8 +162,9 @@
   .cap.wide h2.motto{font-size:clamp(40px,4.8vw,72px)}
   .cap .svc + .small + .cta{margin-top:20px}
   @media (min-width:861px){.cap .n{white-space:nowrap}}
-  @media (max-width:860px){html.scrolly .cap.wide{width:auto}.cap.wide h2.motto{font-size:clamp(34px,10vw,44px)}#ch-8 .svc li{grid-template-columns:104px minmax(0,1fr);gap:12px;padding:7px 0}#ch-8 .svc{margin-top:16px}#ch-8 .small{margin-top:12px}#ch-8 .cta{margin-top:16px}.nl-loop{display:none}}
+  @media (max-width:860px){html.scrolly .cap.wide{width:auto}.cap.wide h2.motto{font-size:clamp(34px,10vw,44px)}#ch-8 .svc li{grid-template-columns:112px minmax(0,1fr);gap:12px;padding:7px 0}#ch-8 .svc{margin-top:16px}#ch-8 .small{margin-top:12px}#ch-8 .cta{margin-top:16px}.nl-loop{display:none}}
   @media (max-width:860px) and (max-height:740px){#ch-8 .n{margin-bottom:12px}#ch-8 h2.motto{font-size:32px}#ch-8 h2 + p{font-size:15px;margin-top:12px}#ch-8 .svc li{padding:5px 0}#ch-8 .small{display:none}}
+  @media (min-width:861px) and (max-height:820px){#ch-8 .n{margin-bottom:14px}#ch-8 h2.motto{font-size:clamp(36px,4vw,52px)}#ch-8 h2 + p{margin-top:14px;font-size:17px}#ch-8 .svc{margin-top:16px}#ch-8 .svc li{padding:7px 0;grid-template-columns:150px minmax(0,1fr)}#ch-8 .svc b{font-size:18px}#ch-8 .svc span{font-size:15px}#ch-8 .small{display:none}#ch-8 .cta{margin-top:18px}}
   .cap .list{list-style:none;margin:28px 0 0;padding:0;border-top:1px solid var(--line)}
   .cap .list li{border-bottom:1px solid var(--line)}
   .cap .list li > b,.cap .list li > a{display:flex;justify-content:space-between;align-items:baseline;gap:20px}
@@ -289,7 +290,7 @@
       <li><b>Review</b><span>Nothing merges unverified. A person ships.</span></li>
     </ul>
     <p class="small">The method is open. The tools are replaceable.</p>
-    <div class="cta"><a class="btn" href="https://github.com/promprit/dryas-workflow">Read the framework on GitHub →</a></div>
+    <div class="cta"><a class="btn" href="https://github.com/promprit/dryas-workflow">Read the framework on GitHub <span aria-hidden="true">→</span></a></div>
   </div></section>
 
   <section class="chapter" id="services"><div class="cap wide" data-name="Services">
@@ -765,7 +766,7 @@ const LBL = [
   ['FRONTIER MODEL', 'runs once', N.fable, '#C69BFF', 1.5, 5.55, 6.02],
   ['REVIEW', 'spec', N.review, '#4FD1B9', 1.9, 6.22, 6.6],
   ['REVIEW', 'quality', N.review, '#4FD1B9', 1.9, 6.6, 6.92],
-  ['SECOND OPINIONS', '2 models', SO[1], '#8AA9FF', 0.9, 6.62, 6.98],
+  ['SECOND OPINIONS', '2 models', SO[0], '#8AA9FF', 0.9, 6.62, 6.98],
   ['TESTS', 'pass', N.review, '#3DFF8B', -1.4, 6.85, 7.12],
   ['SHIPPED', 'live', N.main, '#3DFF8B', 1.1, 7.8, 8.25],
   ['THE LOOP', 'ship · learn · improve', P.trunk.getPointAt(0.9), '#3DFF8B', 0.5, 8.05, 9.0]
