@@ -65,26 +65,39 @@ const PAGES = [
  */
 const LANDING = {
   file: 'index.html',
-  /** It must load nothing from a third party: three.js and fonts are vendored. */
-  forbidden: ['unpkg.com', 'fonts.googleapis.com', 'fonts.gstatic.com'],
+  /** It must load nothing from a third party (three.js and fonts are vendored), and must not bring back the retired "Orchestrator takes over" escalation copy. */
+  forbidden: ['unpkg.com', 'fonts.googleapis.com', 'fonts.gstatic.com', "'takes over'", '</b> takes over'],
   head: [
     '<title>Dryas Studio | AI Website &amp; App Development Studio in Bangkok</title>',
     '<link rel="canonical" href="https://dryasstudio.com/">',
     '<meta name="description"',
     '<meta property="og:image" content="https://dryasstudio.com/og.jpg">',
     '"@type": "ProfessionalService"',
+    '"@type": "CreativeWork"',
+    'Every project is delivered with the Dryas Workflow Framework.',
     '<script type="importmap">',
   ],
   body: [
     '<canvas id="gl"',
     'Imagine it. AI builds it.',
-    ...['ch-0', 'ch-1', 'ch-2', 'ch-3', 'ch-4', 'ch-5', 'ch-6', 'ch-7', 'services', 'contact'].map(
+    ...['ch-0', 'ch-1', 'ch-2', 'ch-3', 'ch-4', 'ch-5', 'ch-6', 'ch-7', 'ch-8', 'services', 'contact'].map(
       (id) => `<section class="chapter" id="${id}">`,
     ),
+    'data-name="Review"',
+    'Checked twice. Then challenged.',
+    'data-name="Framework"',
     'Anything. Built by AI.',
+    'a target operating model for AI-assisted software delivery',
+    'href="https://github.com/promprit/dryas-workflow"',
+    'Delivered with the Dryas Workflow Framework.',
     'href="https://dryasstudio.com/contact/"',
     // Arrow keys step chapters; a new handover of the design file must keep it.
     "addEventListener('keydown', onKey)",
+    "['LEAD MODEL', 'second try'",
+    "['REVIEW', 'spec'",
+    "['REVIEW', 'quality'",
+    "['SECOND OPINIONS', '2 models'",
+    "['TESTS', 'pass'",
   ],
 };
 
@@ -195,6 +208,11 @@ for (const { file, active, thai, must } of PAGES) {
     if (h1s.length !== 1) fail(`expected 1 <h1>, found ${h1s.length}`);
     if (html.includes('content="noindex"')) fail('unexpected noindex');
     for (const s of LANDING.forbidden) if (html.includes(s)) fail(`contains forbidden ${JSON.stringify(s)}`);
+    // One camera keyframe per chapter, or the camera drifts out of step with the captions.
+    const chapters = (html.match(/<section class="chapter"/g) ?? []).length;
+    const k = html.match(/const K = \[([\s\S]*?)\n\];/);
+    const keys = k ? (k[1].match(/^\s*\[V\(/gm) ?? []).length : 0;
+    if (keys !== chapters) fail(`camera has ${keys} keyframes for ${chapters} chapters`);
     checkLocalAssets(html, fail);
   }
 }
