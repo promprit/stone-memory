@@ -65,7 +65,7 @@ const PAGES = [
  */
 const LANDING = {
   file: 'index.html',
-  /** It must load nothing from a third party: three.js and fonts are vendored. */
+  /** It must load nothing from a third party (three.js and fonts are vendored), and must not bring back the retired "Orchestrator takes over" escalation copy. */
   forbidden: ['unpkg.com', 'fonts.googleapis.com', 'fonts.gstatic.com', "'takes over'"],
   head: [
     '<title>Dryas Studio | AI Website &amp; App Development Studio in Bangkok</title>',
@@ -208,6 +208,7 @@ for (const { file, active, thai, must } of PAGES) {
     if (h1s.length !== 1) fail(`expected 1 <h1>, found ${h1s.length}`);
     if (html.includes('content="noindex"')) fail('unexpected noindex');
     for (const s of LANDING.forbidden) if (html.includes(s)) fail(`contains forbidden ${JSON.stringify(s)}`);
+    // One camera keyframe per chapter, or the camera drifts out of step with the captions.
     const chapters = (html.match(/<section class="chapter"/g) ?? []).length;
     const k = html.match(/const K = \[([\s\S]*?)\n\];/);
     const keys = k ? (k[1].match(/^\s*\[V\(/gm) ?? []).length : 0;
