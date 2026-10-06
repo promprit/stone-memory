@@ -591,7 +591,6 @@ function opusRings(p) {
   scene.add(g); return g;
 }
 const rings = [opusRings(N.plan), opusRings(N.review)];
-// two second-opinion reviewers that flank review during the interrogate step
 const SO = [V(6.6, 6.2, -2.4), V(6.6, 6.2, 2.4)];
 const O2 = [orb(SO[0], 0.45, 320, COL.sonnet), orb(SO[1], 0.45, 320, COL.opus)];
 const soLines = SO.map(p => {
@@ -668,11 +667,11 @@ const pMat = new THREE.ShaderMaterial({
 const pPoints = new THREE.Points(pGeo, pMat); pPoints.frustumCulled = false; scene.add(pPoints); track(pGeo, pMat);
 
 const RED = COL.deny;
-// one function: where every packet is, for a given chapter value c (0(0..10)
+// one function: where every packet is, for a given chapter value c (0..10)
 function slots(c, time) {
   const s = [];
   if (c >= 0.95 && c < 2.2) s.push({ c: P.in, t: ease(remap(c, 1.15, 1.95)), col: COL.paper, size: 7 });
-  if (c >= 2.05 && c < 7.45) {                              // builders' work waits at review until it ships
+  if (c >= 2.05 && c < 7.45) {
     for (let k = 0; k < 3; k++) {
       let t, col = COL.sonnet, cu = P.br[k];
       if (c < 3) t = 0.24 * ease(remap(c, 2.15, 2.9));
@@ -735,7 +734,7 @@ const K = [
   [V(12.5, 12, 5.5), V(2.5, 7, -5)],                  // escalate
   [V(10, 7, 9), V(6, 4.6, 0)],                        // review: close on the review node
   [V(15.5, 5.6, 9.5), V(8.4, 2.6, 0)],                // ship
-  [V(13, 9, 24), V(1, 3.6, 0)],                       // motto
+  [V(13, 9, 24), V(1, 3.6, 0)],                       // framework
   [V(-15, 10, 19), V(0, 3.6, 0)],                     // services
   [V(17, 6.5, 15), V(2, 3.6, 0)]                      // contact
 ];
@@ -858,11 +857,11 @@ function animate() {
   const setOrb = (o, a, lit) => { o.mat.uniforms.uAlpha.value = ghost + (1 - ghost) * a; o.mat.uniforms.uLit.value = lit; };
   setOrb(O.you, Math.max(seen(c, 0.9), fin), bump(c, 0.95, 1.55));
   setOrb(O.plan, Math.max(seen(c, 1.6), fin), bump(c, 1.8, 2.55) + bump(c, 5.25, 5.5) * 0.4);
-  setOrb(O.review, Math.max(seen(c, 5.9), fin), bump(c, 6.22, 6.6) + bump(c, 6.6, 6.92));   // two review stages, two pulses
+  setOrb(O.review, Math.max(seen(c, 5.9), fin), bump(c, 6.22, 6.6) + bump(c, 6.6, 6.92));
   setOrb(O.main, Math.max(seen(c, 7.75), fin), remap(c, 7.85, 8.0) * 0.8);
   setOrb(O.fable, bump(c, 5.45, 6.1) * 1.0 + fin * 0.35, bump(c, 5.6, 6.05));
   O.fable.mat.uniforms.uAlpha.value = 0.22 + 0.78 * Math.max(bump(c, 5.45, 6.1), fin * 0.4);
-  const so = bump(c, 6.6, 6.98);                            // second opinions appear only during the interrogate step
+  const so = bump(c, 6.6, 6.98);
   O2.forEach(o => { o.mat.uniforms.uAlpha.value = so; o.mat.uniforms.uLit.value = so * 0.6; });
   soLines.forEach(m => { m.opacity = 0.35 * so; });
 

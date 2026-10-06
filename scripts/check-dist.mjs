@@ -66,17 +66,13 @@ const PAGES = [
 const LANDING = {
   file: 'index.html',
   /** It must load nothing from a third party: three.js and fonts are vendored. */
-  forbidden: ['unpkg.com', 'fonts.googleapis.com', 'fonts.gstatic.com',
-    // Escalation re-runs on a stronger builder; the Orchestrator does not take over.
-    "'takes over'",
-  ],
+  forbidden: ['unpkg.com', 'fonts.googleapis.com', 'fonts.gstatic.com', "'takes over'"],
   head: [
     '<title>Dryas Studio | AI Website &amp; App Development Studio in Bangkok</title>',
     '<link rel="canonical" href="https://dryasstudio.com/">',
     '<meta name="description"',
     '<meta property="og:image" content="https://dryasstudio.com/og.jpg">',
     '"@type": "ProfessionalService"',
-    // The framework is how every project is delivered; keep it in the structured data.
     '"@type": "CreativeWork"',
     'Every project is delivered with the Dryas Workflow Framework.',
     '<script type="importmap">',
@@ -87,10 +83,8 @@ const LANDING = {
     ...['ch-0', 'ch-1', 'ch-2', 'ch-3', 'ch-4', 'ch-5', 'ch-6', 'ch-7', 'ch-8', 'services', 'contact'].map(
       (id) => `<section class="chapter" id="${id}">`,
     ),
-    // The seven-stage loop: Review is its own chapter.
     'data-name="Review"',
     'Checked twice. Then challenged.',
-    // The framework chapter names it, links it, and says every project runs on it.
     'data-name="Framework"',
     'Anything. Built by AI.',
     'a target operating model for AI-assisted software delivery',
@@ -99,7 +93,6 @@ const LANDING = {
     'href="https://dryasstudio.com/contact/"',
     // Arrow keys step chapters; a new handover of the design file must keep it.
     "addEventListener('keydown', onKey)",
-    // 3D labels for the seven-stage loop.
     "['LEAD MODEL', 'second try'",
     "['REVIEW', 'spec'",
     "['REVIEW', 'quality'",
@@ -215,7 +208,6 @@ for (const { file, active, thai, must } of PAGES) {
     if (h1s.length !== 1) fail(`expected 1 <h1>, found ${h1s.length}`);
     if (html.includes('content="noindex"')) fail('unexpected noindex');
     for (const s of LANDING.forbidden) if (html.includes(s)) fail(`contains forbidden ${JSON.stringify(s)}`);
-    // One camera keyframe per chapter, or the camera drifts out of step with the captions.
     const chapters = (html.match(/<section class="chapter"/g) ?? []).length;
     const k = html.match(/const K = \[([\s\S]*?)\n\];/);
     const keys = k ? (k[1].match(/^\s*\[V\(/gm) ?? []).length : 0;
