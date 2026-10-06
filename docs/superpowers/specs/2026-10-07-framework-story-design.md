@@ -21,7 +21,7 @@ Audience: prospective clients, not developers. Internal plumbing (hooks, thresho
 ## Non-goals
 
 - No new pages. No `/framework` page.
-- No change to Intro, Brainstorm, Build, Services, Contact copy, the header nav, or `/contact/`.
+- No change to Brainstorm, Build, Contact copy, the header nav, or `/contact/`. Intro and Services change by one line each (delivery claim, below).
 - No refactor of the timeline into named beats (approach B, rejected).
 
 ## Chapter map (after)
@@ -46,6 +46,9 @@ Chapter ids stay sequential (`ch-0`…`ch-8`). The header nav links `/#ch-1` and
 
 Role names keep their colour classes: `c-opus` Orchestrator and Lead model, `c-sonnet` Builder, `c-jev` Judge, `c-fable` Frontier model.
 
+**00 Intro** (heading unchanged). Last sentence "Scroll to watch how." becomes:
+> Every project runs on our own framework. Scroll to watch how.
+
 **02 Plan** (heading unchanged: "One plan, split three ways.")
 > The **Orchestrator** recalls what worked and what failed before, writes the plan in its own isolated branch, and splits it into small tasks. Each task names the files it may touch and how we'll know it's done.
 
@@ -67,7 +70,7 @@ Role names keep their colour classes: `c-opus` Orchestrator and Lead model, `c-s
 **08 Framework** (`data-name="Framework"`, `class="cap wide"`, list styled like `.svc`)
 > Kicker: The Dryas Workflow Framework
 > Heading (class `motto`): Anything. Built by AI.
-> Lead line: A target operating model for AI-assisted software delivery. Five layers:
+> Lead line: Every project we deliver runs on the Dryas Workflow Framework, a target operating model for AI-assisted software delivery. Five layers:
 > - **Memory** — what was tried, what worked, what failed.
 > - **Governance** — who decides, and what each AI may touch.
 > - **Execution** — small tasks, kept apart, built test-first.
@@ -76,6 +79,11 @@ Role names keep their colour classes: `c-opus` Orchestrator and Lead model, `c-s
 >
 > Small print: The method is open. The tools are replaceable.
 > Link (`class="btn"`): Read the framework on GitHub → `https://github.com/promprit/dryas-workflow` (same-tab, like the X link).
+
+**Services** (list unchanged). Small print becomes:
+> Fixed price, quoted before we start. Delivered with the Dryas Workflow Framework. After launch, we stay on and keep it running.
+
+**Delivery claim.** The framework is shown as how client work is delivered, not as a side project: Intro sets it up, chapters 1–7 show it, chapter 8 names it ("Every project we deliver runs on…"), Services repeats it next to the price promise.
 
 ## 3D scene
 
@@ -107,12 +115,13 @@ The rail, `CH`, scroll-to-chapter and arrow-key stepping all read `caps.length`,
 
 ## SEO
 
-- `<meta name="description">`: mention the framework ("…built with the Dryas Workflow Framework…"), kept under ~160 characters.
+- `<meta name="description">`, og and twitter descriptions: unchanged. They do not affect ranking, and the client-facing promise ("Fixed price, live in weeks, Bangkok") earns more clicks than framework terms.
+- JSON-LD `ProfessionalService.description`: append "Every project is delivered with the Dryas Workflow Framework."
 - JSON-LD: add a `CreativeWork` node (`name`: Dryas Workflow Framework, `description`: "A target operating model for AI-assisted software delivery.", `url`: the repo, `creator`: the studio's `@id`).
 
 ## Testing
 
-1. **Failing check first.** Extend `scripts/check-dist.mjs` LANDING with: `data-name="Review"`, `data-name="Framework"`, `href="https://github.com/promprit/dryas-workflow"`, `Checked twice. Then challenged.`, `A target operating model for AI-assisted software delivery.` Run `npm run build && npm run test:dist`; it must fail before the HTML change and pass after.
+1. **Failing check first.** Extend `scripts/check-dist.mjs` LANDING with: `data-name="Review"`, `data-name="Framework"`, `href="https://github.com/promprit/dryas-workflow"`, `Checked twice. Then challenged.`, `a target operating model for AI-assisted software delivery`, `Delivered with the Dryas Workflow Framework.` Run `npm run build && npm run test:dist`; it must fail before the HTML change and pass after.
 2. `npm run verify` passes.
 3. Playwright against the built site:
    - 11 rail dots; clicking each lands its chapter centred;
@@ -126,6 +135,10 @@ The rail, `CH`, scroll-to-chapter and arrow-key stepping all read `caps.length`,
 ## Release
 
 Worktree `../.worktrees/site-framework-story` on `feat/framework-story` → `/wreview` → verification-before-completion → merge to `main` → push → wrangler direct-upload deploy to dryasstudio.com (asked before push and deploy).
+
+## Related change (dryas-workflow repo, separate commit)
+
+Add one line to the dryas-workflow README: "Built and run by [Dryas Studio](https://dryasstudio.com), which delivers every client project with it." GitHub marks README links `nofollow`, so the value is referral traffic and brand association, not ranking. The local clone is one commit behind `origin/main` (`2431f32`); fast-forward first.
 
 ## Risks
 
